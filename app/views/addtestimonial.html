@@ -1,0 +1,100 @@
+<style>
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+  width:95%;
+}
+</style>
+<div ng-controller="addtestimonialctrl" class="testimonialbg">
+    <div class="alert alert-success alert-dismissable fade in" ng-show="Showsuccessalert">
+        <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+        <strong>{{successmessage}}</strong>
+    </div>
+    <div class="alert alert-danger alert-dismissable fade in" ng-show="Showerroralert" id="alertmessage">
+        <!--  <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+        <strong>{{errormessage}}</strong>
+    </div>
+    <div class="alert alert-info alert-dismissable fade in" ng-show="Showinfoalert" id="alertmessage">
+        <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+        <strong>{{infomessage}}</strong>
+    </div>
+    <div class="container " style="height:100%;">
+        <div class="row" style="margin-top: 20px;margin-bottom:50px;">
+            <div style="margin-bottom: 40px;">
+                <h3 class="text-center" style="font-size:18px;color:#ffffff;">Do provide your valuable testimonial here</h3>
+            </div>
+        
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xs-12 col-center-block1" style="background:rgba(0, 0, 0, .5)">
+                <div>
+                        <div class="row-fluid text-center">
+                            <br>
+                            <input type="file" id="fileupload" ng-change="profileselect();" class="form-control" ng-model="myFile" name="bannerimage" base-sixty-four-input ng-hide="true" />
+
+                            <img src="./images/home/profile_default.png" ng-click="uploadimage();" ng-hide="imgdefault" alt="" title="" class="easy-icon" height="110px" width="110px" style="border-radius:50%;" style="border-radius: 50%;" />
+
+                           
+
+                            <img src="{{profileimage}}" alt="" title="" ng-click="uploadimage();" ng-hide="imgcustom" class="easy-icon" height="110px" width="110px" style="border-radius: 50%;" />
+                             <img src="./images/home/edit.png" ng-click="uploadimage();" style="position: relative;top: 38px;right: 25px;">
+                        </div>
+                    <!-- </div>
+                    <div class="col-sm-8 col-md-8 col-lg-8 col-xs-12"> -->
+                        <form role="form" name="addtestimonialform" novalidate>
+                            <div class="form-group input-group">
+                                <span class="has-float-label" ng-class="{ 'has-error' : addtestimonialform.submitted && addtestimonialform.profilename.$invalid }">                                   
+                                    <input type="text" ng-model="testimonial.name" tabindex="1" name="profilename" placeholder="Name" class="form-control borderline" id="name" required>
+                                    <label for="name">Name</label>
+
+                                </span>
+                                <p ng-show="addtestimonialform.submitted && addtestimonialform.profilename.$error.required" class="text-danger">Name is Required</p>
+                            </div>
+
+                            <div class="form-group input-group">
+                                <span class="has-float-label" ng-class="{ 'has-error' : addtestimonialform.submitted && addtestimonialform.profileemail.$invalid }">
+                                    
+                                    <input type="email" ng-model="testimonial.email" name="profileemail" tabindex="2" placeholder="Email" class="form-control borderline" id="profileemail" required>
+                                    <label for="profileemail">Email</label>
+                                </span>
+                                <p ng-show="addtestimonialform.submitted && addtestimonialform.profileemail.$error.required" class="text-danger">Email is Required</p>
+                                <p ng-show="addtestimonialform.submitted && addtestimonialform.profileemail.$error.email" class="text-danger">Enter a valid email.</p>
+                            </div>
+                            <div class="form-group input-group">
+                                <span class="has-float-label">
+                                   
+                                    <input type="tel" ng-model="testimonial.mobile" name="profilemobile" tabindex="4" placeholder="Mobile Number" ng-minlength="10" class="form-control borderline" id="mobile">
+                                    <label for="mobile">Mobile Number</label>
+                                </span>
+                                <p ng-show="addtestimonialform.submitted && addtestimonialform.profilemobile.$error.minlength" class="text-danger">Mobile Number Should be 10 digits</p>
+                            </div>
+                            <div class="form-group input-group">
+                                <span class="has-float-label" ng-class="{ 'has-error' : addtestimonialform.submitted && addtestimonialform.feedbackcomment.$invalid }">
+                                  
+                                    <textarea type="text" ng-model="testimonial.description" name="feedbackcomment" tabindex="6" class="form-control borderline" id="comments" rows="5" style="margin: 0px -2.5625px 0px 0px; height: 93px !important; " placeholder="Comments" required></textarea>
+                                    <label for="comments">Comments</label>
+                                </span>
+                                <p ng-show="addtestimonialform.submitted && addtestimonialform.feedbackcomment.$error.required" class="text-danger">Comments is Required</p>
+                            </div>
+
+                        </form>
+
+                        <div class="cartitle text-center">
+                        <div class="btn btn-primary btn-lg btn-custom-lg" style="width:120px;" tabindex="8" ng-click="addtestimonial();">SUBMIT</div>
+                    </div>
+             <br>
+
+
+
+                </div>
+
+
+
+
+
+                
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<div ng-include="'views/footer.html'" ng-cloak></div>

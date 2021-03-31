@@ -1,0 +1,236 @@
+<script>
+/*history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+        alert('df');
+        history.go(1);
+    };*/
+    console.log("PathName  ="+window.location.href);
+</script>
+<div ng-controller="paymentdetailctrl" style="background:white;">
+    <div class="alert alert-success alert-dismissable fade in" ng-show="Showsuccessalert">
+        <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+        <strong>{{successmessage}}</strong>
+    </div>
+    <div class="alert alert-danger alert-dismissable fade in" ng-show="Showerroralert" id="alertmessage">
+        <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+        <strong>{{errormessage}}</strong>
+    </div>
+    <div class="alert alert-info alert-dismissable fade in" ng-show="Showinfoalert" id="alertmessage">
+        <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+        <strong>{{infomessage}}</strong>
+    </div>
+    <ul class="breadcrumb" style="margin-left:65px;">
+        <li><a style="color:#949495;font-size: 16px;" ng-href="#" href="#" role="button">HOME</a></li>
+        <li><a style="color:#949495;" ng-click="paymenthistory();" role="button">PAYMENT HISTORY</a></li>
+        <li style="color:#101010;"><b>PAYMENT DETAILS</b></li>
+    </ul>
+    <div class="container " style="height:100%;">
+        <div class="row" style="margin-top: 0px;margin-bottom:50px;background:rgba(255, 255, 255, 1);">
+            <!-- <div class="row-fluid text-center">
+                <h3 style="color:#000000;text-transform:capitalize;">Payment Details
+                <span style="float:right"><img ng-click="goback();" src="/images/cancel.svg" alt="Exit" style="height: 35px;width: 35px;margin-right: 20px;margin-top: -15px;"></span>
+                </h3>
+            </div>-->
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12 col-center-block1 " style="border: 10px solid #f2f2f2;padding-right: 0px;padding-left: 0px;">
+                <div class="card">
+                    <div class="row-fluid text-left" style="background: #071e39;margin-right: 0px;margin-left: 0px;padding:10px;">
+                        <h3 class="paymenttitle">INVOICE
+
+                </h3>
+                    </div>
+                    <div class="row" style="margin-right: 0px;margin-left: 0px;border-bottom: 1px solid #ccc;">
+                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6" style="padding-right: 10px;padding-left: 10px;">
+                            <br>
+                            <h4 class="paymenttext"> Transaction ID </h4>
+                            <br>
+                        </div>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xs-6" style="padding-right: 10px;padding-left: 10px;">
+                            <br>
+                            <h4 class="paymenttext1"> {{paymentdetail.txn_id}}</h4>
+                            <br>
+                        </div>
+                    </div>
+
+                    <div class="row" style="background: #071e39;margin-right: 0px;margin-left: 0px;">
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xs-6">
+                            <div class="paytitle text-left" style="padding-top:10px;color: #ffffff;margin-bottom: 10px;">USER DETAILS</div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xs-6">
+                            <div class="paytitle text-right" style="padding-top:10px;color: #ffffff;">{{paymentdetail.updated_at}}</div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-right: 0px;margin-left: 0px;border-bottom: 1px solid #ccc;">
+                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6" style="padding-right: 10px;padding-left: 10px;">
+                            <br>
+                            <h4 class="paymenttext"> Name </h4>
+                            <h4 class="paymenttext"> Email ID </h4>
+                            <h5 class="paymenttext"> Mobile </h5>
+                            <h4 class="paymenttext"> Vehicle </h4>
+                            <h4 class="paymenttext"> Reg No </h4>
+                            <br>
+                        </div>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xs-6" style="padding-right: 10px;padding-left: 10px;">
+                            <br>
+                            <h4 class="paymenttext1">  {{userdata.name}}</h4>
+                            <h4 class="paymenttext1">  {{userdata.email}}</h4>
+                            <h5 class="paymenttext1">  {{userdata.mobile}}</h5>
+                            <h4 class="paymenttext1">  {{paymentdetail.vehicle_name}}</h4>
+                            <h4 class="paymenttext1">  {{paymentdetail.reg_no}} <span ng-if="!paymentdetail.reg_no">-</span></h4>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="row-fluid text-left" style="background: #071e39;margin-right: 0px;margin-left: 0px;padding:10px;">
+                        <h3 class="paymenttitle">PAYMENT DETAILS
+
+                </h3>
+                    </div>
+                    <div class="row" style="margin-right: 0px;margin-left: 0px;">
+                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6" style="padding-right: 10px;padding-left: 10px;">
+                            <br>
+                            <h4 class="paymenttext"> Dealer Name </h4>
+                            <h4 class="paymenttext"> Payment For </h4>
+                            <h4 class="paymenttext"> Amount </h4>
+                            <h4 class="paymenttext"> Status </h4>
+
+                            <br>
+                        </div>
+                        <div class="col-sm-8 col-md-8 col-lg-8 col-xs-6" style="padding-right: 10px;padding-left: 10px;">
+                            <br>
+                            <h4 class="paymenttext1"> {{paymentdetail.dealer_name}}</h4>
+                            <h4 class="paymenttext1"> {{paymentdetail.entity_type}}</h4>
+                            <h4 class="paymenttext1"> Rs. {{paymentdetail.amount}}</h4>
+                            <h4 class="paymenttext1">   <span style="margin-left: 0px;">
+                    <img src="images/home/success.jpg" style="" height="20px;" width="20px;"  alt="" title="" class="easy-icon" ng-if="paymentdetail.status=='Success'"/>
+                 <img src="images/home/Failed.png" style="" height="20px;" width="20px;"  alt="" title="" class="easy-icon" ng-if="paymentdetail.status=='Failure'"/>
+                </span>
+                            <span style="float:right" class="retrycss">
+                                 <button type="button" style="padding: 5px 16px;background-color: #071e39;border-color: #071e39;margin-top: -4px;margin-top:-4px;" class="btn btn-info" ng-click="retrypayment(paymentdetail.id);" ng-if="paymentdetail.status=='Failure'">RETRY</button>
+                                </span>
+                            </h4>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br>
+                        <br>
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12 col-center-block1" style="padding-right: 0px;padding-left: 0px;width: 200px !important;">
+                            <div style="">
+                                <div style="width: 100%!important;text-align:center;background: rgba(128, 128, 128, .1);border-style: dashed;border-color: rgba(204, 204, 204, 1);border-width: 1px;" class="container_area">
+                                    <br>
+                                    <img ng-src="{{imageurl}}" alt="" class="center-block" id="smallimage" ng-click="viewimage(paymentdetail.web_pay_image.url +'?'+paymentdetail.updated_at,paymentdetail.web_pay_image.url);" style="width:140px;height:155px;margin: 0 auto">
+
+                                    <img ng-src="./images/zoom-in.png" class="middle" style="width:30px!important;height: 30px !important;" ng-click="viewimage(paymentdetail.web_pay_image.url);">
+                                    <br>
+                                </div>
+                                <div class="cartitle text-center" style="margin-top: 25px;margin-bottom: 40px;">
+                                    <button class="btn btn-default btn-md btn-custom-lg" tabindex="8" style="width:100%;" ng-click="uploadfiles(paymentdetail.id)" ng-disabled="paysubmit">UPLOAD FILE</button>
+                                </div>
+                                <input type="file" ng-model="image" name="files" base-sixty-four-input class="form-control2" ng-required="true" id="uploadImage" style="padding-left: 40px;display:none;" ng-change="uploaddocument(paymentdetail.id);">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-include="'views/footer.html'" ng-cloak></div>
+<style>
+    .btn-info {
+        color: #fff;
+        background-color: #1367b3;
+        border-color: #1367b3;
+    }
+    
+    .btn-info:hover,
+    .btn-info:focus {
+        background-color: #1367b3;
+        background-position: 0 -15px;
+    }
+    
+    .row {
+        padding: 5px;
+    }
+    
+    .image {
+        opacity: 1;
+        display: block;
+        margin-top: 20px!important;
+        margin: auto;
+        /* width: auto;
+  height: 200px;*/
+        transition: .5s ease;
+        backface-visibility: hidden;
+    }
+    
+    .middle {
+        transition: .5s ease;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%)
+    }
+    
+    .container_area:hover .image {
+        opacity: 0.3;
+    }
+    
+    .container_area:hover .middle {
+        opacity: 1;
+    }
+    
+    .paytitle {
+        font-size: 18px;
+        padding-top: 10px;
+        font-weight: normal;
+        margin-bottom: 15px;
+        color: #ffffff;
+        font-family: AvenirNextCondensed-Medium;
+    }
+    
+    .card {
+        background: white;
+        bottom: 0px !important;
+        margin-bottom: 0px !important;
+    }
+    
+    .paymenttitle {
+        color: #ffffff;
+        text-transform: uppercase;
+        font-family: AvenirNextCondensed-Medium;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-size: 20px;
+        margin-left: 10px;
+    }
+    
+    .retrycss {
+        margin-right: 30px;
+    }
+    
+    @media (min-width: 0px) and (max-width:766px) {
+        .paytitle {
+            font-size: 16px !important;
+        }
+        .paymenttext {
+            font-family: AvenirNextCondensed-Medium;
+            font-size: 18px !important;
+        }
+        .paymenttext1 {
+            font-family: AvenirNextCondensed-Medium;
+            font-size: 18px !important;
+        }
+        .paymenttitle {
+            font-size: 16px !important;
+            margin-left: 10px;
+        }
+        .retrycss {
+            margin-right: 0px !important;
+        }
+        .breadcrumb {
+            margin-left: 0px !important;
+        }
+    }
+</style>

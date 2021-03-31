@@ -1,0 +1,90 @@
+.reg-threesixty{
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  position: relative;
+  overflow: hidden;
+    height: 400px;
+}
+
+.reg-threesixty.loading-first{
+  opacity: 0;
+}
+
+.reg-threesixty img{
+/*    height: auto;
+    max-width: 100%;
+    margin:0 auto;  */
+    
+   width: 100%;
+  height: auto;
+  display: block;
+  visibility: hidden;
+  position: absolute;
+
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.reg-threesixty img.current{
+  visibility: visible;
+}
+
+@media (min-width: 766px) and (max-width:1024px) {
+    .reg-threesixty{
+    height: 380px !important;
+        width:100%;
+}    
+    .reg-threesixty img{
+         width: 80%;
+  height: auto;
+    }
+}
+@media (min-width: 1024px) and (max-width:1124px) {
+    .reg-threesixty{
+    height: 400px !important;
+        width:100%;
+}    
+    .reg-threesixty img{
+         width: 80%;
+  height: auto;
+    }
+}
+
+ @media (min-width: 500px) and (max-width:765px) {
+         .reg-threesixty{
+    height: 540px !important;
+}     
+}
+ @media (min-width: 0px) and (max-width:499px) {
+         .reg-threesixty{
+    height: 335px !important;
+}     
+}
+
+
+
+
+@media (min-width: 1125px) and (max-width:1499px) {
+    .reg-threesixty{
+    height: 510px !important;
+    width:100%%;
+}
+     .reg-threesixty img{
+         width: 80%;
+         height: auto;
+    }
+}
+   @media (min-width: 1500px) {
+    .reg-threesixty{
+    height: 580px !important;
+    width:70%;
+}
+     .reg-threesixty img{
+         width: 100%;
+         height: auto;
+    }
+}
+  

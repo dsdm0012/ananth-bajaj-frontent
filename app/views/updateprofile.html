@@ -1,0 +1,149 @@
+<style>
+    option {
+        background-color: rgba(255, 255, 255, 1);
+    }
+    
+    .form-group {
+        position: relative;
+        margin-bottom: 1.5rem;
+        width: 95%;
+    }
+    
+    .has-float-label label,
+    .has-float-label>span {
+        color: #101010 !important;
+    }
+    
+    .form-control[disabled] {
+        background-color: transparent;
+        opacity: 1;
+    }
+    .updateprofile input::placeholder {
+    color: #ffffff !important;
+    opacity: 0 !important; /* Firefox */
+}
+.updateprofile input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   opacity: 0 !important;
+}
+.updateprofile input::-ms-input-placeholder { /* Microsoft Edge */
+   opacity: 0 !important;
+}
+    .updateprofile textarea::placeholder {
+    color: #ffffff !important;
+    opacity: 0 !important; /* Firefox */
+}
+.updateprofile textarea:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   opacity: 0 !important;
+}
+.updateprofile textarea::-ms-input-placeholder { /* Microsoft Edge */
+   opacity: 0 !important;
+}
+</style>
+<div ng-controller="updateprofilectrl" class="updateprofile" style="background: white;">
+    <div class="alert alert-success alert-dismissable fade in" ng-show="Showsuccessalert">
+        <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+        <strong>{{successmessage}}</strong>
+    </div>
+    <div class="alert alert-danger alert-dismissable fade in" ng-show="Showerroralert" id="alertmessage">
+        <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+        <strong>{{errormessage}}</strong>
+    </div>
+    <div class="alert alert-info alert-dismissable fade in" ng-show="Showinfoalert" id="alertmessage">
+        <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+        <strong>{{infomessage}}</strong>
+    </div>
+    <ul class="breadcrumb visible-lg visible-md visible-sm hidden-xs" style="margin-left: 65px;">
+        <!-- <li ><a style="color:#949495;" ng-click="gotohomepage();" role="button">Home</a></li>-->
+        <li><a ng-href="#" style="color:#949495;" ng-click="" role="button">HOME</a></li>
+        <li style="color:#101010;"><b>MY PROFILE</b></li>
+    </ul>
+    <div class="container " style="height:100%;">
+        <div class="row" style="margin-top: 100px;">
+
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12 col-center-block1" style="background:#F5F5F5;">
+                <div class="row" style="padding: 25px;">
+                    <div class="row-fluid col-center-block" style="margin-top: -20%;" role="button">
+                        <!-- <h3 style="color:#000000;text-transform:capitalize;">Edit Profile</h3>-->
+                        <input type="file" id="fileupload" ng-change="profileselect();" class="form-control" ng-model="myFile" name="bannerimage" base-sixty-four-input ng-hide="true" />
+                        <img src="{{profileimage}}" ng-click="uploadimage();" ng-hide="imgdefault" alt="" title="" class="easy-icon" height="110px" width="110px" style="border-radius:50%;margin-left: 20px;" />
+                        <img src="{{profileimage}}" alt="" title="" ng-click="uploadimage();" ng-hide="imgcustom" class="easy-icon" height="100px" width="110px" style="border-radius:50%;margin-left: 20px;" />
+                        <div class="glyphicon glyphicon-camera" ng-hide="sociallogin" ng-click="uploadimage();" style="position: relative;right: 30px;top: 50px;font-size: 24px;" />
+                    </div>
+                    <div style="margin-top:20px;">
+                        <form role="form" name="updateprofileform" novalidate>
+                            <div class="form-group input-group">
+                                <span class="has-float-label" ng-class="{ 'has-error' : updateprofileform.submitted && updateprofileform.profilename.$invalid }">
+
+                                    <input type="text" ng-model="profile.full_name" tabindex="1" name="profilename" placeholder="Name" class="form-control borderline1" id="profilename" required>
+                                    <label for="profilename">Name</label>
+
+                                </span>
+                                <p ng-show="updateprofileform.submitted && updateprofileform.profilename.$error.required" class="text-danger">Name is Required</p>
+                            </div>
+
+                            <div class="form-group input-group">
+                                <span class="has-float-label" ng-class="{ 'has-error' : updateprofileform.submitted && updateprofileform.profileemail.$invalid }">
+
+                                    <input type="email" ng-model="profile.email" name="profileemail" tabindex="2" placeholder="Email ID" class="form-control borderline1" id="profileemail" ng-disabled="nomail" required>
+                                     <label for="profileemail">Email ID</label>
+                                    </span>
+                                <p ng-show="updateprofileform.submitted && updateprofileform.profileemail.$error.required" class="text-danger">Email ID is Required</p>
+                                <p ng-show="updateprofileform.submitted && updateprofileform.profileemail.$error.email" class="text-danger">Email ID a valid email.</p>
+                            </div>
+                            <div class="form-group input-group">
+                                <span class="has-float-label" ng-class="{ 'has-error' : updateprofileform.submitted && updateprofileform.profilemobile.$invalid }">
+
+                                    <input type="number" ng-model="profile.mobile" name="profilemobile" tabindex="4" placeholder="Mobile Number" ng-minlength="10" ng-maxlength="10" class="form-control borderline1" id="profilemobile" required>
+                                     <label for="profilemobile">Mobile Number</label>
+                                    </span>
+                                <p ng-show="updateprofileform.submitted && updateprofileform.profilemobile.$error.required" class="text-danger">Mobile No is Required</p>
+                                <p ng-show="updateprofileform.submitted && updateprofileform.profilemobile.$error.minlength" class="text-danger">Mobile Number Should be 10 digits</p>
+                                 <p ng-show="updateprofileform.submitted && updateprofileform.profilemobile.$error.maxlength" class="text-danger">Mobile Number    Maximum 10 digits</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
+
+                                    <div class="form-group input-group">
+                                        <span class="has-float-label">
+
+                                    <input type="text" placeholder="Anniversary" ng-model="profile.marriage_anniversary_date" name="mycarspurchase" tabindex="5" class="form-control borderline1" id="datepicker1">
+                                          <label for="datepicker1">Anniversary</label>
+                                     </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
+
+                                    <div class="form-group input-group" style="width: 90%;">
+                                        <span class="has-float-label">
+
+                                    <input type="text" placeholder="Date of Birth" ng-model="profile.dob" name="mycarslastservice" tabindex="6" class="form-control borderline1" id="datepicker2">
+                                          <label for="datepicker2">Date of Birth</label>
+                                     </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group input-group">
+                                <div class="has-float-label">
+
+                                    <textarea type="text" ng-model="profile.address" tabindex="3" class="form-control borderline1" id="profileaddress" name="profileaddress" rows="5" style="margin: 0px -2.5625px 0px 0px; height: 93px !important;" placeholder="Address"></textarea>
+                                    <label for="profileaddress">Address</label>
+                                    <!-- <p ng-show="updateprofileform.submitted && updateprofileform.profileaddress.$error.required" class="text-danger">Address is Required</p>-->
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="cartitle text-center">
+                    <div class="btn btn-primary btn-md btn-custom-lg" tabindex="7" style="width:90%;" ng-click="updateprofile();">UPDATE</div>
+                    <br>
+                </div>
+                <br>
+            </div>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+</div>
+<div ng-include="'views/footer.html'" ng-cloak></div>

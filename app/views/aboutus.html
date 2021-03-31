@@ -1,0 +1,374 @@
+<!--<div ng-controller="headerCtrl"></div>-->
+<div ng-controller="aboutusctrl" style="min-height:600px;">
+    <div class="alert alert-danger alert-dismissable fade in" ng-show="Showerroralert" id="alertmessage">
+        <strong>{{errormessage}}</strong>
+    </div>
+    <div class="container " style="height:100%;background:white;width:100%;">
+        <div class="aboutus visible-lg visible-md visible-sm hidden-xs" style="height:320px;">
+
+        </div>
+        <div class="aboutus hidden-lg hidden-md hidden-sm visible-xs" style="height:250px;">
+
+        </div>
+        <div class="row" style="background:#071e39;padding: 5px;">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 center-block" style="float: none;top:8px;padding-right:0px;padding-left:0px;" id="list_bike1">
+                <ul class="list-inline" align="center" ng-init="classVar='ANANT BAJAJ'">
+                    <li role="button" class="list-inline-item itemcss" ng-click="changecontent('ANANT BAJAJ');"><small ng-class="'ANANT BAJAJ' === classVar ? 'nav_active' : 'nav_color'">ANANT BAJAJ</small></li>
+                    <li role="button" class="list-inline-item itemcss" ng-click="changecontent('QUALITY POLICY');"><small ng-class="'QUALITY POLICY' === classVar ? 'nav_active' : 'nav_color'" style="margin-left: 10px;">QUALITY POLICY</small></li>
+                    <li role="button" class="list-inline-item itemcss" ng-click="changecontent('WHY ANANT BAJAJ');"> <small ng-class="'WHY ANANT BAJAJ' === classVar ? 'nav_active' : 'nav_color'" style="margin-left: 10px;">WHY ANANT BAJAJ</small></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row" id="car_overview" ng-show="category=='ANANT BAJAJ'">
+            <div class="col-sm-11 col-md-11 col-lg-11 col-xs-12 col-center-block1">
+                <br>
+                <br>
+                <div class="headcss" style="text-align: justify;font-family: AvenirNextCondensed-Medium;">
+                    <div style="font-family: AvenirNextCondensed-Bold;"><strong> ANANT BAJAJ</strong>, is a leading Bajaj automobile authorised dealer in Bangalore. With several years of experience we have earned the trust of our customers through hard work and dedication. We have also earned a great reputation for integrity in the Automobile Trade.</div>  <br>  
+                    
+                     Our range of Bajaj Motorcycles is in high demand with our branches located in Laggere and Magadi Road.Our key focus is quality & customer satisfaction which makes Anant Bajaj one of the fastest growing Bajaj dealers in South India.We take this opportunity to thank all our customers for showering us with their graceful support. We commit ourselves to better quality and customer satisfaction.
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div style="text-align:center;"><br><br>
+                <img src="./images/sign.png" style="height: 100px;">
+                <p style="color: #000000;line-height: 1em;padding-bottom: 3px;text-transform: capitalize;font-family: 'Source Sans Pro', sans-serif;font-size:16px;font-weight:bold;">Mr. A Mohan Raju</p>
+                <p style="color: #000000;line-height: 1em;padding-bottom: 3px;text-transform: capitalize;font-family: 'Source Sans Pro', sans-serif;">Chairman &amp; MD - Kalyani Group</p>
+                </div>
+                        <br><br>             </div>
+
+                <br>
+                <br><br>
+                <div class="row" style="background:#ffffff;padding: 5px;">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 center-block" style="float: none;top:8px;padding-right:0px;padding-left:0px;" id="list_bike1">
+                        <ul class="list-inline" ng-init="imgvar='all'">
+                            <li role="button" class="list-inline-item itemcss1" ng-click="gallerydata('all');"><small ng-class="'all' === imgvar ? 'nav_active1' : 'nav_color1'" class="licss">GALLERY</small></li>
+                            <li role="button" class="list-inline-item itemcss1" ng-click="gallerydata('Showroom');"><small ng-class="'Showroom' === imgvar ? 'nav_active1' : 'nav_color1'" class="licss">SHOWROOM</small></li>
+                            <li role="button" class="list-inline-item itemcss1" ng-click="gallerydata('Team Member');"> <small ng-class="'Team Member' === imgvar ? 'nav_active1' : 'nav_color1'">TEAM MEMBERS</small></li>
+                        </ul>
+                    </div>
+                </div>
+                <br>
+
+                <div class="row aboutheight" style="padding: 5px;">
+                    <div class="image-row">
+                    </div>
+                    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 center-block visible-lg visible-md visible-sm hidden-xs">
+                        <div id="loading"><img style="height: 40px;margin-top:50px;" src="./images/loader-64x/Preloader_11.gif" class="center-block"></div>
+                        <div class="slider multiple-items1" id="galleryimage">
+                            <div ng-repeat="newbike in imagedata" class="item imagecss">
+                                <a class="example-image-link" href="https://anant-bajaj-dev.myridz.com{{newbike.image.url}}?{{newbike.updated_at}}" data-lightbox="example-set" title="Click anywhere outside the image or the X to the right to close.">
+                                    <img src="https://anant-bajaj-dev.myridz.com{{newbike.image.url}}?{{newbike.updated_at}}" class="img-responsive center-block">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 center-block hidden-lg hidden-md hidden-sm visible-xs">
+                        <div id="loading1"><img style="height: 40px;margin-top:50px;" src="./images/loader-64x/Preloader_11.gif" class="center-block"></div>
+                        <div class="slider multiple-items2" id="galleryimage1">
+                            <div ng-repeat="newbike in imagedata" class="item imagecss">
+                                <a class="example-image-link" href="https://anant-bajaj-dev.myridz.com{{newbike.image.url}}?{{newbike.updated_at}}" data-lightbox="example-set" title="Click anywhere outside the image or the X to the right to close.">
+                                    <img src="https://anant-bajaj-dev.myridz.com{{newbike.image.url}}?{{newbike.updated_at}}" class="img-responsive center-block">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <br>
+            </div>
+        </div>
+        <div class="row" id="car_overview" ng-show="category=='QUALITY POLICY'">
+            <div class="col-sm-11 col-md-11 col-lg-11 col-xs-12 col-center-block1" style="margin-bottom:15%;">
+                <br>
+                <br>
+                <div class="headcss" style="text-align: justify;font-family: AvenirNextCondensed-Medium;">
+                   <div style="font-family:AvenirNextCondensed-Bold;font-size: 18px;"> Quality has been of paramount importance to us. We deal with only genuine components to ensure highest standards in quality and reliability.</div>
+                   
+                    <br/> Our quality policy has been designed in tune with customer requirements. Our quality strategy is to maintain the reputation of the company by constantly meeting and exceeding customer expectations on every occasion. We ensure that all quality specifications are agreed to and clarified by both customers and suppliers before proceeding further with the procurement process and ensure delivery of defect free quality products always on time. We always commit ourselves for every order equally to ensure total product quality and reduce variation. We strive hard to constantly improve our quality, cost, delivery and service levels towards obtaining customer satisfaction.
+                </div>
+                <br>
+                <br>
+            </div>
+        </div>
+        <div class="row" id="car_overview" ng-show="category=='WHY ANANT BAJAJ'">
+            <div class="col-sm-11 col-md-11 col-lg-11 col-xs-12 col-center-block1">
+                <br>
+                <br>
+                <div class="headcss" style="text-align: justify;font-family: AvenirNextCondensed-Bold;">
+                    ANANT BAJAJ is an authorized Bajaj Auto Dealership in Bangalore since 2013. Head Office in Kamakshi palya, ANANT BAJAJ family includes over 100 employees with overall 2 showrooms, 2 Workshops and 3 ASC.
+                    <br/>
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3 col-md-3 col-lg-3 col-xs-12">
+                        <img src="./images/background/aboutus/image1.jpg" alt="" title="" class="img-responsive center-block" class="easy-icon" />
+                    </div>
+                    <div class="col-sm-9 col-md-9 col-lg-9 col-xs-12">
+                        <h4 class="title">Vision</h4>
+                        <p class="textcss">
+                            To create & sustain a pool of highly delighted customers by rendering excellent service at ANANT BAJAJ and to become the top most dealer of Bajaj Auto.
+                        </p>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-3 col-md-3 col-lg-3 col-xs-12">
+                        <img src="./images/background/aboutus/image3.jpg" alt="" title="" class="img-responsive center-block" class="easy-icon" />
+                    </div>
+                    <div class="col-sm-9 col-md-9 col-lg-9 col-xs-12">
+                        <h4 class="title">Lineup Services</h4>
+                        <p class="textcss">
+                            <ul id="navlist" style="padding:0;">
+                                <li>&#x2022; New Bikes</li>
+                                <li> &#x2022; Bajaj Finance</li>
+                                <li> &#x2022; Oriental Insurance</li>
+                            </ul>
+                            <ul id="navlist" style="padding:0;">
+                                <li> &#x2022; Vehicle Service</li>
+                                <li> &#x2022; Body Repair</li>
+                                <li> &#x2022; Genuine spare parts</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-3 col-md-3 col-lg-3 col-xs-12">
+                        <img src="./images/background/aboutus/image2.jpg" alt="" title="" class="img-responsive center-block" class="easy-icon" />
+                    </div>
+                    <div class="col-sm-9 col-md-9 col-lg-9 col-xs-12">
+                        <h4 class="title">Mission</h4>
+                        <p class="textcss">
+                            We aspire to fulfill our customers needs for mobility, comfort, style and value for money
+                            <br> Earning the admiration of all our customers and delighting them by providing services of superior quality.
+                            <br> Providing a one stop destination to our customers.
+                        </p>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-3 col-md-3 col-lg-3 col-xs-12">
+                        <img src="./images/background/aboutus/image4.jpg" alt="" title="" class="img-responsive center-block" class="easy-icon" />
+                    </div>
+                    <div class="col-sm-9 col-md-9 col-lg-9 col-xs-12">
+                        <h4 class="title">Our Objectives are</h4>
+                        <p class="textcss">
+                            Anticipate & address the customer need.
+                            <br> Maintain customer satisfaction index above 95%.
+                            <br> To achieve growth of service provision
+                        </p>
+                    </div>
+                </div>
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<br><br><br><br>-->
+<div ng-include="'views/footer.html'" class="container-fluid" style="padding-right:0px;padding-left:0px;" ng-cloak></div>
+<style>
+     @media (min-width: 0px) and (max-width:765px) {
+    .itemcss1 {
+    text-transform: uppercase;
+    font-size: 18px !important;
+    color: #101010;
+}
+         .list-inline > li {
+    display: inline-block;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+        .licss{
+            border-right: 2px solid #071e39;
+            padding-left: 5px !important;
+            padding-right: 8px !important;
+    }
+         small, .small {
+    font-size: 65% !important;
+}
+            .aboutheight{
+            min-height: 150px !important;
+        }
+}
+    @media (min-width: 766px) {
+           .aboutheight{
+            min-height: 180px !important;
+        }
+}
+    .licss{
+        border-right: 2px solid #071e39;
+        padding-left: 8px;
+        padding-right: 32px;
+    }
+        .row {
+            margin-right: 0px !important;
+            margin-left: 0px !important;
+        }
+    .container {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+    .headcss {
+        font-family: Helvetica;
+        color: #000000;
+        font-size: 18px;
+        margin-bottom: 0px;
+        text-align: justify;
+    }
+    
+    .title {
+        font-family: Helvetica;
+        font-weight: bold;
+        margin-top: 0px;
+    }
+    
+    .textcss {
+        font-family: Helvetica;
+        font-weight: normal;
+    }
+    
+    #navlist li {
+        display: inline;
+        list-style-type: none;
+        padding-right: 20px;
+        font-size: 16px;
+        font-family: Helvetica;
+    }
+    /* @media (min-width: 992px) and (max-width: 1199px) {
+   .container-footer {
+   position: absolute;
+   left: 0;
+   right: 0;
+   width: 100%;
+   bottom: 0;
+   }
+   }
+   @media (min-width: 768px)  {
+   .container-footer {
+   position: absolute;
+   left: 0;
+   right: 0;
+   width: 100%;
+   bottom: 0;
+   }
+   }*/
+    /*    List Inline css*/
+    
+    .list-inline-item:not(:last-child) {
+        margin-right: 0;
+    }
+    
+    .list-inline::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    
+    .list-inline-item {
+        /*	float: left;*/
+    }
+    
+    .list-inline-item + .list-inline-item::before {
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+        content: '/';
+        color: #ffffff;
+    }
+    /*List item css*/
+    
+    .itemcss {
+        text-transform: uppercase;
+        font-size: 18px;
+        color: #101010;
+        font-weight: 100;
+    }
+    
+    .itemcss1 {
+        text-transform: uppercase;
+        font-size: 25px;
+        color: #101010;
+        font-weight: 100;
+        font-family: AvenirNextCondensed-Bold;
+        /*padding-left: 25px !important;*/
+    }
+    
+    .nav_active {
+        color: #ffffff !important;
+        border-bottom: 2px solid white;
+    }
+    
+    .nav_color {
+        color: #ffffff !important;
+    }
+    
+    .nav_active1 {
+        color: #071e39 !important;
+        border-bottom: 2px solid white;
+    }
+    
+    .nav_color1 {
+        color: #98999b !important;
+    }
+    
+    .imagecss {
+        background: #fff;
+        margin: 10px;
+        /*   padding: 2%;
+        position: relative;
+        text-align: center;*/
+    }
+    
+    .arrowleft:before,
+    .arrowright:before {
+        font-family: 'slick';
+        font-size: 20px;
+        line-height: 1;
+        opacity: 0;
+        color: #ffffff;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    
+    .arrowleft.slick-disabled:before,
+    .arrowright.slick-disabled:before {
+        opacity: 0;
+    }
+     @media (min-width: 0px) and (max-width:765px) {
+     .title {
+        font-family: Helvetica;
+        font-weight: bold;
+        margin-top: 15px !important;
+    }
+}
+       .slick-prev, .slick-next { 
+    width: 36px !important;
+    height: 50px !important;
+    }
+</style>
+
+<script>
+    jQuery(document).ready(function() {
+
+        jQuery('.multiple-items1').slick({
+            infinite: false,
+            slidesToShow: 4,
+            autoplay: false,
+            draggable: false,
+            slidesToScroll: 4,
+            prevArrow: "<button type='button' class='slick-prev pull-left arrowleft' style='left: -30px;top: 50%;'><img style='width: 35px;height: 35px;margin-top:-26px;' src='../images/home/Slider-left.png'></button>",
+            nextArrow: "<button type='button' class='slick-next pull-right arrowright' style='right: -30px;top: 50%;'><img style='width: 35px;height: 35px;margin-top:-26px;' src='../images/home/Slider-right.png'></button>"
+        });
+          jQuery('.multiple-items2').slick({
+            infinite: false,
+            slidesToShow: 1,
+            autoplay: false,
+            draggable: false,
+            slidesToScroll: 1,
+            prevArrow: "<button type='button' class='slick-prev pull-left arrowleft' style='left: -30px;top: 50%;'><img style='width: 35px;height: 35px;margin-top:-26px;' src='../images/home/Slider-left.png'></button>",
+            nextArrow: "<button type='button' class='slick-next pull-right arrowright' style='right: -30px;top: 50%;'><img style='width: 35px;height: 35px;margin-top:-26px;' src='../images/home/Slider-right.png'></button>"
+        });
+
+    });
+</script>

@@ -1,0 +1,169 @@
+<style>
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+  width:95%;
+}
+.feedbackbg input::placeholder {
+    color: #ffffff !important;
+    opacity: 0 !important; /* Firefox */
+}
+.feedbackbg input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   opacity: 0 !important;
+}
+.feedbackbg input::-ms-input-placeholder { /* Microsoft Edge */
+   opacity: 0 !important;
+}
+    .feedbackbg textarea::placeholder {
+    color: #ffffff !important;
+    opacity: 0 !important; /* Firefox */
+}
+.feedbackbg textarea:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   opacity: 0 !important;
+}
+.feedbackbg textarea::-ms-input-placeholder { /* Microsoft Edge */
+   opacity: 0 !important;
+}
+               .row {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+</style>
+<div ng-controller="feedbackctrl" class="feedbackbg">
+           <div class="alert alert-success alert-dismissable fade in" ng-show="Showsuccessalert">
+       <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+  <strong>{{successmessage}}</strong> 
+</div>
+        <div class="alert alert-danger alert-dismissable fade in" ng-show="Showerroralert" id="alertmessage">
+       <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+  <strong>{{errormessage}}</strong> 
+</div>
+    
+   <div class="alert alert-info alert-dismissable fade in" ng-show="Showinfoalert" id="infomessage">
+       <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+  <strong>{{infomessage}}</strong> 
+</div>
+
+    <div class="container " style="height:100%;min-height:600px;">
+        <div class="row" style="margin-top: 20px;margin-bottom:50px;">
+
+       
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xs-12 col-center-block1">
+                <div class="row">
+                     <div class="row" style="padding:15px;margin-right:0px;margin-left:0px;background:transparent;">
+    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-3" style=""><img src="./images/home/slide_line1.png" style="margin-top: 20px;" class="pull-right"></div>
+    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6" style=""><h4 class="text-center" style="color:#ffffff;font-weight:bold;font-size:23px;">FEEDBACK</h4></div>
+    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-3" style=""><img src="./images/home/slide_line1.png" style="margin-top: 20px;" class="pull-left"></div>
+  </div>
+                    <div style="margin-top:20px;">
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
+                            <form role="form" name="feedbackform" novalidate>
+                                <div class="form-group input-group"> 
+                                    <span class="has-float-label" ng-class="{ 'has-error' : feedbackform.submitted && feedbackform.feedbackname.$invalid }">
+                              
+                                    <input type="text" placeholder="Name" ng-model="feedback.name" name="feedbackname" tabindex="1" class="form-control borderline" id="feedbackname" required>
+                                         <label for="feedbackname">Name</label>
+                                    </span>
+                                <p ng-show="feedbackform.submitted && feedbackform.feedbackname.$error.required" class="text-danger">Name is Required</p>
+                                </div>
+                                <div class="form-group input-group"> 
+                                    <span class="has-float-label" ng-class="{ 'has-error' : feedbackform.submitted && feedbackform.feedbackemail.$invalid }">
+                                   
+                                    <input type="text" placeholder="Email" ng-model="feedback.email" name="feedbackemail" tabindex="2" class="form-control borderline" id="feedbackmail" required>
+                                         <label for="feedbackmail">Email</label>
+                                    </span>
+                                 <p ng-show="feedbackform.submitted && feedbackform.feedbackemail.$error.required" class="text-danger">Email is Required</p>
+                <p ng-show="feedbackform.submitted && feedbackform.feedbackemail.$error.email" class="text-danger">Enter a valid email.</p>
+                                </div>
+                                       <div class="form-group input-group">  
+                                      <span class="has-float-label" ng-class="{ 'has-error' : feedbackform.submitted && feedbackform.feedbackmobile.$invalid }">
+                                   
+                                    <input type="number" placeholder="Mobile Number" ng-model="feedback.mobile" tabindex="4" name="feedbackmobile" ng-minlength="10" ng-maxlength="10" class="form-control borderline" id="feedbackmobile" required>
+                                          <label for="feedbackmobile">Mobile Number</label>
+                                      </span>
+                                <p ng-show="feedbackform.submitted && feedbackform.feedbackmobile.$error.required" class="text-danger">Mobile No is Required</p>
+                <p ng-show="feedbackform.submitted && feedbackform.feedbackmobile.$error.minlength" class="text-danger">Mobile Number Should be 10 digits</p>
+                                <p ng-show="feedbackform.submitted && feedbackform.feedbackmobile.$error.maxlength" class="text-danger">Mobile Number Maximum 10 digits</p>
+                                </div>
+
+                                <div class="form-group">  
+                                    <div class="has-float-label">
+                                  
+                                    <textarea type="text" ng-model="feedback.address" name="feedbackaddress" tabindex="3" class="form-control borderline" id="feedbackaddress" rows="5" style="margin: 0px -2.5625px 0px 0px; height: 93px !important; " placeholder="Address"></textarea>
+                                        <label for="feedbackaddress">Address</label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
+                            <form role="form" name="feedbackform1" novalidate>
+
+                                <div class="form-group input-group">   
+                                    <span class="has-float-label" ng-class="{ 'has-error' : feedbackform1.submitted && feedbackform1.feedbacktype.$invalid }">
+                                   
+                                    <select class="form-control borderline" ng-model="feedback.feedback_type" name="feedbacktype" tabindex="4" id="feedbacktitle" ng-change="row1=1;" required>
+                                      <option value="" ng-selected="true" disabled>Feedback for</option>
+                                      <option value="Sales">Sales</option>
+                                      <option value="Service">Services</option>
+                                      <option value="Others">Others</option>
+                                    </select>
+                                         <label for="feedbacktitle" ng-if="row1==1">Feedback for</label>
+                                    </span>
+                                <p ng-show="feedbackform1.submitted && feedbackform1.feedbacktype.$error.required" class="text-danger">Feedback for is Required</p>
+                                </div>
+                                <div class="form-group input-group">    
+                                    <span class="has-float-label" ng-class="{ 'has-error' : feedbackform1.submitted && feedbackform1.feedbackshowroom.$invalid }">
+                                   
+                                    <select class="form-control borderline" ng-model="feedback.dealer_location" name="feedbackshowroom" tabindex="5" ng-change="row2=1;" id="dealerid" required>
+                                        <option value="" ng-selected="true" disabled>Dealership Location</option>
+                                 <option ng-repeat="dealer in dealerdata" value="{{dealer.dealer_name}}">{{dealer.dealer_name}}</option>
+                                    </select>
+                                         <label for="dealerid" ng-if="row2==1">Dealership Location</label>
+                                    </span>
+                                <p ng-show="feedbackform1.submitted && feedbackform1.feedbackshowroom.$error.required" class="text-danger">Dealership Location is Required</p>
+                                </div>
+                                <div class="form-group input-group">   
+                                    <span class="has-float-label" ng-class="{ 'has-error' : feedbackform1.submitted && feedbackform1.feedbackcomment.$invalid }">
+                                  
+                                    <textarea type="text" ng-model="feedback.comment" name="feedbackcomment" tabindex="6" class="form-control borderline" id="comments" rows="5" style="margin: 0px -2.5625px 0px 0px; height: 93px !important; " placeholder="Comments" required></textarea>
+                                          <label for="comments">Comments</label>
+                                    </span>
+                                <p ng-show="feedbackform1.submitted && feedbackform1.feedbackcomment.$error.required" class="text-danger">Comments is Required</p>
+                                </div>
+                                <div class="form-group">  
+                                    <div class="input-group">
+                                    
+                                    <h4 style="color:white;">Provide Your Rating</h4>
+                                    <fieldset class="rating" id="ratingval">
+                                        <input type="radio" id="star5" name="rating" value="5" />
+                                        <label for="star5">5 stars</label>
+                                        <input type="radio" id="star4" name="rating" value="4" />
+                                        <label for="star4">4 stars</label>
+                                        <input type="radio" id="star3" name="rating" value="3" />
+                                        <label for="star3">3 stars</label>
+                                        <input type="radio" id="star2" name="rating" value="2" />
+                                        <label for="star2">2 stars</label>
+                                        <input type="radio" id="star1" name="rating" value="1" />
+                                        <label for="star1">1 star</label>
+                                    </fieldset>
+                                    </div></div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div> <br>
+                <div class="cartitle text-center visible-lg visible-md visible-sm hidden-xs">
+                    <div class="btn btn-primary btn-md btn-custom-lg" tabindex="7" style="width:250px;" ng-click="submitfeedback();">SUBMIT</div>
+                </div>
+                
+                <div class="cartitle text-center hidden-lg hidden-md hidden-sm visible-xs">
+                    <div class="btn btn-default btn-md btn-custom-lg" tabindex="7" style="width:250px;" ng-click="submitfeedback();">SUBMIT</div>
+                </div>
+                <br>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+ <div ng-include="'views/footer.html'" ng-cloak></div>

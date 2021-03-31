@@ -1,0 +1,162 @@
+<style>
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+  width:95%;
+}
+        .row {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+.contactbg input::placeholder {
+    color: #ffffff !important;
+    opacity: 0 !important; /* Firefox */
+}
+.contactbg input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   opacity: 0 !important;
+}
+.contactbg input::-ms-input-placeholder { /* Microsoft Edge */
+   opacity: 0 !important;
+}
+    .contactbg textarea::placeholder {
+    color: #ffffff !important;
+    opacity: 0 !important; /* Firefox */
+}
+.contactbg textarea:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   opacity: 0 !important;
+}
+.contactbg textarea::-ms-input-placeholder { /* Microsoft Edge */
+   opacity: 0 !important;
+}
+</style>
+<div ng-controller="contactusctrl" class="contactbg" style="min-height:600px;">
+          <div class="alert alert-success alert-dismissable fade in" ng-show="Showsuccessalert">
+       <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+  <strong>{{successmessage}}</strong> 
+</div>
+        <div class="alert alert-danger alert-dismissable fade in" ng-show="Showerroralert" id="alertmessage">
+      <!--  <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+  <strong>{{errormessage}}</strong> 
+</div>
+       <div class="alert alert-info alert-dismissable fade in" ng-show="Showinfoalert" id="infomessage">
+       <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+  <strong>{{infomessage}}</strong> 
+</div>
+	 <div class="container " style="height:100%;">
+          <div class="row top-buffer"> </div>
+        <div class="row" style="">
+          
+         
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xs-12 col-center-block1">
+                <div class="row" style="padding:15px;margin-right:0px;margin-left:0px;background:transparent;">
+    <div class="col-lg-4 col-md-3 col-sm-2 col-xs-3" style=""><img src="./images/home/slide_line1.png" style="margin-top: 20px;" class="pull-right"></div>
+    <div class="col-lg-4 col-md-6 col-sm-8 col-xs-6" style=""><h4 class="text-center" style="color:#ffffff;font-weight:bold;font-size:23px;">ENQUIRY</h4></div>
+    <div class="col-lg-4 col-md-3 col-sm-2 col-xs-3" style=""><img src="./images/home/slide_line1.png" style="margin-top: 20px;" class="pull-left"></div>
+  </div>
+                <div class="row">
+                    <div style="margin-top:20px;">
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
+                            <form role="form" name="contactusform" novalidate>
+                                 <div class="form-group input-group">   
+                                     <span class="has-float-label" ng-class="{ 'has-error' : contactusform.submitted && contactusform.contactname.$invalid }">
+                                    
+                                    <input type="text" placeholder="Name" ng-model="contactus.name" tabindex="1" name="contactname" class="form-control borderline" id="contactname" required>
+                                          <label for="contactname">Name</label>
+                                     </span>
+                                 <p ng-show="contactusform.submitted && contactusform.contactname.$error.required" class="text-danger">Name is Required</p>
+                                </div>
+                                 <div class="form-group input-group">    
+                                     <span class="has-float-label" ng-class="{ 'has-error' : contactusform.submitted && contactusform.contactemail.$invalid }">
+                                    
+                                    <input type="email" placeholder="Email" ng-model="contactus.email" tabindex="2" name="contactemail" class="form-control borderline" id="contactmail" required>
+                                          <label for="contactmail">Email</label>
+                                     </span>
+                                <p ng-show="contactusform.submitted && contactusform.contactemail.$error.required" class="text-danger">Email is Required</p>
+                <p ng-show="contactusform.submitted && contactusform.contactemail.$error.email" class="text-danger">Enter a valid email.</p>
+                                </div>
+                                 <div class="form-group input-group">  
+                                      <span class="has-float-label" ng-class="{ 'has-error' : contactusform.submitted && contactusform.contactmobile.$invalid }">
+                                   
+                                    <input type="number" placeholder="Mobile Number" ng-model="contactus.phone" tabindex="4" name="contactmobile" ng-minlength="10" ng-maxlength="10" class="form-control borderline" id="contactmobile" required>
+                                            <label for="contactmobile">Mobile Number</label>
+                                      </span>
+                                <p ng-show="contactusform.submitted && contactusform.contactmobile.$error.required" class="text-danger">Mobile No is Required</p>
+                <p ng-show="contactusform.submitted && contactusform.contactmobile.$error.minlength" class="text-danger">Mobile Number Should be 10 digits</p>
+                                      <p ng-show="contactusform.submitted && contactusform.contactmobile.$error.maxlength" class="text-danger">Mobile Number Maximum 10 digits</p>
+                                </div>
+                               
+                                  <div class="form-group input-group">  
+                                      <span class="has-float-label">
+                                    
+                                    <textarea type="text" class="form-control borderline" ng-model="contactus.address" tabindex="3" name="contactaddress" id="contactaddress" rows="5" style="margin: 0px -2.5625px 0px 0px; height: 93px !important; " placeholder="Address"></textarea>
+                                          <label for="contactaddress">Address</label>
+                                      </span></div>
+                            </form>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
+                            <form role="form" name="contactusform1" novalidate>
+                                 
+                                 <div class="form-group input-group">  
+                                     <span class="has-float-label" ng-class="{ 'has-error' : contactusform1.submitted && contactusform1.contactenquiry.$invalid }">
+                                  
+                                    <select class="form-control1" id="enquiryid" ng-model="contactus.category" tabindex="5" name="contactenquiry" required ng-change="row=1">
+                                         <option value="" ng-selected="true" disabled>Enquiry for</option>
+                                      <option value="Sales">Sales</option>
+                                      <option value="Service">Service</option>
+                                      <option value="Other">Other</option>
+                                    </select>
+                                         <label for="enquiryid" ng-if="row==1">Enquiry for</label>
+                                     </span>
+                                 <p ng-show="contactusform1.submitted && contactusform1.contactenquiry.$error.required" class="text-danger">Enquiry for is Required</p>
+                                </div>
+                                 <div class="form-group input-group" style="width:95%;">
+                                <span class="has-float-label" ng-class="{ 'has-error' : contactusform1.submitted && contactusform1.testmodel.$invalid }">                             
+                                    <select class="form-control borderline" name="testmodel" ng-model="contactus.bike" tabindex="4" id="contactmodel" ng-change="row1=2;" required>
+                                        <option value="" ng-selected="true" disabled>Model</option>
+                                 <option ng-repeat="data in bikedetails" value="{{data.name}}">{{data.name}}</option>
+                                    </select>
+                                    <label class="" for="contactmodel" ng-if="row1==2">Model</label>
+                                    </span>
+                                 <p ng-show="contactusform1.submitted && contactusform1.testmodel.$error.required" class="text-danger">Model is Required</p>
+                                </div>
+                                 <div class="form-group input-group">  
+                                     <span class="has-float-label" ng-class="{ 'has-error' : contactusform1.submitted && contactusform1.contactshowroom.$invalid }">
+                                    
+                                    <select class="form-control1" id="showroom" ng-model="contactus.dealer_location" tabindex="6" name="contactshowroom" required ng-change="row1=1">
+                                        <option value="" ng-selected="true" disabled>Dealership Location</option>
+                                 <option ng-repeat="dealer in dealerdata" value="{{dealer.dealer_name}}">{{dealer.dealer_name}}</option>
+                                    </select>
+                                         <label for="contactmobile" ng-if="row1==1">Dealership Location</label>
+                                     </span>
+                                 <p ng-show="contactusform1.submitted && contactusform1.contactshowroom.$error.required" class="text-danger">Dealership Location is Required</p>
+                                </div>
+                                 <div class="form-group input-group">     
+                                     <span class="has-float-label" ng-class="{ 'has-error' : contactusform1.submitted && contactusform1.contactcomment.$invalid }">
+              
+            <textarea type="text"  class="form-control borderline" id="contactcmt" ng-model="contactus.message" tabindex="7" name="contactcomment" rows="5" style="margin: 0px -2.5625px 0px 0px; height: 93px !important; " placeholder="Comments" required></textarea>
+                                          <label for="contactcmt">Comments</label>
+                                     </span>
+                                <p ng-show="contactusform1.submitted && contactusform1.contactcomment.$error.required" class="text-danger">Comments is Required</p>
+                                </div>
+                                
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="cartitle text-center visible-lg visible-md visible-sm hidden-xs">
+                    <div class="btn btn-primary btn-md btn-custom-lg" style="width:250px;" tabindex="8" ng-click="submitcontactus();">SUBMIT</div>
+                </div>
+                
+                <div class="cartitle text-center hidden-lg hidden-md hidden-sm visible-xs">
+                    <div class="btn btn-default btn-md btn-custom-lg" style="width:250px;" tabindex="8" ng-click="submitcontactus();">SUBMIT</div>
+                </div>
+                 <br>
+            </div>
+
+        </div>
+
+    </div>
+<div class="row bikedetail-buffer"> </div>
+</div>
+ <div ng-include="'views/footer.html'" ng-cloak></div>

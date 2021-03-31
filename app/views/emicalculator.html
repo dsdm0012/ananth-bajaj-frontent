@@ -1,0 +1,169 @@
+<!--<div ng-controller="headerCtrl">
+</div>-->
+<style>
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+  width:95%;
+}
+.emicalcbg input::placeholder {
+    color: #ffffff !important;
+    opacity: 0 !important; /* Firefox */
+}
+.emicalcbg input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   opacity: 0 !important;
+}
+.emicalcbg input::-ms-input-placeholder { /* Microsoft Edge */
+   opacity: 0 !important;
+}
+               .row {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+</style>
+<div ng-controller="emicalculatorctrl" class="emicalcbg" style="min-height:600px;">
+         <div class="alert alert-success alert-dismissable fade in" ng-show="Showsuccessalert">
+       <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+  <strong>{{successmessage}}</strong> 
+</div>
+        <div class="alert alert-danger alert-dismissable fade in" ng-show="Showerroralert" id="alertmessage">
+       <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+  <strong>{{errormessage}}</strong> 
+</div>
+	<div class="container " style="height:100%;">
+        <div class="row top-buffer"> </div>
+        <div class="row">
+          
+          
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xs-12 col-center-block1">
+                 <div class="row" style="padding:15px;margin-right:0px;margin-left:0px;background:transparent;">
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 hidden-lg hidden-md hidden-sm visible-xs" style="padding-right: 0px;padding-left: 0px;"><h4 class="text-center" style="color:#ffffff;font-weight:bold;font-size:20px;"><img src="./images/home/slide_line1.png" style="margin-top: 0px;height: 4px;" class=""> &nbsp;&nbsp; EMI CALCULATOR &nbsp;&nbsp; <img src="./images/home/slide_line1.png" style="margin-top: 0px;height: 4px;" class=""></h4></div>
+                     <div class="visible-lg visible-md visible-sm hidden-xs">
+    <div class="col-lg-4 col-md-2 col-sm-2 col-xs-2" style=""><img src="./images/home/slide_line1.png" style="margin-top: 20px;" class="pull-right"></div>
+    <div class="col-lg-4 col-md-8 col-sm-8 col-xs-8" style=""><h4 class="text-center" style="color:#ffffff;font-weight:bold;font-size:23px;">EMI CALCULATOR</h4></div>
+    <div class="col-lg-4 col-md-2 col-sm-2 col-xs-2" style=""><img src="./images/home/slide_line1.png" style="margin-top: 20px;" class="pull-left"></div></div>
+  </div>
+                <div class="row">    
+                    <div style="margin-top:20px;">
+            	<div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
+     <form role="form" name="emiform" novalidate>
+        <div class="form-group input-group">  
+            <span class="has-float-label" ng-class="{ 'has-error' : emiform.submitted && emiform.emimodel.$invalid }">
+        
+             <select class="form-control borderline" id="emimodel" ng-model="emi.model" ng-change="emiModel();row=1;" name="emimodel" tabindex="1" required>
+                    <option value="" ng-selected="true">Select Bike</option>
+					  <option ng-repeat="bike in cardetails" value="{{bike.name}}" ng-selected="" ng-if="bike.name!='others'">{{bike.name}}</option>	 
+                  </select>
+                <label for="emimodel" ng-if="row==1">Bike</label>
+            </span>
+          <p ng-show="emiform.submitted && emiform.emimodel.$error.required" class="text-danger">Bike is Required</p>
+         </div>
+        <div class="form-group input-group">  
+            <span class="has-float-label" ng-class="{ 'has-error' : emiform.submitted && emiform.emivariant.$invalid }">
+     
+             <select class="form-control borderline" id="emivariant" ng-change="emiVariant();row1=1;" ng-model="emi.variantid" name="emivariant" tabindex="2" required>
+                   <option value="" ng-selected="true">Select Variant</option>
+					  <option  ng-repeat="variant in emicarVariantData" value="{{variant.varient.id}}" >{{variant.varient.varient_name}}</option>	
+                  </select>
+                 <label for="emivariant" ng-if="row1==1">Variant</label>
+            </span>
+          <p ng-show="emiform.submitted && emiform.emivariant.$error.required" class="text-danger">Variant is Required</p>
+         </div>
+         <div class="form-group input-group">  
+             <div class="has-float-label" ng-class="{ 'has-error' : emiform.submitted && emiform.emionroadprice.$invalid }">
+            
+             <input type="number" placeholder="On Road Price" class="form-control borderline" id="onroadprice" ng-model="emi.onRoadPriceValue" name="emionroadprice" tabindex="3" required>
+                   <label for="onroadprice">On Road Price</label>
+             </div>
+          <p ng-show="emiform.submitted && emiform.emionroadprice.$error.required" class="text-danger">On Road Price is Required</p>
+         </div>
+      
+         </form>
+         </div>
+               <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
+            <form role="form" name="emiform1" novalidate>              
+         <div class="form-group input-group">        
+             <span class="has-float-label" ng-class="{ 'has-error' : emiform1.submitted && emiform1.emitenure.$invalid }">
+            
+             <select class="form-control borderline" id="emitenure" ng-model="emi.tenureMonth" name="emitenure" tabindex="5" required ng-change="row3=1;">
+                    <option value="" ng-selected="true">Select Tenure</option>
+					  <option ng-repeat="data in tenuredata" value="{{data.month}}" ng-selected="">{{data.month}}&nbsp;&nbsp;months</option>
+                  </select>
+                  <label for="emitenure" ng-if="row3==1">Tenure</label>
+             </span>
+                 <p ng-show="emiform1.submitted && emiform1.emitenure.$error.required" class="text-danger">Tenure is Required</p>
+                </div> 
+         <div class="form-group input-group">   
+             <span class="has-float-label" ng-class="{ 'has-error' : emiform1.submitted && emiform1.emiinterest.$invalid }">
+          
+             <input type="number" placeholder="Rate of Interest" class="form-control borderline" id="rateinterest" ng-model="emi.rateInterest" name="emiinterest" tabindex="5" required>
+                 <label for="rateinterest">Rate of Interest</label>
+             </span>
+                 <p ng-show="emiform1.submitted && emiform1.emiinterest.$error.required" class="text-danger">Rate of Interest is Required</p>
+                </div>
+          <div class="form-group input-group">   
+              <span class="has-float-label" ng-class="{ 'has-error' : emiform1.submitted && emiform1.emidownpay.$invalid }">
+            
+             <input type="number" placeholder="Down Payment" class="form-control borderline" id="downpay" ng-model="emi.downPay" name="emidownpay" tabindex="6" onkeypress="return event.charCode >=48 && event.charCode < 58 || event.charCode < 9" required>
+                  <label for="downpay">Down Payment</label>
+              </span> 
+                  <p ng-show="emiform1.submitted && emiform1.emidownpay.$error.required" class="text-danger">Down Payment is Required</p>
+                </div>             
+               
+          </form><br><br>
+                    </div></div></div>
+        
+                <div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xs-6">
+       <div class="cartitle text-right visible-lg visible-md visible-sm hidden-xs">
+           <div class="btn btn-primary btn-md btn-custom-lg" style="width:120px;" ng-click="resetemi();" tabindex="7">RESET</div></div>
+        
+        <div class="cartitle text-right hidden-lg hidden-md hidden-sm visible-xs">
+           <div class="btn btn-default btn-md btn-custom-lg" style="width:120px;" ng-click="resetemi();" tabindex="7">RESET</div></div>
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xs-6">
+        <div class="cartitle visible-lg visible-md visible-sm hidden-xs">
+            <div class="btn btn-primary btn-md btn-custom-lg" style="width:120px;" ng-click="calculate();" tabindex="8">CALCULATE</div></div>
+                     <div class="cartitle hidden-lg hidden-md hidden-sm visible-xs">
+            <div class="btn btn-default btn-md btn-custom-lg" style="width:120px;" ng-click="calculate();" tabindex="8">CALCULATE</div></div>
+                    </div>
+                    <br><br>
+        <div style="text-align:center;">
+                    </div>
+</div>
+                
+                
+                <div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xs-6">
+     <div class="emititle text-right">EMI &nbsp;  &#x20B9;</div>
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xs-6">
+        <div class="emititle">{{emi.emiValue | INR1}}*
+        <h6 style="text-transform: capitalize;font-size:10px;margin-left: 10px;text-align: left;color:white;" ng-if="emi.emiValue">* price indicator</h6>
+        </div>
+        
+                    </div>
+</div><br>
+
+            </div> <br><br>
+            
+    </div>
+
+    </div>	</div>
+ <div ng-include="'views/footer.html'" ng-cloak></div>
+ <script type="text/javascript">
+
+        function isNumberKey(evt, obj) {
+
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            var value = obj.value;
+            var dotcontains = value.indexOf(".") != -1;
+            if (dotcontains)
+                if (charCode == 46) return false;
+            if (charCode == 46) return true;
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        }
+
+    </script>

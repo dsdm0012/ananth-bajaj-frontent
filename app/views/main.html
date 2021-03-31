@@ -1,0 +1,682 @@
+<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet"> 
+<style>
+    .slider-icon {
+    z-index: 0 !important;
+}
+    .row {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+    .affix {
+        top: 0;
+        width: 100%;
+        position: fixed;
+        /*max-width: 1200px;*/
+        max-width: 100%;
+        z-index: 9;
+    }
+
+    .caption1 {
+        width: 100%;
+        bottom: 5.3rem;
+        position: absolute;
+        height: 27px;
+    }
+
+    .caption {
+        width: 100%;
+        bottom: .3rem;
+        position: absolute;
+        height: 42px;
+    }
+
+    .cartext {
+        font-size: 20px;
+        padding: 10px;
+        font-weight: 600;
+        color: #0D639C;
+        margin-bottom: 15px;
+        padding-top: 10px;
+        /*padding-left: 25px;*/
+    }
+
+    .caption h4 {
+        color: #fff;
+        /* -webkit-font-smoothing: antialiased;*/
+    }
+
+    .carousel-control {
+        background-color: transparent;
+        opacity: 1;
+    }
+
+
+    .nav-tabs>li,
+    .nav-pills>li {
+        float: none;
+        display: inline-block;
+    }
+
+    .nav-tabs {
+        text-align: center;
+    }
+
+    .nav-tabs>li {
+        width: auto;
+    }
+
+    .gallery_links {
+        font-size: 23px !important;
+        padding: 1px !important;
+        margin-bottom: 10px;
+        padding-bottom: 0px !important;
+        color: #101010 !important;
+        font-weight: normal !important;
+        font-family: AvenirNextCondensed-Bold;
+        text-transform: capitalize;
+
+    }
+
+    .nav>li>a:hover,
+    .nav>li>a:focus {
+        background-color: transparent;
+        border: 0px solid #101010;
+        /*text-decoration: underline;*/
+    }
+
+    .tabActivee {
+        color: #2b67b3 !important;
+        background-color: transparent !important;
+        text-decoration: none;
+        border-bottom: 0px solid #2b67b3 !important;
+        border: 0px solid #ddd !important;
+        font-weight: bold !important;
+    }
+
+    .nav-tabs>li.active>a,
+    .nav-tabs>li.active>a:hover,
+    .nav-tabs>li.active>a:focus {
+        color: #23527c;
+        border-bottom: 0px solid #2b67b3;
+    }
+     @media (min-width: 0px) and (max-width:767px) {
+        .carousel-indicators .active {
+            background-color: #25629c;
+            border: 1px solid #25629c;
+            margin-right: 4px;
+        }
+}
+
+    @media screen and (min-width: 768px) {
+        .carousel-indicators {
+            bottom: 10px;
+        }
+        .carousel-indicators .active {
+            background-color: #25629c;
+            border: 1px solid #25629c;
+            margin-right: 4px;
+        }
+        .carousel-indicators li {
+            border: 0px solid #363636;
+            border:3px;
+        }
+    }
+
+    .carousel-indicators {
+        position: relative;
+        width: 100%;
+        margin-left: 0;
+        left: 0;
+    }
+    .carousel-inner.onebyone-carosel { margin: auto; width: 90%; }
+.onebyone-carosel .active.left { left: -33.33%; }
+.onebyone-carosel .active.right { left: 33.33%; }
+.onebyone-carosel .next { left: 33.33%; }
+.onebyone-carosel .prev { left: -33.33%; }
+    /*    List Inline css*/
+    .list-inline-item:not(:last-child) {
+	margin-right: 0;
+}
+.list-inline::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+.list-inline-item {
+/*	float: left;*/
+}
+.list-inline-item + .list-inline-item::before {
+    padding-right: 2rem;
+    padding-left: 1rem;
+	content: '/';
+    color:#2b67b3;
+}
+    
+   /* Gallery Background Image*/
+    .gallerybg {
+    background: url(../images/home/gallery_background.jpg) no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    height:100%;
+}
+    /*List item css*/
+    .itemcss{
+        text-transform: uppercase;
+        font-size: 20px;
+        color: #071e39;
+        font-weight: 100;
+        font-family: AvenirNextCondensed-Bold;
+    }
+    .bikecss:hover{
+    background: #f2f2f2;
+}
+       .btnhover:hover{
+           background: #101010;
+           color: #ffffff;
+           border: #101010;
+}
+         .btnhover{
+           color: #101010;
+    background-color: transparent;
+    border: 2px solid #101010;
+}
+    .titlecss1 {
+    font-family: AvenirNextCondensed-Bold;
+    color: #071e39;
+    font-size: 22px;
+    text-transform: uppercase;
+    margin-bottom: 0px;
+    margin-top:20px;
+    font-weight: bold;
+}
+    .biketypecss{
+    background: #fff;
+    color: #101010;
+    font-size: 36px;
+    line-height: 40px;
+    margin: 0;
+    padding: 2%;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: AvenirNextCondensed-Bold;
+    }
+    .slick-prev:before, .slick-next:before {
+    font-family: 'slick';
+    font-size: 20px;
+    line-height: 1;
+    opacity: .75;
+    color: #101010;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+    .arrowleft:before, .arrowright:before {
+    font-family: 'slick';
+    font-size: 20px;
+    line-height: 1;
+    opacity: 0;
+    color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+    .arrowleft.slick-disabled:before, .arrowright.slick-disabled:before {
+    opacity: 0;
+}
+    .slick-prev, .slick-next {
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    /*top: 76%;*/
+    width: 30px !important;
+    height: 48px !important;
+}
+    .slick-arrow {
+    top: 60% !important;
+    z-index: 0 !important;
+}
+
+    .nav_active{
+        color:#0951a0;
+    }
+     .nav_color{
+        color:#071e39;
+    }
+    .carousel-indicators li {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 1px;
+  text-indent: -999px;
+  cursor: pointer;
+  background-color: #000 \9;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid #fff;
+  border-radius: 10px;
+}
+    .DocumentList
+{
+    overflow-x:scroll;
+    overflow-y:hidden;
+    /*height:200px;*/
+    width:80%;
+    padding: 0 15px;
+}
+
+.list-inline {
+  white-space:nowrap;
+}
+ /*      .nav_active{
+        color:#ffffff !important;
+        border-bottom:2px solid white;
+    }
+     .nav_color{
+        color:#ffffff !important;
+    }*/
+    .col-centered {
+    float: none;
+    margin: 0 auto;
+}
+
+.carousel-control { 
+    width: 8%;
+    width: 0px;
+}
+.carousel-control.left,
+.carousel-control.right { 
+    margin-right: 40px;
+    margin-left: 32px; 
+    background-image: none;
+    opacity: 1;
+}
+.carousel-control > a > span {
+    color: white;
+	  font-size: 29px !important;
+}
+
+.carousel-col { 
+    position: relative; 
+    min-height: 1px; 
+    padding: 5px; 
+    float: left;
+ }
+
+ .active > div { display:none; }
+ .active > div:first-child { display:block; }
+
+
+
+/*md*/
+@media (min-width: 0) and (max-width: 1199px) {
+  .carousel-inner .active.left { left: -33%; }
+  .carousel-inner .active.right { left: 33%; }
+	.carousel-inner .next        { left:  33%; }
+	.carousel-inner .prev		     { left: -33%; }
+  .carousel-col                { width: 33%; }
+	.active > div:first-child + div { display:block; }
+  .active > div:first-child + div + div { display:block; }
+}
+    @media (min-width: 766px) and (max-width:1024px) {
+        .rowheight{
+            min-height: 250px !important;
+        }
+}
+    @media (min-width: 1025px) and (max-width:1499px) {
+           .rowheight{
+            min-height: 360px !important;
+        }
+}
+    @media (min-width: 1500px) {
+     .rowheight{
+            min-height: 440px !important;
+        }
+}
+
+
+.block {
+	width: 306px;
+	height: 230px;
+}
+
+.red {background: red;}
+
+.blue {background: blue;}
+
+.green {background: green;}
+
+.yellow {background: yellow;}
+    
+    .nav-tabs > li > a {
+        border: 0px solid #ffffff !important;
+        border-radius: 4px 4px 0 0;
+    }
+       #newloader,#newloader1 {
+    background-image: url(./images/loader-64x/Preloader_11.gif);
+    background-repeat: no-repeat;
+    background-size: 40px 40px;
+    background-position: center center;
+    height: 40px;
+}
+</style>
+<script>
+       function OnSuccessData(elem) {
+         var bikeid = $(elem).attr("id");
+        var biketype = $(elem).attr("data-type");
+            angular.element(document.getElementById('divID')).scope().TestAngularMethod(bikeid,biketype);
+        }
+    $(document).ready(function() {
+        $('html, body').scrollTop(0);
+        $(window).on('load', function() {
+            setTimeout(function() {
+                $('html, body').scrollTop(0);
+            }, 0);
+        });
+        
+         setTimeout(function() {     
+        $('.carousel[data-type="multi"] .item').each(function() {
+	var next = $(this).next();
+	if (!next.length) {
+		next = $(this).siblings(':first');
+	}
+	next.children(':first-child').clone().appendTo($(this));
+
+	for (var i = 0; i < 2; i++) {
+		next = next.next();
+		if (!next.length) {
+			next = $(this).siblings(':first');
+		}
+
+		next.children(':first-child').clone().appendTo($(this));
+	}
+});
+         },2000)
+        
+    });
+    $('#bannerCarousel').carousel({
+        interval: 5000
+    });
+     $('#bannerCarousel_mobile').carousel({
+        interval: 5000
+    });
+    $(document).ready(function () {
+    $('#myCarousel').carousel({
+        interval: 10000
+    })
+   
+});
+         function reloaddata()
+        {
+            console.log('slide update');
+            setTimeout(function() {            
+            $('.fdi-Carousel .item').each(function () {
+            var next = $(this).next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+            next.children(':first-child').clone().appendTo($(this));
+
+            if (next.next().length > 0) {
+                next.next().children(':first-child').clone().appendTo($(this));
+            }
+            else {
+                $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+            }
+    });
+            }, 100);
+    }
+
+</script>
+<!--<div ng-controller="headerCtrl"> </div>-->
+<div class="alert alert-danger alert-dismissable fade in" ng-show="Showerroralert" id="alertmessage"> <strong>{{errormessage}}</strong> </div>
+<div ng-show="offlinemode">
+    <div id="bannerCarousel" class="carousel slide visible-lg visible-md visible-sm hidden-xs" data-ride="carousel" ng-cloak>
+        <div class="carousel-inner" role="listbox">
+            <div class="item" data-ng-repeat="img in bannerdata" data-ng-class="{active : $first}"> <img data-ng-src="https://anant-bajaj-dev.myridz.com{{img.image.url}}" style="width:100% !important;" alt=" carousel {{$index}}" />
+                    <div class="carousel-caption" style="display:block !important;right: 10% !important;">
+                	<div style="text-align: right;position:  relative;top: 30px;" ng-if="img.button_visible==true">
+                        <a ng-href="{{img.button_link_url}}" ng-click="bannerredirect(img.bike_id,img.bike_type_name);">
+				        		<button style="font-family:AvenirNextCondensed-Medium;padding: 5px 20px;color: white;border: none;border-radius: 4px;font-size: 20px;font-weight: normal;z-index: 9999 !important;background:{{img.button_color}};" role="button">
+				        				{{img.button_text}}
+				        		</button></a>
+				        	</div>
+                </div>
+            </div>
+        </div>
+        <!--   <ol class="carousel-indicators">
+            <li data-target="#bannerCarousel" data-ng-repeat="img in bannerdata" data-ng-class="{active : $first}" data-slide-to="{{$index}}"></li>
+        </ol>-->
+        <a class="carousel-control left" href="#bannerCarousel" data-slide="prev" target="_self">
+            <span class="slider-icon icon-slideleft small"></span>
+        </a> <a class="carousel-control right" href="#bannerCarousel" data-slide="next" target="_self">
+            <span class="slider-icon icon-slideright small"></span>
+        </a>
+      <ol class="carousel-indicators" ng-hide="hideindicator" style="margin-top:-30px;">
+      <li data-target="#bannerCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#bannerCarousel" data-slide-to="{{$index+1}}" ng-repeat="i in getNumber(number) track by $index"></li>
+    </ol>
+    </div>
+       <div id="bannerCarousel_mobile" class="carousel slide hidden-lg hidden-md hidden-sm visible-xs" data-ride="carousel" ng-cloak>
+        <div class="carousel-inner" role="listbox">
+           
+             <div class="item" data-ng-repeat="img in mobilebanner" data-ng-class="{active : $first}"> <img data-ng-src="{{img.image_host_url}}" alt=" carousel {{$index}}" />
+            <div class="carousel-caption" style="display:block !important;right: 4% !important;">
+                	<div style="text-align: right;position:  relative;top: 30px;" ng-if="img.active==true">
+                        <a ng-href="{{img.button_link_url}}" ng-click="bannerredirect(img.bike_id,img.bike_type_name);">
+				        		<button style="font-family:AvenirNextCondensed-Medium;padding: 5px 15px;color: white;border: none;border-radius: 4px;font-size: 14px;font-weight: normal;z-index: 9999 !important;background:{{img.button_color}};" role="button">
+				        				{{img.button_text}}
+				        		</button></a>
+				        	</div>
+                </div>
+            </div>
+        </div>     
+      <ol class="carousel-indicators" ng-hide="hideindicator" style="margin-top:-30px;">
+      <li data-target="#bannerCarousel_mobile" data-slide-to="0" class="active"></li>
+      <li data-target="#bannerCarousel_mobile" data-slide-to="{{$index+1}}" ng-repeat="i in getNumber1(number) track by $index"></li>
+    </ol>
+    </div>
+      <div class="row" style="padding:15px;margin-right:0px;margin-left:0px;background:#ffffff;">
+    <div class="col-lg-5 col-md-5 col-sm-4 col-xs-3" style=""><img src="./images/home/slide_line.png" style="margin-top: 20px;" class="pull-right"></div>
+    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6" style=""><h4 class="text-center dividecss"> BIKE RANGE</h4></div>
+    <div class="col-lg-5 col-md-5 col-sm-4 col-xs-3" style=""><img src="./images/home/slide_line.png" style="margin-top: 20px;" class="pull-left"></div>
+  </div>
+       <div class="row visible-lg visible-md visible-sm hidden-xs" style="padding:15px;background:#ffffff;margin-right:0px;margin-left:0px;">
+    <div  class="col-md-8 center-block" style="float: none;" id="list_bike">
+          <ul class="list-inline text-center" >
+              <!--<li class="list-inline-item itemcss" role="button" ng-class="'ALL' === classVar ? 'nav_active' : 'nav_color'" ng-click="getbikename();">ALL</li>-->
+ 	<li class="list-inline-item itemcss" role="button" ng-class="bike === classVar ? 'nav_active' : 'nav_color'" data-ng-repeat="bike in biketype" ng-click="getbikename(bike);">{{bike}}</li>
+</ul>
+        </div>
+  </div>
+   
+    <div  class="hidden-lg hidden-md hidden-sm visible-xs">
+  	<div class="row">
+		<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-center-block1" style="height: 50px;">
+	 <div class="slider multiple-items hidden-lg hidden-md hidden-sm visible-xs">
+	<div class="item" data-ng-repeat="newbike in biketype">
+         <div>
+        <p class="biketypecss" style="font-size: 18px !important;" ng-class="newbike === classVar ? 'nav_active' : 'nav_color'" ng-click="getbikename(newbike);">{{newbike}}</p>
+        </div>
+	</div>
+</div>
+		</div>
+	</div></div>
+    
+    <!--End carousel for mobile bike list-->
+<!--    <br><br>-->
+ 
+       <div  class="visible-lg visible-md visible-sm hidden-xs" style="background:#ffffff;">
+  	<div class="row">
+		<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-center-block1 rowheight" id="newloader1" style="margin-bottom: 40px;">
+          <!--  <div id="loading1"><img style="height: 40px;" src="./images/loader-64x/Preloader_11.gif" class="center-block"></div>-->
+              <div class="margin-bottom" id="divID"></div>
+	    	<div class="slider autoplay" id="bikegallery">
+				   <div class="item" data-ng-repeat="bike in bikemodeldata">
+                                    <div class="bikecss" style="padding:10px;">
+                                        <p class="titlecss1" style="font-size: 23px !important;margin-left:15px;">{{bike.name}}</p>
+                                        <a>
+                                            <img src="{{bike.bike_image}}" class="img-responsive center-block" >
+                                        </a>
+                                          <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="">
+      <h5 class="text-center" style="color:#101010;font-weight:400;margin-top:18px;font-size:20px;font-weight:bold;
+    font-family: AvenirNextCondensed-Bold;">&#8377;{{bike.pricing | INR1}}*</h5>
+        <h6 style="text-transform: capitalize;font-size:10px;margin-left: 0px;text-align:center;">* price indicator</h6>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="">
+     <div class="cartitle text-center" style="padding-top: 15px;">
+            <div class="btn btn-primary btn-md btn-custom-lg" data-type="{{bike.bike_type}}" id="{{bike.id}}" onclick="OnSuccessData(this,this)" style="padding:4px !important;width:100px;">EXPLORE</div>
+        </div>
+    </div>
+  </div>
+         </div>
+      </div>   
+				</div>
+		</div>
+	</div></div>    
+     
+    <!--/* Home page Mobile view bike css */-->  
+         <div class="hidden-lg hidden-md hidden-sm visible-xs" style="min-height: 250px !important;" id="newloader">
+       <!--  <div id="loading2"><img style="height: 40px;" src="./images/loader-64x/Preloader_11.gif" class="center-block"></div>-->
+    <div id="bikemobile_gallery">   
+        <div class="margin-bottom" id="divID"></div>
+     <div class="slider-nav" style="background:#ffffff;">        
+	<div class="item" data-ng-repeat="bike in bikemodeldata">
+		<!--<img src="{{bike.bike_image}}" alt="image"  draggable="false" style="height:100px"/>-->
+         <div>
+        <p class="titlecss1" style="font-size: 20px !important;margin-left: 35px;">{{bike.name}}</p>
+                <a href="#">
+                <img src="{{bike.bike_image}}" class="img-responsive center-block" style="height:145px;">
+                </a>
+                                       <!-- <div class="text-center">{{bike.name}}</div>-->
+        <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="">
+      <h5 class="text-right" style="color:#101010;font-weight:400;margin-top:18px;font-size:20px;font-weight:bold;
+    font-family: AvenirNextCondensed-Bold;">&#8377;{{bike.pricing | INR1}}*</h5>
+        <h6 style="text-transform: capitalize;font-size:10px;margin-left: 0px;text-align: right;margin-right: 5px;">* price indicator</h6>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="">
+     <div class="cartitle text-left" style="">
+            <div class="btn btn-primary btn-md btn-custom-lg" data-type="{{bike.bike_type}}" id="{{bike.id}}" onclick="OnSuccessData(this,this)" style="padding:4px !important;width:100px;">EXPLORE</div>
+        </div>
+    </div>
+  </div>
+                                    </div>
+	</div>
+</div>
+    </div></div>
+    
+   
+    <!--/* End Home page Mobile view bike css */-->
+
+
+
+    <div id="services" style="padding-bottom:35px;" class="gallerybg" ng-cloak>
+<!--
+        <div class="titleHead" style="color:black;margin-bottom: 25px;">GALLERY
+            <div style="width: 75px;padding-bottom: 4px;border-bottom: 4px solid #1367b3;margin: 0px auto;"></div>
+        </div>
+-->
+         <div class="row" style="padding:15px;">
+    <div class="col-lg-5 col-md-5 col-sm-4 col-xs-3" style=""><img src="./images/home/slide_line1.png" style="margin-top: 20px;" class="pull-right"></div>
+    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6" style=""><h4 class="text-center divide_whitecss"> GALLERY</h4></div>
+    <div class="col-lg-5 col-md-5 col-sm-4 col-xs-3" style=""><img src="./images/home/slide_line1.png" style="margin-top: 20px;" class="pull-left"></div>
+  </div>
+        <div class="container">
+            <ul class="nav nav-tabs" style="margin-bottom: 10px;">
+                <!-- <li><a id="allTab" href="" data-toggle="tab" class="gallery_links" ng-click="getClick(0);">ALL</a></li>
+                <li>
+                    <div class="gallery_links">/</div>
+                </li> -->
+                <li style="border-bottom: 0px solid #e5e5e5;margin-left: 5px;"><a id="vidTab" href="" data-toggle="tab" class="gallery_links" ng-click="getClick(2);">VIDEOS</a></li>
+                <li style="border-bottom: 0px solid #e5e5e5;margin-left: 5px;">
+                    <div class="gallery_links">/</div>
+                </li>               
+                <li style="border-bottom: 0px solid #e5e5e5;margin-left: 5px;"><a id="hapCustTab" href="" data-toggle="tab" class="gallery_links" ng-click="getClick(3);">HAPPY CUSTOMERS</a></li>
+               <!-- <li>
+                    <div class="gallery_links" ng-hide="true">/</div>
+                </li>
+                <li><a id="picTab" href="" data-toggle="tab" ng-hide="true" class="gallery_links" ng-click="getClick(1);">Facilities</a></li>-->
+                
+            </ul>
+
+            <div ng-if="view.toShow == 'all'"> 
+            </div>
+
+            <div ng-if="view.toShow == 'pics'"> 
+                <div class="item cruises" data-ng-repeat="list in masterDataPics | limitTo:mdVariable.limit" data-ng-class="{active : $first}">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6" ng-repeat="each in list">
+                          <div class="thumbnail"  style="margin-bottom: 20px;" role="button"  data-thumbnail-group="gallery">
+                               <a href="{{each.image}}" data-lightbox="gallery-group-1"><img alt="Background" src="{{each.image}}" /></a>
+                           <!-- <img ng-src="{{each.image}}"  style="width: 100%;" data-toggle="modal" data-target="#myModalaa"/>-->  
+                          </div>
+                    </div>
+                </div>
+                <div class="gallery_links" style="font-size: 12px;text-align: center;" ng-click="loadMorehc();" ng-if="mdVariable.limit < masterDataPics.length" role="button">Load more ...</div>
+            </div>
+
+            <div ng-if="view.toShow == 'vids'">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" style="text-align: center;">
+                        <div class="embed-responsive embed-responsive-16by9" style="height: 352px;position:unset;"> <iframe class="embed-responsive-item" style="height:352px;" ng-src="{{videoView | trustUrl}}" frameborder="0" allowfullscreen></iframe> </div>
+                         <div style="font-size: 22px;color:#FFFFFF;margin-left:10px;text-align:left;font-family:AvenirNextCondensed-Medium;">{{poweredby}}</div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="overflow-y: scroll;max-height: 352px;background:rgba(0,0,0,.6);">
+                        <div ng-repeat="vid in masterYoutube" ng-cloak>
+                            <div class="row" ng-click="changeVideo(vid,$index);" role="button" style="padding: 5px;">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"> <img src="{{vid.items[0].snippet.thumbnails.default.url}}" class="img-responsive"> </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" title="{{vid.items[0].snippet.title}}">
+                                    <div style="font-size: 14px;color:#FFFFFF;margin-left: 10px;"> {{vid.items[0].snippet.title}} </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-if="view.toShow == 'hapCust'">
+                <div class="item cruises" data-ng-repeat="list in masterData | limitTo:mdVariable.limit">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6" ng-repeat="each in list">
+                          <div class="thumbnail"  style="margin-bottom: 20px;background-color:transparent!important;border:none;" role="button"  data-thumbnail-group="gallery">
+                              <a href="{{each.image}}" data-lightbox="gallery-group-1"><img alt="Background" src="{{each.image}}" /></a>
+                           <!-- <img ng-src="{{each.image}}"  style="width: 100%;" data-toggle="modal" data-target="#myModalaa"/> --> 
+                          </div>
+                    </div>
+                </div>
+                <div class="gallery_links" style="font-size: 12px;text-align: center;" ng-click="loadMorehc();" ng-if="mdVariable.limit < masterData.length" role="button">Load more ...</div>
+            </div>
+
+
+
+        </div>
+    </div>
+     <div ng-cloak style="background:white;" class="visible-lg visible-md visible-sm hidden-xs">
+          <div class="row bottom-buffer"> </div>
+       <div class="row" style="padding:15px;margin-right:0px;margin-left:0px;background:#ffffff;">
+    <div class="col-lg-5 col-md-5 col-sm-4 col-xs-3" style=""><img src="./images/home/slide_line.png" style="margin-top: 20px;" class="pull-right"></div>
+    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6" style="padding-right: 5px;padding-left: 5px;"><h4 class="text-center dividecss"> TESTIMONIALS </h4></div>
+    <div class="col-lg-5 col-md-5 col-sm-4 col-xs-3" style=""><img src="./images/home/slide_line.png" style="margin-top: 20px;" class="pull-left"></div>
+  </div>
+         <div class="row top-buffer"> </div>
+        <div class="row" style="text-align: center;margin: 0 auto;">
+             <div class="col-lg-11 col-md-11 col-sm-11 col-xs-12 col-centered">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" ng-repeat="data in testimonialdata | limitTo:3" ng-if="data.visible==true">
+                <div class="boxshadow" style="height:370px !important;">
+                    <div class="quotes" style="text-align: center;"> <img src="images/home/Testimonial.png" height="25px"/> </div>
+                    <div class="extraspace" style="margin-top:20px;">{{data.description}} </div><br>
+                       <div class="quotes" style="text-align: center;font-size: 18px;text-transform: capitalize;"> <p>{{data.name}}</p> </div>
+                    
+                    <br><br> 
+                </div>
+            </div>
+         </div>
+        </div>
+        <div class="cartitle text-center" style="padding-top: 20px;">
+            <div class="btn btn-primary btn-md btn-custom-lg" ng-click="testimonial();" style="width: 150px;">VIEW ALL</div>
+        </div>
+        <div class="row top-buffer"> </div>
+         <div class="row top-buffer"> </div>
+         <div class="row top-buffer"> </div>
+    </div>
+    <div ng-include="'views/footer.html'" ng-cloak></div>
+</div>

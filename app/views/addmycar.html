@@ -1,0 +1,158 @@
+
+<style>
+    .form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+  width:95%;
+}
+.addbikebg input::placeholder {
+    color: #ffffff !important;
+    opacity: 0 !important; /* Firefox */
+}
+.addbikebg input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   opacity: 0 !important;
+}
+.addbikebg input::-ms-input-placeholder { /* Microsoft Edge */
+   opacity: 0 !important;
+}
+
+</style>
+<div ng-controller="addmycarctrl" class="addbikebg">
+           <div class="alert alert-success alert-dismissable fade in" ng-show="Showsuccessalert">
+       <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+  <strong>{{successmessage}}</strong> 
+</div>
+        <div class="alert alert-danger alert-dismissable fade in" ng-show="Showerroralert" id="alertmessage">
+       <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+  <strong>{{errormessage}}</strong> 
+</div>
+     <div class="alert alert-info alert-dismissable fade in" ng-show="Showinfoalert" id="alertmessage">
+       <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+  <strong>{{infomessage}}</strong> 
+</div>
+    <div class="container " style="height:100%;">
+        <div class="row" style="margin-top: 20px;margin-bottom:50px;">
+ 
+   
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xs-12 col-center-block1">
+                <div class="row">
+                   <div class="row" style="padding:15px;margin-right:0px;margin-left:0px;background:transparent;">
+    <div class="col-lg-4 col-md-2 col-sm-2 col-xs-2" style=""><img src="./images/home/slide_line1.png" style="margin-top: 20px;" class="pull-right"></div>
+    <div class="col-lg-4 col-md-8 col-sm-8 col-xs-8" style=""><h4 class="text-center" style="color:#ffffff;font-weight:bold;font-size:25px;"> Add Bike</h4></div>
+    <div class="col-lg-4 col-md-2 col-sm-2 col-xs-2" style=""><img src="./images/home/slide_line1.png" style="margin-top: 20px;" class="pull-left"></div>
+  </div>
+                    <div style="margin-top:20px;">
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
+                            <form role="form" name="mycarsform" novalidate>
+                            <div class="form-group input-group">
+              <span class="has-float-label" ng-class="{ 'has-error' : mycarsform.submitted && mycarsform.mycarmodel.$invalid }">
+           
+             <select class="form-control borderline" name="mycarmodel" ng-change="testFuels();row=1;" ng-model="mycars.bike" tabindex="1" id="addmodel" required>
+                    <option value="" ng-selected="true" disabled>Model*</option>
+                    <option ng-repeat="data in cardetails" value="{{data.name}}">{{data.name}}</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  <label for="addmodel" ng-if="row==1">Model</label>
+            </span>
+           <p ng-show="mycarsform.submitted && mycarsform.mycarmodel.$error.required" class="text-danger">Model is Required</p>
+         </div>
+                             <div class="form-group input-group" ng-if="othercarselected">  
+                                       <span class="has-float-label">
+                                  
+                                    <input type="text" name="othermodel" ng-model="mycars.other_model" placeholder="Add Custom Bike Model Here" tabindex="6" class="form-control borderline" id="othercar">
+                                           <label for="othercar">Add Custom Bike Model Here</label>
+                                       </span>
+                                  <p class="text-danger" ng-if="modelinvalid">Model is Required</p>                                
+                                </div>
+                               
+                                 <div class="form-group input-group">  
+                                     <span class="has-float-label" ng-class="{ 'has-error' : mycarsform.submitted && mycarsform.mycarsregno.$invalid }">
+                                  
+                                    <input type="text" name="mycarsregno" ng-model="mycars.registration_number" placeholder="Registration Number" tabindex="3" class="form-control borderline" id="regno" required>
+                                         <label for="regno">Registration Number</label>
+                                     </span>
+                                 <p ng-show="mycarsform.submitted && mycarsform.mycarsregno.$error.required" class="text-danger">Registration No is Required</p>
+                                </div>
+                                <div class="form-group input-group">    
+                                     <span class="has-float-label" ng-class="{ 'has-error' : mycarsform.submitted && mycarsform.mycarspurchase.$invalid }">
+                                    
+                                    <input type="text" placeholder="Date of Purchase" ng-model="mycars.date_of_purchase" name="mycarspurchase" tabindex="4" class="form-control borderline" id="datepicker1" required>
+                                         <label for="datepicker1">Date of Purchase</label>
+                                     </span>
+                                  <p ng-show="mycarsform.submitted && mycarsform.mycarspurchase.$error.required" class="text-danger">Purchase Date is Required</p>
+                                </div>
+                                <div class="form-group input-group">    
+                                     <span class="has-float-label" ng-class="{ 'has-error' : mycarsform.submitted && mycarsform.mycarslastservice.$invalid }">
+                                   
+                                    <input type="text" placeholder="Last Service Date" ng-model="mycars.last_service_date" name="mycarslastservice" tabindex="5" class="form-control borderline" id="datepicker2">
+                                          <label for="datepicker2">Last Service Date</label>
+                                     </span>
+                                  <p ng-show="mycarsform.submitted && mycarsform.mycarslastservice.$error.required" class="text-danger">Last Service Date is Required</p>
+                                  <p class="text-danger" ng-if="serviceDate">Last Service Date is invalid</p>
+                                </div>
+                                
+
+                               
+             
+         
+                                
+                            </form>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
+                            <form role="form" name="mycarsform1" novalidate>
+                                 <div class="form-group input-group">  
+                                       <span class="has-float-label">
+                                   
+                                    <input type="number" name="mycarskms" ng-model="mycars.kms" placeholder="Kilometer" tabindex="6" class="form-control borderline" id="kilometer">
+                                           <label for="kilometer">Kilometer</label>
+                                       </span>
+                                
+                                </div>
+                                   
+                                   <div class="form-group input-group">      
+                                       <span class="has-float-label" ng-class="{ 'has-error' : mycarsform1.submitted && mycarsform1.mycarsinsurance.$invalid }">
+                                
+                                    <input type="text" name="mycarsinsurance" ng-model="mycars.insurance_provider" placeholder="Insurance Company" tabindex="9" class="form-control borderline" id="mycarsinsurance" required>
+                                           <label for="mycarsinsurance">Insurance Company</label>
+                                       </span>
+                                 <p ng-show="mycarsform1.submitted && mycarsform1.mycarsinsurance.$error.required" class="text-danger">Insurance Company is Required</p>
+                                </div>
+                                  <div class="form-group input-group">    
+                                      <span class="has-float-label" ng-class="{ 'has-error' : mycarsform1.submitted && mycarsform1.mycarspolicy.$invalid }">
+                                   
+                                    <input type="text" name="mycarspolicy" ng-model="mycars.insurance_number" placeholder="Policy Number" tabindex="10" class="form-control borderline" id="policyno">
+                                           <label for="policyno">Policy Number</label>
+                                      </span>
+                                 <p ng-show="mycarsform1.submitted && mycarsform1.mycarspolicy.$error.required" class="text-danger">Policy Number is Required</p>
+                                </div>
+                                  <div class="form-group input-group"> 
+                                      <span class="has-float-label" ng-class="{ 'has-error' : mycarsform1.submitted && mycarsform1.mycarexpiry.$invalid }">
+                                   
+                                    <input type="text" name="mycarexpiry" ng-model="mycars.insurance_expiry_date" placeholder="Expiry Date" tabindex="11" class="form-control borderline" id="datepicker3" required>
+                                           <label for="datepicker3">Expiry Date</label>
+                                </span>
+                                       <p ng-show="mycarsform1.submitted && mycarsform1.mycarexpiry.$error.required" class="text-danger">Expiry Date is Required</p>
+                                      <p class="text-danger" ng-if="expiryDate">Expiry Date is invalid</p>
+                                </div>
+                               
+                              
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="cartitle text-center visible-lg visible-md visible-sm hidden-xs">
+                    <br>
+                    <div class="btn btn-primary btn-md btn-custom-lg" tabindex="12" style="width:240px;" ng-click="addmycars();" tabindex="12">ADD</div>
+                </div>
+                
+                 <div class="cartitle text-center hidden-lg hidden-md hidden-sm visible-xs">
+                    <br>
+                    <div class="btn btn-default btn-md btn-custom-lg" tabindex="12" style="width:240px;" ng-click="addmycars();" tabindex="12">ADD</div>
+                </div>
+            </div>
+
+        </div>
+
+    </div></div>
+ <div ng-include="'views/footer.html'" ng-cloak></div>

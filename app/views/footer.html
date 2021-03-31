@@ -1,0 +1,245 @@
+<div ng-controller="footerCtrl">    
+               <div id="mobileview_bikes" class="sidenav" style="position:fixed;top: 0px;transition: unset !important;">
+                       <div class="page-header" style="height:50px;background:#071e39;">
+        <div class="pull-left">
+            <a href="javascript:void(0)" onclick="closebikenav()" style="color:#ffffff !important;font-size:38px;padding:0;margin-left:20px;opacity:1 !important;">&#x2716;</a>
+        </div>
+        <div class="pull-right">
+            <a href="#">
+                <img src="images/home/logo.png" onclick="closebikenav()" class="khtlogo" style="position:absolute;z-index:8;margin-top: 5px !important;right: 13px;height: 20px;" /></a>
+        </div>
+    </div>
+    <li class="dropdown dropdown-submenu hidden-lg hidden-md hidden-sm visible-xs" style="color:#0951a0;border-bottom: 0px solid #e5e5e5;font-size: 18px;padding: 8px 8px 8px 12px;" role="button">
+      <!--  <span class="caret-left" style="position: relative;left: 10px;" onclick="closebikenav()"></span> &nbsp; Bikes-->
+    </li>
+    <form style="margin-left: 10px;">
+        <div class="row" >
+  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-right: 10px;padding-left: 0px;">
+      <div ng-repeat="bike in bikemodel_type" style="color: gray;border-bottom: 1px solid #071e39;font-size: 20px;text-transform: uppercase;padding: 15px 0px 15px 10px;">
+      <div ng-repeat="(key, value) in bike" ng-click="getbikename(key);" ng-class="bikename === key ? 'foot_active' : 'foot_color'"> {{key}}</div>
+          </div>
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-right: 0px;padding-left: 10px;height: 390px;overflow-y: scroll;">
+      <div ng-repeat="bikelist in bikedata" ng-if="bikelist.bike_type==bikename" ng-click="goTobikedetail(bikelist.id,bikelist.bike_type);">
+            <div style="padding: 3px;">
+            <p class="titlecss1" style="font-size:16px !important;margin-left:2px;">{{bikelist.name}}</p>
+            <div>
+            <img src="{{bikelist.bike_image}}" class="img-responsive" >
+            </div>
+      <h5 class="text-left" style="color:#101010;font-weight:400;margin-top:18px;font-size:18px;font-weight:bold;
+    font-family: AvenirNextCondensed-Bold;"> &#8377; {{bikelist.pricing | INR1}}*</h5>
+         </div>      
+      </div>
+  </div>
+</div>
+    </form>
+</div>
+
+<footer class="container-footer text-center">
+    <br>
+        <div class="container">
+         <div class="row">
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+               <p class="text-left">
+      <div class="foot-links">
+        <p class="footerlogo" style="margin-top:40px;">
+          <img src="images/home/logo.png" ng-click="homepage();" role="button" style="height: 28px;">
+        </p>   
+      </div>
+   
+    </div>
+       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="padding-right: 0px;padding-left: 0px;">
+          <p class="text-center" style="margin-top:20px;">
+               <a href="{{sociallink}}">
+              <img src="images/home/facebook.png" ng-click="homepagesocial();" id="social" width="auto" height="30" role="button">
+              </a>
+                   <br><br>
+          FOLLOW US 
+        </p>
+             <div class="row" style="padding-right: 0px;padding-left: 0px;">
+    <div id="bottom-footer">
+      <div class="row text-center">
+        <div class="col-sm-12" style="padding-right: 0px;padding-left: 0px;">
+    	<a >&copy; 2018 All Rights Reserved</a>
+        <a  ng-click="gototerms();" role="button">Terms of Use</a>
+        <a  ng-click="gotoprivacy();" style="border-right:0px solid #636363;" role="button">Privacy Policy</a>        
+        </div>      
+    </div>
+  </div>    
+  </div>
+      </div>
+     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="padding-right: 0px;padding-left: 0px;"> 
+         <div class="foot-links"><br>
+        <p class="footermyridz visible-lg visible-md visible-sm hidden-xs" style="">
+          Powered by: <img src="images/home/myridzlogo.png" id="myridz" width="auto" height="35" role="button">
+        </p>
+              <p class="footermyridz hidden-lg hidden-md hidden-sm visible-xs" style="">Powered by:<br> <img src="images/home/myridzlogo.png" id="myridz1" width="auto" height="35" role="button">
+        </p>
+         </div>  
+    </div>
+  	</div><br><br>
+           <!-- Mobile Responsive-->
+  
+</div>
+</footer>
+      <footer class="container-footer fixedfooter text-center hidden-lg hidden-md hidden-sm visible-xs" style="background-color: #f4f4f4;border-top: 2px solid #0951a0;">
+        <div class="container">   
+     <!--           <div class="alert alert-success alert-dismissable fade in" ng-show="Showsuccessalert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+  <strong>{{successmessage}}</strong> 
+</div>
+        <div class="alert alert-danger alert-dismissable fade in" ng-show="Showerroralert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+  <strong>{{errormessage}}</strong> 
+</div>-->
+        <div class="alert alert-info alert-dismissable fade in" ng-show="Showinfoalert" id="alertmessage">
+        <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+        <strong>{{infomessage}}</strong>
+    </div>
+           <!-- Mobile Responsive-->
+            <div class="row" style="margin-right: 15px !important;">
+   <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" ng-click="whatsapp();" onclick="closebikenav()">
+       <a  class="tab" href="https://api.whatsapp.com/send?phone={{whatsapplink}}" ng-click="tab = 1;">
+           <img src="images/footer/Whatsapp_mobile.png" style="height: 45px;"/>
+          <!-- <img src="images/footer/Whatsapp.png" ng-if="pagename!='Whatsapp'" style="height: 45px;"/>-->
+        </a>        
+   </div>
+   <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-half-offset" ng-click="bikelist();" onclick="newbike();">
+      <a  class="tab" ng-click="tab = 2;">
+           <img src="images/footer/Newbike1.png" style="height: 45px;"/>
+          <!-- <img src="images/footer/Newbike.png" ng-if="pagename!='bikes'" style="height: 45px;"/>-->
+        </a>
+   </div>
+   <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-half-offset" ng-click="gotopayment();" onclick="closebikenav()">
+      <a  class="tab" ng-click="tab = 3;">
+           <img src="images/footer/Payment1.png" style="height: 45px;"/>
+         <!--  <img src="images/footer/Payment.png" ng-if="pagename!='payment'" style="height: 45px;"/>-->
+        </a>
+   </div>
+   <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-half-offset" onclick="closebikenav()">
+      <a  class="tab" ng-click="testimonial();tab = 4;">
+           <img src="images/footer/Testi1.png" style="height: 45px;"/>
+          <!-- <img src="images/footer/Testi.png" ng-if="pagename!='Testimonial'" style="height: 45px;"/>-->
+        </a>
+   </div>
+   <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-half-offset" ng-click="contactlink();" onclick="closebikenav()">
+       <a href="tel:{{contactno}}" class="tab" ng-click="tab = 5;">
+           <img src="images/footer/Call1.png" style="height: 45px;"/>
+           <!--<img src="images/footer/Call.png" ng-if="pagename!='Contact'" style="height: 45px;"/>-->
+        </a>
+   </div>
+</div>
+</div>
+</footer>
+<div class="menu floating-action hidden-xs"  role="navigation"> 
+        <a class=" btn button-size" style="border: 0px solid transparent !important;" data-title="Join Chat Room" ng-click="whatsapp1();"> 
+            <img src="images/whatsapp.gif" id="whatsapp" width="auto" height="100" role="button">
+        </a>
+    </div>
+</div>
+
+<style>
+     .foot_active{
+        color:#071e39 !important;
+        /*border-bottom:2px solid #071e39;*/
+    }
+     .foot_color{
+        color:gray !important;
+    }
+    @media (min-width: 0px) and (max-width:765px) {
+      .floating-action {
+    bottom: 8rem;
+    position: fixed;
+    right: 2rem;
+    z-index: 1000;
+}
+        .footermyridz {
+    margin-bottom: 60px;
+}
+        .container {
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+}
+    @media (min-width: 767px) {
+    .floating-action {
+    bottom: 5rem;
+    position: fixed;
+    right: 16rem;
+    z-index: 1000;
+}
+            .footermyridz {
+    margin-top: 10px;
+}
+}
+    .btn.button-size {
+    padding: 0;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+}
+    .fixedfooter{
+         position: fixed;
+         /*height: 100px;*/
+         bottom: 0;
+         width: 100%;
+         z-index:9;
+    }
+.col-half-offset{
+    margin-left:4.166666667%
+}
+         .sidenav {
+	background-color: #f8f8f8;
+	height: 100%;
+	/*left: 0;*/
+    right: 0;
+	overflow-x: hidden;
+	padding-top: 0px;
+	position: fixed;
+	top: 50px;
+	transition: .5s;
+	width: 0;
+	z-index: 1;
+}
+.sidenav a,
+.sidenavR a {
+	color: #071e39;
+	display: block;
+	font-size: 20px;
+	padding: 8px 8px 8px 32px;
+	text-decoration: none;
+	transition: .3s;
+}
+.sidenav a:hover,
+.offcanvas a:focus,
+.sidenavR a:hover,
+.offcanvas a:focus {
+	color: #0951a0;
+}
+.sidenav .closebtn,
+.sidenavR .closebtn {
+	font-size: 36px;
+	margin-left: 50px;
+	position: absolute;
+	/* right:25px;*/
+	top: 0;
+}
+</style>
+
+<script>
+               function newbike() {
+                   $('#barid').hide();
+        document.getElementById("mobileview_bikes").style.width = "100%";
+    }
+        function closebikenav() {
+        $('#barid').show();
+        document.getElementById("mobileview_bikes").style.width = "0";
+    }
+     $('#myridz,#myridz1').click(function(){
+ window.open("https://www.myridz.com/",'_system');
+  });
+  /*    $('#social').click(function(){
+ window.open("https://www.facebook.com/authoriseddealersinbajajmotorbikes/");
+  });*/
+</script>

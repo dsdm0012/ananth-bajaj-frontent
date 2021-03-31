@@ -1,0 +1,215 @@
+<!--<div ng-controller="headerCtrl">
+</div>-->
+<style>
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+  width:95%;
+}
+               .row {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+.insurancebg input::placeholder {
+    color: #ffffff !important;
+    opacity: 0 !important; /* Firefox */
+}
+.insurancebg input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   opacity: 0 !important;
+}
+.insurancebg input::-ms-input-placeholder { /* Microsoft Edge */
+   opacity: 0 !important;
+}
+    .insurancebg textarea::placeholder {
+    color: #ffffff !important;
+    opacity: 0 !important; /* Firefox */
+}
+.insurancebg textarea:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   opacity: 0 !important;
+}
+.insurancebg textarea::-ms-input-placeholder { /* Microsoft Edge */
+   opacity: 0 !important;
+}
+</style>
+<div ng-controller="insurancectrl" class="insurancebg">
+           <div class="alert alert-success alert-dismissable fade in" ng-show="Showsuccessalert">
+       <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+  <strong>{{successmessage}}</strong> 
+</div>
+        <div class="alert alert-danger alert-dismissable fade in" ng-show="Showerroralert" id="alertmessage">
+       <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+  <strong>{{errormessage}}</strong> 
+</div>
+      <div class="alert alert-info alert-dismissable fade in" ng-show="Showinfoalert" id="infomessage">
+       <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+  <strong>{{infomessage}}</strong> 
+</div>
+    <div class="container " style="height:100%;">
+        <div class="row" style="margin-top: 20px;margin-bottom:50px;">          
+         
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xs-12 col-center-block1">
+                <div class="row" style="padding:15px;margin-right:0px;margin-left:0px;background:transparent;">
+    <div class="col-lg-4 col-md-3 col-sm-2 col-xs-3" style=""><img src="./images/home/slide_line1.png" style="margin-top: 20px;" class="pull-right"></div>
+    <div class="col-lg-4 col-md-6 col-sm-8 col-xs-6" style=""><h4 class="text-center" style="color:#ffffff;font-weight:bold;font-size:23px;">INSURANCE RENEWAL</h4></div>
+    <div class="col-lg-4 col-md-3 col-sm-2 col-xs-3" style=""><img src="./images/home/slide_line1.png" style="margin-top: 20px;" class="pull-left"></div>
+  </div>
+                <div class="row">
+                    <div style="text-align: center;width: 100%;">
+                      
+                      <p style="color: #fff;">
+                        <img src="./images/icon.png" style="width: 50px;height: 50px;margin-right: 10px;" />Call <a href="tel:9071641153" style="color: #fff;font-weight: bold;text-decoration: underline;">9071641153</a> for any query
+                      </p>
+                    </div>
+                    <div style="margin-top:20px;">
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
+                            <form role="form" name="insuranceform" novalidate>
+                                 <div class="form-group input-group"> 
+                                     <span class="has-float-label" ng-class="{ 'has-error' : insuranceform.submitted && insuranceform.insname.$invalid }">                                 
+                                    <input type="text" placeholder="Name" ng-model="insurance.name" name="insurancename" tabindex="1" class="form-control borderline" id="insurancename" required>
+                                          <label for="insurancename">Name</label>
+                                     </span>
+                                 <p ng-show="insuranceform.submitted && insuranceform.insurancename.$error.required" class="text-danger">Name is Required</p>
+                                </div>
+                                 <div class="form-group input-group">   
+                                     <span class="has-float-label" ng-class="{ 'has-error' : insuranceform.submitted && insuranceform.insurancemail.$invalid }">
+                                  
+                                    <input type="email" placeholder="Email" ng-model="insurance.email" name="insurancemail" tabindex="2" class="form-control borderline" id="insurancemail1" required>
+                                         <label for="insurancemail1">Email</label>
+                                     </span>
+                                     
+                                <p ng-show="insuranceform.submitted && insuranceform.insurancemail.$error.required" class="text-danger">Email is Required</p>
+                <p ng-show="insuranceform.submitted && insuranceform.insurancemail.$error.email" class="text-danger">Enter a valid email.</p>
+                                </div>
+                                 <div class="form-group input-group">   
+                                     <span class="has-float-label" ng-class="{ 'has-error' : insuranceform.submitted && insuranceform.insurancemobile.$invalid }">
+                                   
+                                    <input type="number"  ng-minlength="10" ng-maxlength="10" ng-model="insurance.mobile" name="insurancemobile" placeholder="Mobile Number" tabindex="3" class="form-control borderline" id="insurancemob" required>
+                                         <label for="insurancemob">Mobile Number</label>
+                                     </span>
+                                  <p ng-show="insuranceform.submitted && insuranceform.insurancemobile.$error.required" class="text-danger">Mobile No is Required</p>
+                <p ng-show="insuranceform.submitted && insuranceform.insurancemobile.$error.minlength" class="text-danger">Mobile Number Should be 10 digits</p>
+                                      <p ng-show="insuranceform.submitted && insuranceform.insurancemobile.$error.maxlength" class="text-danger">Mobile Number Maximum 10 digits</p>
+                                </div>
+                                 <div class="form-group input-group"> 
+                                     <span class="has-float-label">
+                                   
+                                    <textarea type="text" ng-model="insurance.address" class="form-control borderline" name="insuranceaddress" tabindex="4" id="insuranceaddress" rows="5" style="margin: 0px -2.5625px 0px 0px; height: 93px !important; " placeholder="Address"></textarea>
+                                          <label for="insuranceaddress">Address</label>
+                                     </span>
+                               <!-- <p ng-show="insuranceform.submitted && insuranceform.insuranceaddress.$error.required" class="text-danger">Address is Required</p>-->
+                                </div>
+
+                                <!-- <div class="form-group">   
+                                     <div class="input-group" ng-class="{ 'has-error' : insuranceform.submitted && insuranceform.insurancemodel.$invalid }">
+                                    <div class="input-group-addon">
+                                        <span class="custom-icon icon-iconmodel large"></span>
+                                    </div>
+                                    <select class="form-control1" ng-model="insurance.model" name="insurancemodel" tabindex="5" id="model" required>
+                                        <option>Model</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </select>
+                                     </div>
+                                  <p ng-show="insuranceform.submitted && insuranceform.insurancemodel.$error.required" class="text-danger">Model is Required</p>
+                                </div>-->
+                                    <div class="form-group input-group" ng-show="carmodel">
+              <span class="has-float-label" ng-class="{ 'has-error' : insuranceform.submitted && insuranceform.insurancemodel.$invalid }">
+            
+             <select class="form-control1" name="insurancemodel" ng-model="insurance.my_bike_id" tabindex="5" id="insmodel" ng-change="changecarmodel();row=1;" ng-required="{{carmodel}}">
+                    <option value="" ng-selected="true" disabled>Model*</option>
+                    <option ng-repeat="data in mycardetails" value="{{data.id}}">{{data.bike}}</option>
+                   <!-- <option value="Other" >Other</option>-->
+                  </select>
+                   <label for="insmodel" ng-if="row==1">Model</label>
+            </span>
+           <p ng-show="insuranceform.submitted && insuranceform.insurancemodel.$error.required" class="text-danger">Model is Required</p>
+           <p class="text-left" style="color:#fff;font-size:18px;" ng-show="addmycarinsurance">
+           <img src="images/home/plus.png" style="color:#fff;'"><a ng-click="addmycarins();">Add Bike</a>
+        </p>
+         </div>
+          <div class="form-group input-group" ng-show="othermodel">
+            <span class="has-float-label" ng-class="{ 'has-error' : insuranceform.submitted && insuranceform.insurancecustom.$invalid }">
+            
+             <input type="text" placeholder="Model" name="insurancecustom" ng-model="insurance.model" tabindex="5" class="form-control borderline" id="inscustommodel" ng-required="{{othermodel}}">
+                 <label for="inscustommodel">Model</label>
+                </span>
+        <p class="text-danger" ng-if="modelinvalid">Model is Required</p>
+         </div>
+                                
+                            </form>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
+                            <form role="form" name="insuranceform1" novalidate>
+                                
+                                 <div class="form-group input-group">    
+                                     <span class="has-float-label" ng-class="{ 'has-error' : insuranceform1.submitted && insuranceform1.insurancepurchase.$invalid }">
+                                    
+                                    <input type="text" placeholder="Date of Purchase" ng-model="insurance.purchase_date" name="insurancepurchase" tabindex="6" class="form-control borderline" id="datepicker1" required>
+                                         <label for="datepicker1">Date of Purchase</label>
+                                     </span>
+                                  <p ng-show="insuranceform1.submitted && insuranceform1.insurancepurchase.$error.required" class="text-danger">Purchase Date is Required</p>
+                                </div>
+                                 <div class="form-group input-group">  
+                                     <span class="has-float-label" ng-class="{ 'has-error' : insuranceform1.submitted && insuranceform1.insuranceregno.$invalid }">
+                                   
+                                    <input type="text" name="insuranceregno" ng-model="insurance.registration_number" placeholder="Registration Number" tabindex="7" class="form-control borderline" id="regno" required>
+                                          <label for="regno">Registration Number</label>
+                                     </span>
+                                 <p ng-show="insuranceform1.submitted && insuranceform1.insuranceregno.$error.required" class="text-danger">Registration No is Required</p>
+                                </div>
+                                   <div class="form-group input-group">  
+                                       <span class="has-float-label">
+                                   
+                                    <input type="text" name="insurancekms" ng-model="insurance.kms" placeholder="Kilometer" tabindex="8" class="form-control borderline" id="kilometer">
+                                            <label for="kilometer">Kilometer</label>
+                                       </span>
+                                
+                                </div>
+                                   <div class="form-group input-group">      
+                                       <div class="has-float-label" ng-class="{ 'has-error' : insuranceform1.submitted && insuranceform1.insurancecompany.$invalid }">
+                                   
+                                    <input type="text" name="insurancecompany" ng-model="insurance.insurance_company" placeholder="Insurance Company" tabindex="9" class="form-control borderline" id="insuranceid" required>
+                                            <label for="insuranceid">Insurance Company</label>
+                                       </div>
+                                 <p ng-show="insuranceform1.submitted && insuranceform1.insurancecompany.$error.required" class="text-danger">Insurance Company is Required</p>
+                                </div>
+                                  <div class="form-group input-group">    
+                                      <div class="has-float-label" ng-class="{ 'has-error' : insuranceform1.submitted && insuranceform1.insurancepolicy.$invalid }">
+                                   
+                                    <input type="text" name="insurancepolicy" ng-model="insurance.policy_number" placeholder="Policy Number" tabindex="10" class="form-control borderline" id="policy" required>
+                                          <label for="policy">Policy Number</label>
+                                      </div>
+                                 <p ng-show="insuranceform1.submitted && insuranceform1.insurancepolicy.$error.required" class="text-danger">Policy Number is Required</p>
+                                </div>
+                                  <div class="form-group input-group"> 
+                                      <div class="has-float-label" ng-class="{ 'has-error' : insuranceform1.submitted && insuranceform1.insuranceexpiry.$invalid }">
+                                   
+                                    <input type="text" name="insuranceexpiry" ng-model="insurance.expiry_date" placeholder="Expiry Date" tabindex="11" class="form-control borderline" id="datepicker2" required>
+                                           <label for="datepicker2">Expiry Date</label>
+                                </div>
+                                       <p ng-show="insuranceform1.submitted && insuranceform1.insuranceexpiry.$error.required" class="text-danger">Expiry Date is Required</p>
+                                       <p class="text-danger" ng-if="expiryDate">Expiry Date is invalid</p>
+                                </div>
+                               
+                              
+
+                            </form>
+                        </div>
+                    </div>
+                </div><br><br>
+                <div class="cartitle text-center visible-lg visible-md visible-sm hidden-xs">
+                    <div class="btn btn-primary btn-md btn-custom-lg" tabindex="12" style="width:250px;" ng-click="submitinsurance();">SUBMIT</div>
+                </div>
+                
+                  <div class="cartitle text-center hidden-lg hidden-md hidden-sm visible-xs">
+                    <div class="btn btn-default btn-md btn-custom-lg" tabindex="12" style="width:250px;" ng-click="submitinsurance();">SUBMIT</div>
+                </div>
+                <br><br>
+            </div>
+
+        </div>
+
+    </div></div>
+ <div ng-include="'views/footer.html'" ng-cloak></div>

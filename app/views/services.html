@@ -1,0 +1,219 @@
+<!--<div ng-controller="headerCtrl">
+</div>-->
+<style>
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+  width:95%;
+}
+               .row {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+.servicebookbg input::placeholder {
+    color: #ffffff !important;
+    opacity: 0 !important; /* Firefox */
+}
+.servicebookbg input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   opacity: 0 !important;
+}
+.servicebookbg input::-ms-input-placeholder { /* Microsoft Edge */
+   opacity: 0 !important;
+}
+    .servicebookbg textarea::placeholder {
+    color: #ffffff !important;
+    opacity: 0 !important; /* Firefox */
+}
+.servicebookbg textarea:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   opacity: 0 !important;
+}
+.servicebookbg textarea::-ms-input-placeholder { /* Microsoft Edge */
+   opacity: 0 !important;
+}
+</style>
+<div ng-controller="servicesctrl" class="servicebookbg" style="min-height:650px;">
+         <div class="alert alert-success alert-dismissable fade in" ng-show="Showsuccessalert">
+       <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+  <strong>{{successmessage}}</strong> 
+</div>
+        <div class="alert alert-danger alert-dismissable fade in" ng-show="Showerroralert" id="alertmessage">
+       <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+  <strong>{{errormessage}}</strong> 
+</div>
+        <div class="alert alert-info alert-dismissable fade in" ng-show="Showinfoalert" id="infomessage">
+       <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+  <strong>{{infomessage}}</strong> 
+</div>
+	<div class="container " style="height:100%;">
+        <div class="row top-buffer"> </div>
+        <div class="row" style="margin-bottom:50px;">           
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xs-12 col-center-block1">
+                <div class="row">    
+                    <div>
+                         <div class="row" style="padding:15px;margin-right:0px;margin-left:0px;background:transparent;">
+    <div class="col-lg-4 col-md-2 col-sm-2 col-xs-2" style=""><img src="./images/home/slide_line1.png" style="margin-top: 20px;" class="pull-right"></div>
+    <div class="col-lg-4 col-md-8 col-sm-8 col-xs-8" style=""><h4 class="text-center" style="color:#ffffff;font-weight:bold;font-size:20px;margin-top: 12px;">SERVICE BOOKING</h4></div>
+    <div class="col-lg-4 col-md-2 col-sm-2 col-xs-2" style=""><img src="./images/home/slide_line1.png" style="margin-top: 20px;" class="pull-left"></div>
+  </div>
+                         <div class="row top-buffer"> </div>
+            	<div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
+     <form role="form" name="servicebookform" novalidate> 
+          <div class="form-group input-group">
+           <span class="has-float-label" ng-class="{ 'has-error' : servicebookform.submitted && servicebookform.servicename.$invalid }">            
+             <input type="text" placeholder="Name" name="servicename" ng-model="servicebook.name" tabindex="1" class="form-control borderline" id="servicename" required>
+                <label for="servicename">Name</label>
+              </span>
+         <p ng-show="servicebookform.submitted && servicebookform.servicename.$error.required" class="text-danger">Name is Required</p>
+         </div>
+         
+          <div class="form-group input-group">
+              <span class="has-float-label" ng-class="{ 'has-error' : servicebookform.submitted && servicebookform.servicemail.$invalid }">
+            
+             <input type="email" placeholder="Email" name="servicemail" ng-model="servicebook.email" tabindex="2" class="form-control borderline" id="servicemail" required>
+                    <label for="servicemail">Email</label>
+              </span>
+         <p ng-show="servicebookform.submitted && servicebookform.servicemail.$error.required" class="text-danger">Email is Required</p>
+                <p ng-show="servicebookform.submitted && servicebookform.servicemail.$error.email" class="text-danger">Enter a valid email.</p>
+         </div>
+         
+         <!-- <div class="form-group">
+             <div class="input-group" ng-class="{ 'has-error' : servicebookform.submitted && servicebookform.servicemobile.$invalid }">
+             <div class="input-group-addon">
+             <span class="custom-icon icon-iconmobile large"></span> 
+             </div> 
+             <input type="number" placeholder="Mobile Number" ng-minlength="10" name="servicemobile'" ng-model="servicebook.mobile" tabindex="3" class="form-control1" id="mobile" required>
+              </div>
+          <p ng-show="servicebookform.submitted && servicebookform.servicemobile.$error.required" class="text-danger">Mobile No is Required</p>
+                <p ng-show="servicebookform.submitted && servicebookform.servicemobile.$error.minlength" class="text-danger">Mobile Number Should be 10 letters</p>
+         </div>-->
+          <div class="form-group input-group">
+                                <span class="has-float-label" ng-class="{ 'has-error' : servicebookform.submitted && servicebookform.servicemobile.$invalid }">                                   
+                                    <input type="number" ng-model="servicebook.mobile" name="servicemobile" tabindex="3" placeholder="Mobile Number" ng-minlength="10" ng-maxlength="10" class="form-control borderline" id="servicemobile" required>
+                                       <label for="servicemobile">Mobile Number</label>
+                                    </span>
+                                  <p ng-show="servicebookform.submitted && servicebookform.servicemobile.$error.required" class="text-danger">Mobile No is Required</p>
+                <p ng-show="servicebookform.submitted && servicebookform.servicemobile.$error.minlength" class="text-danger">Mobile Number Should be 10 digits</p>
+              <p ng-show="servicebookform.submitted && servicebookform.servicemobile.$error.maxlength" class="text-danger">Mobile Number Maximum 10 digits</p>
+                                </div>
+         
+         
+       
+        <div class="form-group input-group" ng-show="carmodel">
+              <span class="has-float-label" ng-class="{ 'has-error' : servicebookform.submitted && servicebookform.servicemodel.$invalid }">
+             
+             <select class="form-control borderline" name="servicemodel" ng-model="servicebook.my_bike_id" tabindex="4" id="servicemodel" ng-change="changecarmodel();row=3;" ng-required="{{carmodel}}">
+                    <option value="" ng-selected="true" disabled>Model*</option>
+                    <option ng-repeat="data in mycardetails" value="{{data.id}}">{{data.bike}}</option>
+                   <!-- <option value="Other" >Other</option>-->
+                  </select>
+                  <label for="servicemodel" ng-if="row==3">Model</label>
+            </span>
+           <p ng-show="servicebookform.submitted && servicebookform.servicemodel.$error.required" class="text-danger">Model is Required</p>
+                <p class="text-left" style="color:#fff;font-size:18px;" ng-show="addmycarpage">
+           <img src="images/home/plus.png" style="color:#fff;'"><a ng-click="addmycar();">Add Bike</a>
+        </p>
+         </div>
+          <div class="form-group input-group" ng-show="othermodel">
+            <span class="has-float-label" ng-class="{ 'has-error' : servicebookform.submitted && servicebookform.servicecustom.$invalid }">
+           
+             <input type="text" placeholder="Model" name="servicecustom" ng-model="servicebook.model" tabindex="5" class="form-control borderline" id="custommodel" ng-required="{{othermodel}}">
+                 <label for="custommodel">Model</label>
+                </span>
+         <p class="text-danger" ng-if="modelinvalid">Model is Required</p>
+         </div>
+         
+            <div class="form-group input-group">
+            <span class="has-float-label" ng-class="{ 'has-error' : servicebookform.submitted && servicebookform.serviceregno.$invalid }">
+            
+             <input type="text" placeholder="Registration Number" name="serviceregno" ng-model="servicebook.registration_number" tabindex="5" class="form-control borderline" id="serviceregno" required>
+                <label for="serviceregno">Registration Number</label>
+                </span>
+         <p ng-show="servicebookform.submitted && servicebookform.serviceregno.$error.required" class="text-danger">Registation No is Required</p>
+         </div>
+         
+           <div class="form-group input-group">
+             <span class="has-float-label" ng-class="{ 'has-error' : servicebookform.submitted && servicebookform.servicekms.$invalid }">
+          
+             <input type="number" placeholder="Kilometers" name="servicekms" ng-model="servicebook.kms" tabindex="6" class="form-control borderline" id="servicekms" required>
+                 <label for="servicekms">Kilometers</label>
+               </span>
+          <p ng-show="servicebookform.submitted && servicebookform.servicekms.$error.required" class="text-danger">Kilometers is Required</p>
+         </div>  
+         </form>
+         </div>
+               <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
+            <form role="form" name="servicebookform1" novalidate>              
+          <div class="form-group input-group">
+             <span class="has-float-label" style="width:100%;" ng-class="{ 'has-error' : servicebookform1.submitted && servicebookform1.serviceshowroom.$invalid }">
+                <select class="form-control borderline" ng-model="servicebook.service_station" name="serviceshowroom" tabindex="7" id="showroomid" required ng-change="row1=1">
+                <option value="" ng-selected="true" disabled>Service Centers *</option>
+                <option ng-repeat="dealer in dealerdata" value="{{dealer.dealer_name}}" ng-if="dealer.dealer_type.indexOf('Service') !== -1 || dealer.dealer_type.indexOf('Service') !== -1">{{dealer.dealer_name}}</option>
+                  </select>
+                  <label for="showroomid" ng-if="row1==1">Service Centers</label>
+              </span>
+                 <p ng-show="servicebookform1.submitted && servicebookform1.serviceshowroom.$error.required" class="text-danger">Service Center is Required</p>
+                </div>
+                
+                  <div class="form-group input-group">
+             <span class="has-float-label" style="width:100%;" ng-class="{ 'has-error' : servicebookform1.submitted && servicebookform1.servicetype.$invalid }">
+                <select class="form-control borderline" ng-model="servicebook.service_type" name="servicetype" tabindex="7" id="servicetype" required ng-change="row2=1">
+                <option value="" ng-selected="true" disabled>Service Type *</option>
+                 <option value="free">Free</option>
+                        <option value="paid">Paid</option>
+                        <option value="don't know">Don’t Know</option>
+                  </select>
+                  <label for="servicetype" ng-if="row2==1">Service Type</label>
+              </span>
+                 <p ng-show="servicebookform1.submitted && servicebookform1.servicetype.$error.required" class="text-danger">Service Type is Required</p>
+                </div>
+                
+          <div class="form-group input-group">
+              <span class="has-float-label" ng-class="{ 'has-error' : servicebookform1.submitted && servicebookform1.servicedate.$invalid }">
+           
+             <input type="text" placeholder="Date" name="servicedate" ng-model="servicebook.service_date" tabindex="8" class="form-control borderline" id="datepicker1" data-date-start-date="Date.default" required>
+                  <label for="datepicker1">Date</label>
+              </span>
+                 <p ng-show="servicebookform1.submitted && servicebookform1.servicedate.$error.required" class="text-danger">Date is Required</p>
+                </div>
+            <div class="form-group input-group">
+            <span class="has-float-label" ng-class="{ 'has-error' : servicebookform1.submitted && servicebookform1.servicetime.$invalid }">
+            
+             <input type="text" placeholder="Time" name="servicetime" ng-model="servicebook.service_time" tabindex="9" class="form-control borderline" id="clockpicker1" required>
+                  <label for="clockpicker1">Time</label>
+                </span>
+                 <p ng-show="servicebookform1.submitted && servicebookform1.servicetime.$error.required" class="text-danger">Time is Required</p>
+                </div>
+                <div class="form-group input-group">
+                <span class="has-float-label">
+            
+            <textarea type="text"  class="form-control borderline" ng-model="servicebook.comments" tabindex="10" id="servicecomment" rows="5" style="margin: 0px -2.5625px 0px 0px; height: 93px!important; " placeholder="Comments"></textarea>
+                     <label for="servicecomment">Comments</label>
+                    </span></div>
+               <!-- <div class="form-group">
+                 <div class="input-group" ng-show="showaddress">
+             <div class="input-group-addon" style="vertical-align:top;">
+             <span class="custom-icon icon-iconaddress large"></span> 
+             </div> 
+            <textarea type="text"  class="form-control1" ng-model="servicebook.address" tabindex="11" id="comments" rows="5" style="margin: 0px -2.5625px 0px 0px; height: 93px; " placeholder="Address"></textarea>
+                    </div></div>-->
+               <!-- <div class="form-group">
+                <div class="input-group">
+             <div class="checkbox" style="margin-top:0px;margin-bottom:0px;margin-left: 10px;color:#ffffff;">
+             <label>
+             <input class="big-checkbox" type="checkbox" ng-model="servicebook.requestpickup" ng-change="stateChanged()">Please send personnel to residence/office </label>
+            </div>
+                    </div></div>-->
+          </form>
+                    </div></div></div>
+             <div class="cartitle text-center visible-lg visible-md visible-sm hidden-xs">
+                 <div class="btn btn-primary btn-md btn-custom-lg" style="width:250px;" ng-click="servicebooking();" tabindex="12">SUBMIT</div></div>
+                
+                  <div class="cartitle text-center hidden-lg hidden-md hidden-sm visible-xs">
+                 <div class="btn btn-default btn-md btn-custom-lg" style="width:250px;" ng-click="servicebooking();" tabindex="12">SUBMIT</div></div>
+                <br>
+            </div>
+            
+    </div>
+
+    </div>	</div>
+ <div ng-include="'views/footer.html'" ng-cloak></div>

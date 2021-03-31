@@ -1,0 +1,932 @@
+<style>
+@media (max-width:500px) {
+  .setcolwidth {
+   width:100%;
+  }
+}
+    html input[disabled] {
+    cursor: default;
+    opacity: .3 !important;
+}
+  select {
+     background:url("../images/arrow.png") no-repeat 97% center !important;  
+}
+        .row {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+    input[type="checkbox"] {
+  -webkit-appearance: none !important;
+  -moz-appearance:    none !important;
+  appearance:         none !important;
+  background-color: #fff;
+  margin-bottom: 0;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  height: 12px;
+  width: 12px;
+  border: 1px solid #000;
+  /*border-radius: 3px;*/
+}
+
+input[type="checkbox"]:checked:after {
+content: "";
+background-color: #fff;
+position: absolute;
+left: 2px;
+top: 1px;
+width: 5px;
+border-bottom: 2px solid #000;
+height: 8px;
+border-right: 3px solid #000;
+transform: rotate(45deg);
+-o-transform: rotate(45deg);
+-ms-transform: rotate(45deg);
+-webkit-transform: rotate(45deg);
+}
+
+input[type="checkbox"]:focus {
+  outline: none !important;
+  outline-offset: 0 !important;
+}
+    .slider-icon.small {
+    width: 44px !important;
+    height: 45px !important;
+}
+    .slider-icon.icon-slideleft {
+    background: url(../images/home/Slider-left.png);
+    background-size: cover;
+    left: 5px !important;
+}
+.slider-icon.icon-slideright {
+    background: url(../images/home/Slider-right.png);
+    background-size: cover;
+    right: 5px !important;
+}
+    .carousel-control { 
+    /*opacity: 1 !important;*/
+}
+</style>
+<div ng-controller="bikedetailctrl" style="background:white;margin-top:-5px;">
+     <!-- <div class="alert loader-svg fade in" ng-show="loadimg">
+  <object type="image/svg+xml" data="images/home/eclipse.svg" class="svg-icon"></object>
+</div>-->
+   
+    <div class="alert alert-danger alert-dismissable fade in" ng-show="Showerroralert" id="alertmessage">
+        <strong>{{errormessage}}</strong>
+    </div>
+    <div class="alert alert-info alert-dismissable fade in" ng-show="Showinfoalert" id="alertmessage">
+        <strong>{{infomessage}}</strong>
+    </div>
+
+    <div class="container-full" style="margin-top: 0px;">
+
+        <div class="container-fluid no-padding">
+  <div class="row visible-lg visible-md visible-sm hidden-xs">
+    <div class="col-md-12" style="padding-right: 0px;padding-left: 0px;">
+      <img src="{{cardetails.default_bike_data.web_s3_url}}" alt="loading" class="img-responsive" />
+    </div>
+  </div>
+            <div class="row hidden-lg hidden-md hidden-sm visible-xs">
+    <div class="col-md-12" style="padding-right: 0px;padding-left: 0px;">
+      <img src="{{cardetails.default_bike_data.mobile_s3_url}}" alt="loading" class="img-responsive" />
+    </div>
+  </div>
+</div>
+            <div class="row hidden-lg hidden-md hidden-sm visible-xs" style="padding:15px;background:#ffffff;margin-right:0px;margin-left:0px;background:#071e39;">
+    <div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12 center-block" style="float: none;top:8px;">
+     
+               <select class="form-control borderline3" ng-model="bikename" name="testshowroom" tabindex="6" ng-change="changecardata();bikecomparelist();" ng-init="bikename=bikenameid">
+                <option value="" ng-selected="true" disabled>Bike Model</option>
+                   <option ng-repeat="bikename in bikemodel" value="{{bikename.id}}" ng-value="{{bikename.id}}" style="background:rgba(0, 0, 0, .5);" ng-if="bikename.bike_type==biketype">{{bikename.name}} </option>
+                                    </select>
+
+        </div>
+                <div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12 center-block" style="float: none;top:8px;padding-right:0px;padding-left:0px;" id="list_bike1">
+         <div class="DocumentList">
+             <br>
+    <ul class="list-inline">    
+              <li class="list-inline-item itemcss" ng-click="goToverview('OVERVIEW');"><small ng-class="'OVERVIEW' === classVar ? 'nav_active' : 'nav_color'">OVERVIEW</small></li>
+              <li class="list-inline-item itemcss"  ng-click="goToFeatures('FEATURES');"><small ng-class="'FEATURES' === classVar ? 'nav_active' : 'nav_color'">FEATURES</small></li>
+              <li class="list-inline-item itemcss"  ng-click="goTogallery('GALLERY');"> <small ng-class="'GALLERY' === classVar ? 'nav_active' : 'nav_color'">GALLERY</small></li>
+              <li class="list-inline-item itemcss"  ng-click="goTocolors('COLOURS');"> <small ng-class="'COLOURS' === classVar ? 'nav_active' : 'nav_color'">COLORS - 360°</small></li>
+               <li class="list-inline-item itemcss"  ng-click="goTovideos('VIDEOS');"> <small ng-class="'VIDEOS' === classVar ? 'nav_active' : 'nav_color'">VIDEOS</small></li>
+              <li class="list-inline-item itemcss"  ng-click="goTovariants('VARIANTS');"> <small ng-class="'VARIANTS' === classVar ? 'nav_active' : 'nav_color'">VARIANTS</small></li>
+               <li class="list-inline-item itemcss"  ng-click="goTocompare('COMPARE');"><small ng-class="'COMPARE' === classVar ? 'nav_active' : 'nav_color'">COMPARE</small></li>
+              <li class="list-inline-item itemcss"  ng-click="goTospecification('SPECIFICATION');"><small ng-class="'SPECIFICATION' === classVar ? 'nav_active' : 'nav_color'">SPECIFICATION</small></li>
+        
+    </ul>
+</div>
+        </div>
+  </div>
+          <div class="row visible-lg visible-md visible-sm hidden-xs" id="bikedetail_fix" style="padding:15px;background:#ffffff;margin-right:0px;margin-left:0px;background:#071e39;">
+    <div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12 center-block" style="float: none;top:8px;padding-right: 0px;padding-left:0px;" id="list_bike">
+          <ul class="list-inline text-center bikelistcss">
+              <li class="" style="margin-right:25px;">
+               <select class="form-control borderline3" ng-model="bikename" name="testshowroom" tabindex="6" ng-change="changecardata();bikecomparelist();" ng-init="bikename=bikenameid">
+                <option value="" ng-selected="true" disabled>Bike Model</option>
+                   <option ng-repeat="bikename in bikemodel" value="{{bikename.id}}" ng-value="{{bikename.id}}" style="background:rgba(0, 0, 0, .5);" ng-if="bikename.bike_type==biketype">{{bikename.name}} </option>
+                                    </select>
+              </li>
+ 	          <li class="list-inline-item itemcss" ng-click="goToverview('OVERVIEW');"><small ng-class="'OVERVIEW' === classVar ? 'nav_active' : 'nav_color'" role="button">OVERVIEW</small></li>
+              <li class="list-inline-item itemcss"  ng-click="goToFeatures('FEATURES');"><small ng-class="'FEATURES' === classVar ? 'nav_active' : 'nav_color'" role="button">FEATURES</small></li>
+              <li class="list-inline-item itemcss"  ng-click="goTogallery('GALLERY');"> <small ng-class="'GALLERY' === classVar ? 'nav_active' : 'nav_color'" role="button">GALLERY</small></li>
+              <li class="list-inline-item itemcss"  ng-click="goTocolors('COLOURS');"> <small ng-class="'COLOURS' === classVar ? 'nav_active' : 'nav_color'" role="button">COLORS - 360°</small></li>
+               <li class="list-inline-item itemcss"  ng-click="goTovideos('VIDEOS');"> <small ng-class="'VIDEOS' === classVar ? 'nav_active' : 'nav_color'" role="button">VIDEOS</small></li>
+              <li class="list-inline-item itemcss"  ng-click="goTovariants('VARIANTS');"> <small ng-class="'VARIANTS' === classVar ? 'nav_active' : 'nav_color'" role="button">VARIANTS</small></li>
+               <li class="list-inline-item itemcss"  ng-click="goTocompare('COMPARE');"><small ng-class="'COMPARE' === classVar ? 'nav_active' : 'nav_color'" role="button">COMPARE</small></li>
+              <li class="list-inline-item itemcss"  ng-click="goTospecification('SPECIFICATION');"><small ng-class="'SPECIFICATION' === classVar ? 'nav_active' : 'nav_color'" role="button">SPECIFICATION</small></li>
+</ul>
+        </div>
+  </div>
+
+    </div>
+    <div class="row overviewbg" id="car_overview" ng-show="category=='OVERVIEW'">
+        <br>
+      
+           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right">                           
+               <div class="dropdown">
+        <img class="btn dropdown-toggle" src="./images/background/bikedetailsBG/share.png" alt="dropdown image" data-toggle="dropdown" class="img-responsive" style="height: 50px;width: auto;margin-right: 20px;">
+        <ul class="dropdown-menu dropdown-menu-right" style="margin-right: 15px;">
+            <li role="button" style="padding: 5px;"><a ng-click="downloadbrochure(cardetails.bike_brochure_url);">Download Brochure</a></li>
+            <li role="button" style="padding: 5px;"><!--<a ng-click="downloadbrochure(cardetails.bike_brochure_url);">Share Brochure</a>-->
+            <a socialshare socialshare-provider="email" socialshare-trigger="click" socialshare-subject="{{cardetails.name}} Brochure URL" socialshare-body="Below is the brochure link for requested model - {{cardetails.bike_brochure_url}}">Share via Mail</a>
+            </li>
+             <li role="button" class="hidden-lg hidden-md hidden-sm visible-xs" style="padding: 5px;"><!--<a ng-click="downloadbrochure(cardetails.bike_brochure_url);">Share Brochure</a>-->
+            <!--<a socialshare socialshare-provider="whatsapp" socialshare-text="{{cardetails.name}} Brochure URL" socialshare-url="{{brochureurl}}" href="whatsapp://send?text={{cardetails.name}} Brochure URL {{brochureurl}}">Share via WhatsApp</a>-->
+            <a href="https://api.whatsapp.com/send?text={{cardetails.name}} Brochure URL {{brochureurl}}">Share via WhatsApp</a>
+            </li>
+        </ul>
+    </div>                 
+                        </div> 
+          <br>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+           <!-- <img src="images/home/tiago.jpg" alt="" title="" style="margin-bottom:15px;margin-top:10%;" width="100%" style="" class="easy-icon" />-->
+             <img src="{{defaultimageurl}}" alt="" title="" style="margin-bottom:15px;margin-top:0%;" width="100%" style="" class="easy-icon" />
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            
+                    <div class="row" style="margin-top: 20px;margin-right: 0px;margin-left: 0px;">
+         <div class="variantbox center-block boxcss">
+                    <div class="row">
+                      
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="height: 50px;padding-left: 32px;">
+                           
+                            <p style="font-size: 24px;font-family: AvenirNextCondensed-Medium;color: #071e39;text-align: left;">Starting at  <b class="vartitlecss"> &#x20B9; {{cardetails.bike_price | INR1}}*</b></p>
+                           
+                        </div>                       
+                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="padding-right: 0px;padding-left: 0px;">
+                            <div class="row'">
+                           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:0px;padding-right:0px;padding-left: 0px;">
+                                <p class="fuelcss" style="margin-bottom: 0;">{{maxpower}}</p>
+                        </div>
+                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <p class="variantpricecss">Max power</p>
+                            </div></div>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding-right:0px;padding-left:0px;">
+                        <img src="./images/divider.png" style="margin-top:4px;height:50px;margin-left:0px;" class="pull-left">
+                            </div>
+                         <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 img-wrap2" style="padding-right: 0px;padding-left: 0px;">
+                           <div class="row">
+                           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:0px;padding-right: 0px;padding-left: 0px;">
+                                <p class="fuelcss" style="margin-bottom: 0;">{{powertorque}}</p>
+                        </div>
+                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-right: 0;">
+                                <p class="variantpricecss">Max Torque</p>
+                            </div></div>
+                        </div>
+                    </div>
+  
+   
+                </div>
+            
+            </div><br>
+    
+        </div>
+       <!-- Bike details price quote,test drive, emi-->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 visible-lg visible-md visible-sm hidden-xs">
+             <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-center-block1" align="center" style="margin-top:50px;">
+      <!--             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+            <div class="cartitle text-center" style="padding-top:40px;">
+                <div class="btn btn-primary btn-md btn-custom-lg" id="onroad_price">GET ON ROAD PRICE</div>
+            </div>
+            </div>       
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+            <div class="cartitle text-center" style="padding-top:40px;">
+                <div class="btn btn-primary btn-md btn-custom-lg" ng-click="emicalculator(cardetails.name);">EMI CALCULATOR</div>
+            </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+            <div class="cartitle text-center" style="padding-top:40px;">
+                <div class="btn btn-primary btn-md btn-custom-lg" ng-click="gototestdrive(cardetails.name);">BOOK TEST RIDE</div>
+            </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+            <div class="cartitle text-center" style="padding-top:40px;">
+                <div class="btn btn-primary btn-md btn-custom-lg" ng-click="gotopayment(cardetails.name);">BOOK NOW</div>
+            </div>
+            </div> -->  
+                <button type="button" class="btn btn-warning custom-button-width" id="onroad_price">GET ON ROAD PRICE</button>
+                <button type="button" class="btn btn-warning custom-button-width .navbar-right" ng-click="emicalculator(cardetails.name);">EMI CALCULATOR</button>
+                <button type="button" class="btn btn-warning custom-button-width .navbar-right" ng-click="gototestdrive(cardetails.name);">BOOK TEST RIDE</button>
+                <button type="button" class="btn btn-warning custom-button-width .navbar-right" ng-click="gotopayment(cardetails.name);">BOOK NOW</button>
+                </div>
+            <br>
+        </div>
+        
+                    <div class="row hidden-lg hidden-md hidden-sm visible-xs" style="margin-right:0px;margin-left:0px;">
+                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+              <img src="./images/background/bikedetailsBG/onroadprice.png" id="onroad_price1" class="imgcss">
+            </div>
+                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+               <img src="./images/background/bikedetailsBG/emi.png" ng-click="emicalculator(cardetails.name);" class="imgcss">
+            </div>
+                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+               <img src="./images/background/bikedetailsBG/testdrive.png" ng-click="gototestdrive(cardetails.name);" class="imgcss">
+            </div>
+                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+                              <img src="./images/background/bikedetailsBG/booknow.png" ng-click="gotopayment(cardetails.name);" class="imgcss">
+            </div>       
+                    </div>
+         <div class="row bikedetail-buffer"> </div>
+          <!-- Bike details price quote,test drive, emi-->
+    </div>
+        <div class="" ng-show="category=='FEATURES'" style="background:#E7E7E7;">
+            <br><br>
+        <div class="row" id="">
+  
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 col-center-block1" style="padding-right: 0px;padding-left: 0px;background:white;">
+  <div id="sidebar-carousel-1" class="carousel slide" data-ride="carousel">
+          
+       <ol class="carousel-indicators" style="margin-top:-10px;bottom: 0px;bottom: -45px;">
+     <!-- <li data-target="#sidebar-carousel-1" data-slide-to="0" class="active"></li>-->
+      <li data-target="#sidebar-carousel-1" data-slide-to="{{$index}}" ng-repeat="i in getNumber(number) track by $index"></li>
+    </ol>
+            <div class="carousel-inner">
+              <div class="item" data-ng-repeat="data in featurelist.values" data-ng-class="{active : $first}">
+             
+                    <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div style="padding:25px;">
+         <h4 class="vartitlecss" style="font-size: 30px;font-style:italic;">{{data.title}}</h4><br>
+         <p class="featuretitle">{{data.description}}</p>
+            </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+      <!--<p><img src={{data.image}} style="height:190px;float:right;width:auto;"></p>-->
+          <img src="{{data.image}}" alt="" title="" style="" width="100%" class="img-responsive" />
+    </div>
+  </div>
+              </div>   
+            </div>
+             <!-- Controls -->
+        <a class="left carousel-control" href="#sidebar-carousel-1" data-slide="prev" target="_self" style="    background:transparent;">
+          <!--<span class="glyphicon glyphicon-chevron-left"></span>-->
+             <span class="slider-icon icon-slideleft small"></span>
+        </a>
+        <a class="right carousel-control" href="#sidebar-carousel-1" data-slide="next" target="_self" style="    background:transparent;">
+         <!-- <span class="glyphicon glyphicon-chevron-right"></span>-->
+             <span class="slider-icon icon-slideright small"></span>
+        </a>
+                  </div>
+      
+            </div><br><br><br>
+                 <!-- Bike details price quote,test drive, emi-->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 visible-lg visible-md visible-sm hidden-xs">
+                       <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-center-block1" align="center" style="margin-top:50px;"> 
+                <button type="button" class="btn btn-warning custom-button-width" id="onroad_price">GET ON ROAD PRICE</button>
+                <button type="button" class="btn btn-warning custom-button-width .navbar-right" ng-click="emicalculator(cardetails.name);">EMI CALCULATOR</button>
+                <button type="button" class="btn btn-warning custom-button-width .navbar-right" ng-click="gototestdrive(cardetails.name);">BOOK TEST RIDE</button>
+                <button type="button" class="btn btn-warning custom-button-width .navbar-right" ng-click="gotopayment(cardetails.name);">BOOK NOW</button>
+                </div>     
+            <br>
+        </div>
+        
+                    <div class="row hidden-lg hidden-md hidden-sm visible-xs" style="margin-right:0px;margin-left:0px;">
+                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+              <img src="./images/background/bikedetailsBG/onroadprice.png" id="onroad_price1" class="imgcss">
+            </div>
+                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+               <img src="./images/background/bikedetailsBG/emi.png" ng-click="emicalculator(cardetails.name);" class="imgcss">
+            </div>
+                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+               <img src="./images/background/bikedetailsBG/testdrive.png" ng-click="gototestdrive(cardetails.name);" class="imgcss">
+            </div>
+                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+                              <img src="./images/background/bikedetailsBG/booknow.png" ng-click="gotopayment(cardetails.name);" class="imgcss">
+            </div>       
+                    </div>
+            <div class="row bikedetail-buffer"> </div>
+          <!-- Bike details price quote,test drive, emi-->
+       
+
+        </div> 
+    </div>
+    <div class="" ng-show="category=='GALLERY'">
+        <div class="row" id="car_gallery" style="margin-right: 0px;margin-left: 0px;">
+     <!--       <nav class="navbar navbar-default" style="border-radius:0px;background-color:#ffffff;">
+                <div class="container" style="padding-right:0px;padding-left:0px;">
+                    <div class="collapse navbar-collapse" id="exteriortype" style="display:block!important;">
+                        <ul class="nav navbar-nav gallerylistitem">
+                             <li role="button" class="active"><a class="disablecss" ng-click="gallerytype('EXTERIOR');" data-toggle="tab"><small style="font-size:100%;">&nbsp;&nbsp;EXTERIOR&nbsp;&nbsp;</small></a></li>
+                            <li role="button"><a class="disablecss" ng-click="gallerytype('INTERIOR');" data-toggle="tab"><small style="font-size:100%;">&nbsp;&nbsp;INTERIOR&nbsp;&nbsp;</small></a></li>
+                           
+                        </ul>
+                    </div>
+                </div>
+            </nav>-->
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 col-center-block1" style="padding-right: 0px;padding-left: 0px;">
+
+                <flex-slider slider-id="slider" id="gallery_slider" flex-slide="data in gallerydata.image track by $index" animation="fade" animation-loop="false" sync="#carousel" slideshow="false" control-nav="false" init-delay="100">
+
+                    <li>
+                        <img ng-src="{{data}}">
+                    </li>
+
+                </flex-slider>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 visible-lg visible-md visible-sm hidden-xs col-center-block1">
+
+                <flex-slider slider-id="carousel" flex-slide="data in gallerydata.image track by $index" animation="slide" animation-loop="false" item-width="210" item-margin="5" as-nav-for="#slider" slideshow="false" control-nav="false">
+                    <li class="col-lg-3 col-md-3 col-sm-3 col-xs-3 sliderwidth">
+                        <img ng-src="{{data}}">
+                    </li>
+                </flex-slider>
+            </div>
+             <!-- Bike details price quote,test drive, emi-->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 visible-lg visible-md visible-sm hidden-xs">
+                       <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-center-block1" align="center" style="margin-top:50px;"> 
+                <button type="button" class="btn btn-warning custom-button-width" id="onroad_price">GET ON ROAD PRICE</button>
+                <button type="button" class="btn btn-warning custom-button-width .navbar-right" ng-click="emicalculator(cardetails.name);">EMI CALCULATOR</button>
+                <button type="button" class="btn btn-warning custom-button-width .navbar-right" ng-click="gototestdrive(cardetails.name);">BOOK TEST RIDE</button>
+                <button type="button" class="btn btn-warning custom-button-width .navbar-right" ng-click="gotopayment(cardetails.name);">BOOK NOW</button>
+                </div>     
+            <br>
+        </div>
+        
+                    <div class="row hidden-lg hidden-md hidden-sm visible-xs" style="margin-right:0px;margin-left:0px;">
+                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+              <img src="./images/background/bikedetailsBG/onroadprice.png" id="onroad_price1" class="imgcss">
+            </div>
+                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+               <img src="./images/background/bikedetailsBG/emi.png" ng-click="emicalculator(cardetails.name);" class="imgcss">
+            </div>
+                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+               <img src="./images/background/bikedetailsBG/testdrive.png" ng-click="gototestdrive(cardetails.name);" class="imgcss">
+            </div>
+                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+                              <img src="./images/background/bikedetailsBG/booknow.png" ng-click="gotopayment(cardetails.name);" class="imgcss">
+            </div>       
+                    </div>
+          <!-- Bike details price quote,test drive, emi-->
+             <div class="row bikedetail-buffer"> </div>
+        </div>
+        
+    </div>
+    <div class="" ng-show="category=='COLOURS'">
+        <div class="row" id="car_gallery" style="margin-right: 0px;margin-left: 0px;">
+            <div class="row colorsbg"><br>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 col-center-block container_area">
+                     <h4 ng-show="noimage">Images are not available</h4>
+                   <!-- <img src="{{initialImage}}" style="width:100%;margin:5% auto;">-->
+                   <threesixty images="imageList1" reverse="true" animate-after-loading="false" class="col-center-block" ></threesixty>
+ <img ng-src="./images/360.png" class="middle"  style="width:auto!important;height: 40px !important;">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 col-center-block1" align="center" style="margin-top: -35px;">                       
+                        <div ng-repeat="color in web_colors" ng-click="changeColor(color.colorName);" ng-class="{colorpallete:colorval== color.colorName}" style="padding-right: 0px;padding-left: 0px;display: inline-block;max-width: 180px;">
+                            <div style="padding:5px;">
+                                <img role="button" src="{{color.colorPalletImage}}" class="imgcircle" style="height: 30px;width: auto;">
+                            </div>
+                             <p class="colorcss" ng-class="color.colorName === colorname ? 'color_active' : 'color_disabled'">{{color.colorName}}</p>
+                        </div>
+                   <!--     <div class="col-xs-8 col-center-block">
+                            <p class="colorcss">{{colorname}}</p>
+                        </div>-->
+                  
+                </div>
+
+            </div>
+            
+
+        </div><br>
+            <br>
+    </div>
+        <div class="" ng-show="category=='VIDEOS'">
+        <div class="row col-lg-10 col-md-10 col-sm-10 col-xs-12 col-center-block1">
+            <br><br>
+                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" style="text-align: center;">
+                        <div class="embed-responsive embed-responsive-16by9"> <iframe class="embed-responsive-item" ng-src="{{videoView | trustUrl}}" frameborder="0" allowfullscreen></iframe> </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="overflow-y: scroll;max-height: 420px;">
+                        <div ng-repeat="vid in masterYoutube" ng-cloak>
+                            <div class="row" ng-click="changeVideo(vid);" role="button" style="padding: 5px;">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"> <img src="{{vid.items[0].snippet.thumbnails.default.url}}" class="img-responsive"> </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" title="{{vid.items[0].snippet.title}}">
+                                    <div style="font-size: 14px;color:#071e39;margin-left: 10px;margin-top: 10px;"> {{vid.items[0].snippet.title}} </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+             <div class="row bikedetail-buffer"> </div>
+                </div>  <br><br>
+    </div>
+      <div class="" ng-show="category=='VARIANTS'" style="min-height:400px;">
+          <br><br>
+           <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 col-center-block1">
+                    <div class="row" style="margin-left:5px  !important;">
+                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+              <p class="variantcss" style="color:#0951a0;">Variant Name</p>
+            </div>
+                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3">
+              <p class="variantcss" style="color:#0951a0;">Mileage</p>
+            </div>
+                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3 text-center">
+            </div>
+                    </div>
+                </div>
+             <div class="row" style="margin-right: 0px;margin-left: 0px;">
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 col-center-block1" style="padding-right: 20px;padding-left: 20px;padding: 10px;" ng-repeat="data in bikevariantdata | toArray : false">
+                    <div class="row" style="margin-left:5px  !important;">
+                           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+              <p class="variantcss">{{data.varient_name}}</p>
+            </div>
+                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3">
+              <p class="variantcss">{{data.mileage}}</p>
+            </div>
+                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3 text-center">
+                              <div class="btn btn-primary btn-md btn-custom-lg visible-lg visible-md visible-sm hidden-xs" style="width:200px;" ng-click="showroomprice(data.varient_name);" id="show_room" tabindex="10">ON ROAD PRICE</div>
+                              <img src="./images/background/bikedetailsBG/on_road_price.png" class="imgcss hidden-lg hidden-md hidden-sm visible-xs" style="margin-top: -15px;" ng-click="showroomprice(data.varient_name);" id="show_room">
+            </div>       
+                    </div>    
+   
+                </div></div>
+           <div class="row top-buffer"> </div>
+           <div class="row top-buffer"> </div>
+    </div>
+     <div class="" ng-show="category=='SPECIFICATION'">
+         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 col-center-block1">
+             <br>
+               <!--<div ng-repeat="specdata in specificationdata" style="padding: 10px;">
+                <div>
+                    <div>
+                        <div class="headercss">{{specdata.specification_type}}</div>
+                    </div>
+                    <table class="table" style="margin-bottom:0px;">
+                        <tbody>
+                        <tr ng-repeat="specvalue in specdata.values" style="border-bottom: 1px solid #f3f3f3;">
+                            <td class="tdclass">{{specvalue.specification_sub_name}}</td>
+                            <td class="tdclass">{{specvalue.value}}</td>
+                            </tr></tbody>
+                    </table>
+                </div>
+            </div>-->
+             <div class="panel-group" id="accordion">
+    <div class="panel panel-default" id="panel1" ng-repeat="specdata in specificationdata">
+        <div class="panel-heading">
+             <h4 class="panel-title">
+        <a data-toggle="collapse" role="button" data-target="#spec{{$index}}" style="font-weight: normal;text-decoration: none;">
+          {{specdata.specification_type}}
+        </a>
+      </h4>
+
+        </div>
+        <div id="spec{{$index}}" class="panel-collapse collapse">
+            <div class="panel-body panelcustomcss">
+            <table class="table" style="margin-bottom:0px;">
+                        <tbody>
+                        <tr ng-repeat="specvalue in specdata.values" style="font-size:17px;font-family: AvenirNextCondensed-Medium;">
+                            <td class="tdclass" style="color:#071e39;">{{specvalue.specifi_name}}</td>
+                            <td class="tdclass" style="color:#071e39;">{{specvalue.value}}</td>
+                            </tr></tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+  
+   
+</div> <div class="row bikedetail-buffer"> </div>
+     </div><br><br>
+    </div>
+    <div class="" ng-show="category=='COMPARE'">
+        <br><br>
+         <div class="alert alert-success alert-dismissable fade in" ng-show="Showsuccessalert">
+        <strong>{{successmessage}}</strong>
+    </div>
+         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 col-center-block1 mobilepadding">
+             <div class="row comparecard" style="">
+                 <div class="margincss" style="margin-top: 15px;">
+                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mobilepadding" ng-repeat="data in comparemodel" ng-if="data.visible==true" style="margin-bottom:40px;">
+              <p class="vartitlecss bikecomparetext">{{data.name}}</p>
+                             <div class="checkbox text-left" style="margin-top:0px;margin-bottom:0px;margin-left:5px;color:#000000;">
+                                <label style="font-family: AvenirNextCondensed-Medium;">
+                                    <input class="big-checkbox" type="checkbox" ng-model="variantcompare.ids[data.id]" id=var{{data.id}} ng-checked="data.id==bikeidset" ng-disabled="data.id==bikeidset">COMPARE </label>
+                            </div>
+                             <img src="{{data.bike_image}}" alt="" title="" style="" class="imagecss" />
+                             
+                              <p class="vartitlecss" style="font-weight: normal;"> &#x20B9; {{data.pricing | INR1}}*</p>
+            </div>
+                 
+                        </div>
+                    </div>
+             <div class="row">
+                 <br><br>
+              <div class="cartitle text-center col-lg-12 col-md-12 col-sm-12 col-xs-612">
+                    <div class="btn btn-primary btn-md btn-custom-lg" style="width:200px;" ng-click="bikecomparedetail();" tabindex="10">COMPARE NOW</div>
+                    <!--<span class="glyphicon glyphicon-refresh spinning"></span>-->
+                </div></div>
+              <br><br>
+        </div>
+    </div>
+    
+
+    <!-- START SEND ON ROAD PRICE EMAIL-->
+    <div class="modal fade" id="send_price" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header text-center" style="background:rgba(7, 30, 57, 1);">
+                    <button type="button" class="close" style="color:#ffffff;" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="color:#ffffff;">Request Price Quote</h4>
+                </div>
+                <div class="modal-body" style="padding:5px 50px;">
+                    <div class="alert alert-info alert-dismissable fade in" ng-show="Showinfoalert1" id="alertmessage">
+                        <strong>{{infomessage}}</strong>
+                    </div>
+                    <br>
+                    <br>
+                    <form role="bikepricequote" name="bikepricequote" novalidate>
+                        <div class="form-group formborder" ng-class="{ 'has-error' : bikepricequote.submitted && bikepricequote.signupname.$invalid }">
+                            <input type="text" ng-model="bikeprice.name" class="form-control" name="signupname" id="name" placeholder="Name" required>
+                            <p ng-show="bikepricequote.submitted && bikepricequote.signupname.$error.required" class="help-block">Name is Required</p>
+                        </div>
+                        <div class="form-group formborder" ng-class="{ 'has-error' : bikepricequote.submitted && bikepricequote.signupmobile.$invalid }">
+                            <input type="number" ng-model="bikeprice.mobile" ng-minlength="10" class="form-control" name="signupmobile" id="Mobile" placeholder="Mobile Number" required>
+                            <p ng-show="bikepricequote.submitted && bikepricequote.signupmobile.$error.required" class="help-block">Mobile No is Required</p>
+                            <p ng-show="bikepricequote.submitted && bikepricequote.signupmobile.$error.minlength" class="help-block">Mobile Number Should be 10 digits</p>
+                        </div>
+                        <div class="form-group formborder" ng-class="{ 'has-error' : bikepricequote.submitted && bikepricequote.signupmail.$invalid }">
+                            <input type="email" ng-model="bikeprice.email" class="form-control" name="signupmail" id="email2" placeholder="Email ID" required>
+                            <p ng-show="bikepricequote.submitted && bikepricequote.signupmail.$error.required" class="help-block">Email is Required</p>
+                            <p ng-show="bikepricequote.submitted && bikepricequote.signupmail.$error.email" class="help-block">Enter a valid email.</p>
+                        </div>
+                        <div class="form-group formborder" ng-class="{ 'has-error' : bikepricequote.submitted && bikepricequote.pricevariant.$invalid }">
+                            <select class="form-control" id="variant" ng-model="bikeprice.id" name="pricevariant" tabindex="2" required>
+                                <option value="" ng-selected="true">Select Variant</option>
+                                <option ng-repeat="data in bikevariantdata" value="{{data.id}}" >{{data.varient_name}}</option>
+                            </select>
+                            <p ng-show="bikepricequote.submitted && bikepricequote.pricevariant.$error.required" class="help-block">Variant is Required</p>
+                        </div>
+                        <div class="cartitle text-center">
+                            <div class="btn btn-primary btn-lg btn-custom-lg" style="width:210px;" ng-click="sendpricedetail();">EMAIL PRICE QUOTE</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+
+        </div>
+    </div>
+      <div class="modal fade" id="showroom_price" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header text-center" style="background:rgba(7, 30, 57, 1);">
+                    <button type="button" class="close" style="color:#ffffff;" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="color:#ffffff;">On-Road Price</h4>
+                </div>
+                <div class="modal-body" style="padding:5px 50px;">
+                    <br>
+              <table class="table" style="margin-bottom:0px;">
+                        <tbody>
+                        <tr ng-repeat="showroom in showroomdata | toArray : false | orderBy: 'price_field_values[0].display_order'" ng-class="{showcss: showroom.price_field_name == 'Ex Showroom Price', showcss1: showroom.price_field_name == 'On Road Price'}">
+                            <h6 style="text-transform: capitalize;font-size:10px;margin-left: 10px;text-align: right;color:black;">* price indicator</h6>
+                            <td class="tdtype">{{showroom.price_field_name}}</td>
+                            <td class="tdtype" ng-if="showroom.values[0].value!='NA'">{{showroom.price_field_values[0].value | INR}}*</td>
+                            <td class="tdtype" ng-if="showroom.values[0].value=='NA'"> - </td>
+                            </tr></tbody>
+                    </table>        
+                </div>
+                <div class="modal-footer" style="border-top: 0px solid #e5e5e5;">
+                </div>
+            </div>
+
+        </div>
+    </div>
+        <!-- <div class="modal fade" id="feature_show" role="dialog">
+        <div class="modal-dialog">
+             Modal content
+            <div class="modal-content">
+                <div class="modal-header text-center" style="background:rgba(7, 30, 57, 1);">
+                    <button type="button" class="close" style="color:#ffffff;" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="color:#ffffff;">Feature Showcase</h4>
+                </div>
+                <div class="modal-body" style="padding:5px 20px;">
+                    <br>
+                <div ng-repeat="feature in featuredata" style="">
+                <div>
+                    <div>
+                        <div class="headercss">{{feature.key_feature_type}}</div>
+                    </div>
+                    <table class="table" style="margin-bottom:0px;">
+                        <tbody>
+                        <tr ng-repeat="featurevalue in feature.values" style="border-bottom: 1px solid #f3f3f3;">
+                            <td class="tdclass">{{featurevalue.feature_name}}</td>
+                            <td class="tdclass">{{featurevalue.description}}</td>
+                            </tr></tbody>
+                    </table>
+                </div>
+            </div>           
+                </div>
+                <div class="modal-footer" style="border-top: 0px solid #e5e5e5;">
+                </div>
+            </div>
+
+        </div>
+    </div>-->
+    <!-- END SEND ON ROAD PRICE EMAIL-->
+</div>
+<script>
+        (function($) {
+         $(document).ready(function() {
+             $(function() {
+                 $(window).scroll(function() {
+                     if ($(this).scrollTop() > 490) {
+                       $( "#bikedetail_fix" ).removeClass( "navbar-static-top" ).addClass( "navbar-fixed-top" );
+                       $( "#bikedetail_fix" ).addClass( "navbar-fixed-topp" );
+                     } else {
+                       $( "#bikedetail_fix" ).removeClass( "navbar-fixed-top" ).addClass( "navbar-static-top" );
+                       $( "#bikedetail_fix" ).removeClass( "navbar-fixed-topp" );
+                     }
+                 });
+             });
+
+         });
+     }(jQuery));
+    $(document).ready(function() {
+        $('.panel-collapse').collapse('hide');
+          setTimeout(function(){$('#spec0').collapse('in'); }, 2000);
+        $("#onroad_price,#onroad_price1").click(function() {
+            $("#send_price").modal();
+        });
+        /* $("#show_room").click(function() {
+            $("#showroom_price").modal();
+        });*/
+        /*     $("#myforgot").click(function(){
+                $('#send_price').modal('toggle');
+            });*/
+    });
+</script>
+<style>
+     #bikedetail_fix + .container-full {
+      padding-top: 80px;
+  }
+    /* Gallery slider custom css */
+      
+    .flex-direction-nav .flex-disabled {
+    opacity: .25 !important;   
+}
+    .flex-direction-nav a{
+        opacity: 1 !important;
+    }
+      /* End Gallery slider custom css */
+
+    .flexslider {
+    border: 4px solid #fff;
+    -webkit-border-radius: 0px!important;
+    -moz-border-radius: 0px!important;
+    -o-border-radius: 0px!important;
+    border-radius: 0px!important;
+    -webkit-box-shadow: 0 0px 0px rgba(0,0,0,.2)!important;
+    -moz-box-shadow: 0 0px 0px rgba(0,0,0,.2)!important;
+    -o-box-shadow: 0 0px 0px rgba(0,0,0,.2)!important;
+    box-shadow: 0 0px 0px rgba(0,0,0,.2) !important;
+}
+    #carousel img {
+    display: block;
+    opacity: .4;
+    cursor: pointer;
+}
+    .carousel-indicators .active {
+    width: 12px;
+    height: 12px;
+    margin: 0;
+    background-color: #071e39;
+    margin-right:5px !important;
+}
+    .middle {
+  transition: .5s ease;
+  opacity: 1;
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}
+
+.container_area:hover .image {
+  opacity: 0.3;
+}
+
+.container_area:hover .middle {
+  opacity: 1;
+}
+ 
+    .DocumentList
+{
+    overflow-x:scroll;
+    overflow-y:hidden;
+    /*height:200px;*/
+    width:100%;
+    /*padding: 0 15px;*/    
+}
+
+.list-inline {
+  white-space:nowrap;
+}
+    .imgcss{
+        height: 60px;
+        width: auto;            
+    }
+    .panel-default > .panel-heading {
+    color: #ffffff;
+    background-color: #071e39;
+    border-color: #071e39;
+    text-transform: uppercase;
+    font-family: AvenirNextCondensed-Bold;
+    font-weight: bold;
+}
+    .panelcustomcss{
+       font-family: AvenirNextCondensed-Medium;
+       background-color: #E4E4E4;
+    }
+    .nav_active{
+        color:#ffffff !important;
+        border-bottom:2px solid white;
+    }
+     .nav_color{
+        color:#ffffff !important;
+    }
+     .color_active{
+        color:#071e39 !important;
+    }
+     .color_disabled{
+        color:#ffffff !important;
+    }
+    .panel-heading a:after {
+        font-family: 'Glyphicons Halflings';
+        content: "\2212";
+        float: right;
+        color: #ffffff;
+        border: 1px solid #ffffff;
+        border-radius: 20px;
+        font-size: 12px;
+        padding: 2px 2px 2px 3px;
+}    /*    List Inline css*/
+    .list-inline-item:not(:last-child) {
+	margin-right: 0;
+}
+.list-inline::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+.list-inline-item {
+/*	float: left;*/
+}
+.list-inline-item + .list-inline-item::before {
+	padding-right: 1.5rem;
+	padding-left: .5rem;
+	content: '/';
+    color:#ffffff;
+}
+
+    /*List item css*/
+    .itemcss{
+        text-transform: uppercase;
+        font-size: 18px;
+        color: #101010;
+        font-weight: 100;        
+    }
+    
+.panel-heading a.collapsed:after {
+    content:"\2b";
+}
+    option {
+        background-color: rgba(255, 255, 255, 1);
+    }
+    .carousel-indicators li { 
+    background-color: lightgray;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+}
+    .carousel-indicators .active {
+    width: 12px;
+    height: 12px;
+    margin: 0;
+    background-color: #071e39;
+}
+      .margincss{
+             margin-left:6%;
+         }
+    .imagecss{
+        margin-bottom:15px;
+        margin-top:10px;
+        height:110px;
+        width:auto;
+    }
+    .comparecard{
+        background:#E4E4E4;
+        padding:15px;
+        overflow-y:scroll;
+        height:310px;
+    }
+    
+  
+@media (min-width: 766px) and (max-width:1024px) {
+    /*.bikelistcss > li { 
+    font-size: 22px;
+}*/
+
+}
+@media (min-width: 1125px) and (max-width:1499px) {
+   .bikelistcss > li { 
+    font-size: 20px;
+}
+}
+     @media (min-width: 0px) and (max-width:765px) {
+         
+         .margincss{
+             margin-left:0px !important;
+         }
+         .mobilepadding{
+             padding-right: 5px !important;
+             padding-left: 5px !important;
+         }
+         .imagecss{
+        margin-bottom:15px;
+        margin-top:10px;
+        height:80px !important;
+        width:auto;
+         }
+         .bikecomparetext { 
+           font-size: 18px !important; 
+         }
+          .comparecard{
+        background:#E4E4E4;
+        padding: 15px 0px 0px 0px;
+        overflow-y:scroll;
+        height:450px;
+    }
+          .boxcss{
+        margin-top:0%;
+        width: 100%;
+    }
+           #slider .flex-direction-nav {
+            opacity:1;
+        }
+         .flex-direction-nav .flex-next {
+    right: 0px !important;
+    text-align: right;
+    width: 20px;
+    height: 36px;
+    background-color: rgba(255, 255, 255, 1) !important;
+}
+         .flex-direction-nav .flex-prev {
+            left: 0px !important;
+            width: 20px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 1) !important;
+        }
+         .flex-direction-nav .flex-disabled { opacity: 1!important; filter:alpha(opacity=0); cursor: default; }
+         .flexslider:hover .flex-prev { opacity: 1; left: 10px; }
+         .flexslider:hover .flex-next { opacity: 1; right: 10px; }
+
+}
+    @media (min-width: 766px) {
+         .boxcss{
+        margin-top:20%;
+        width: 400px;
+    }
+            .flex-direction-nav .flex-next {
+    right: -50px !important;
+    text-align: right;
+}
+    .flex-direction-nav .flex-prev {
+    left: -50px !important;
+}
+          #slider .flex-direction-nav {
+            opacity:0;
+        }
+}
+ 
+</style>
+
+<div ng-include="'views/footer.html'" ng-cloak></div>
+<style>
+
+</style>

@@ -1,0 +1,136 @@
+<style>
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+  width:95%;
+}
+.pricequotebg input::placeholder {
+    color: #ffffff !important;
+    opacity: 0 !important; /* Firefox */
+}
+.pricequotebg input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   opacity: 0 !important;
+}
+.pricequotebg input::-ms-input-placeholder { /* Microsoft Edge */
+   opacity: 0 !important;
+}
+               .row {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+</style>
+<div ng-controller="pricequotectrl" class="pricequotebg" style="min-height:600px;">
+           <div class="alert alert-success alert-dismissable fade in" ng-show="Showsuccessalert">
+       <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+  <strong>{{successmessage}}</strong> 
+</div>
+        <div class="alert alert-danger alert-dismissable fade in" ng-show="Showerroralert" id="alertmessage">
+       <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+  <strong>{{errormessage}}</strong> 
+</div>
+       <div class="alert alert-info alert-dismissable fade in" ng-show="Showinfoalert" id="infomessage">
+       <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+  <strong>{{infomessage}}</strong> 
+</div>
+	<div class="container " style="height:100%;">
+        <div class="row"><br>
+          
+           
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xs-12 col-center-block1">
+               <div class="row" style="padding:15px;margin-right:0px;margin-left:0px;background:transparent;">
+    <div class="col-lg-4 col-md-3 col-sm-2 col-xs-2" style=""><img src="./images/home/slide_line1.png" style="margin-top: 20px;" class="pull-right"></div>
+    <div class="col-lg-4 col-md-6 col-sm-8 col-xs-8" style=""><h4 class="text-center" style="color:#ffffff;font-weight:bold;font-size:23px;">PRICE QUOTE</h4></div>
+    <div class="col-lg-4 col-md-3 col-sm-2 col-xs-2" style=""><img src="./images/home/slide_line1.png" style="margin-top: 20px;" class="pull-left"></div>
+  </div>
+                <div class="row">    
+                    <div style="margin-top:20px;">
+                        <br>
+            	<div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
+     <form role="form" name="pricequoteform" novalidate> 
+         <div class="form-group input-group">           
+             <span class="has-float-label" ng-class="{ 'has-error' : pricequoteform.submitted && pricequoteform.pricequotename.$invalid }">
+             
+             <input type="text" placeholder="Name" class="form-control borderline" id="pricename" ng-model="pricequote.name" name="pricequotename" tabindex="1" required>
+                  <label for="pricename">Name</label>
+             </span>
+          <p ng-show="pricequoteform.submitted && pricequoteform.pricequotename.$error.required" class="text-danger">Name is Required</p>
+         </div>
+        <div class="form-group input-group">      
+            <span class="has-float-label" ng-class="{ 'has-error' : pricequoteform.submitted && pricequoteform.pricequotemail.$invalid }">
+             
+             <input type="email" placeholder="Email" class="form-control borderline" id="pricemail" ng-model="pricequote.email" name="pricequotemail" tabindex="2" required>
+                 <label for="pricemail">Email</label>
+            </span>
+         <p ng-show="pricequoteform.submitted && pricequoteform.pricequotemail.$error.required" class="text-danger">Email is Required</p>
+                <p ng-show="pricequoteform.submitted && pricequoteform.pricequotemail.$error.email" class="text-danger">Enter a valid email.</p>
+         </div>
+        <div class="form-group input-group">        
+            <span class="has-float-label" ng-class="{ 'has-error' : pricequoteform.submitted && pricequoteform.pricequotemobile.$invalid }">
+             
+             <input type="number" placeholder="Mobile Number" class="form-control borderline" id="pricemobile" ng-model="pricequote.mobile" name="pricequotemobile" ng-minlength="10" ng-maxlength="10" tabindex="3" required>
+                   <label for="pricemobile">Mobile Number</label>
+            </span>
+          <p ng-show="pricequoteform.submitted && pricequoteform.pricequotemobile.$error.required" class="text-danger">Mobile No is Required</p>
+                <p ng-show="pricequoteform.submitted && pricequoteform.pricequotemobile.$error.minlength" class="text-danger">Mobile Number Should be 10 digits</p>
+             <p ng-show="pricequoteform.submitted && pricequoteform.pricequotemobile.$error.maxlength" class="text-danger">Mobile Number Maximum 10 digits</p>
+         </div>
+          
+         </form>
+         </div>
+               <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
+            <form role="form" name="pricequoteform1" novalidate>              
+         <div class="form-group">  
+             <span class="has-float-label" ng-class="{ 'has-error' : pricequoteform1.submitted && pricequoteform1.pricequotemodel.$invalid }">
+            
+             <select class="form-control borderline" id="pricemodel" ng-model="pricequote.model" name="pricequotemodel" tabindex="4" ng-change="changevariant();row1=1;" required>
+                  <option value="" ng-selected="true" disabled>Model*</option>
+                  <option ng-repeat="data in cardetails" value="{{data.name}}">{{data.name}}</option>
+                  </select>
+                  <label for="pricemodel" ng-if="row1==1">Model</label>
+             </span>
+                 <p ng-show="pricequoteform1.submitted && pricequoteform1.pricequotemodel.$error.required" class="text-danger">Model is Required</p>
+                </div>
+                 <div class="form-group"> 
+                     <span class="has-float-label" ng-class="{ 'has-error' : pricequoteform1.submitted && pricequoteform1.pricequotevariant.$invalid }">
+            
+             <select class="form-control borderline" id="pricevariant" ng-model="pricequote.id" name="pricequotevariant" tabindex="5" ng-change="row2=1;" required>
+                  <option value="" ng-selected="true">Select Variant*</option>
+					  <option  ng-repeat="variant in emicarVariantData" value="{{variant.varient.id}}">{{variant.varient.varient_name}}</option>
+                  </select>
+                          <label for="pricevariant" ng-if="row2==1">Variant</label>
+                     </span>
+                 <p ng-show="pricequoteform1.submitted && pricequoteform1.pricequotevariant.$error.required" class="text-danger">Variant is Required</p>
+                </div>
+               
+          </form>
+                    </div></div></div><br>
+             <div class="cartitle text-center visible-lg visible-md visible-sm hidden-xs"><div class="btn btn-primary btn-md btn-custom-lg" style="width:250px;" ng-click="submitpricequote();" tabindex="6">SUBMIT</div></div>
+                
+                  <div class="cartitle text-center hidden-lg hidden-md hidden-sm visible-xs"><div class="btn btn-default btn-md btn-custom-lg" style="width:250px;" ng-click="submitpricequote();" tabindex="6">SUBMIT</div></div>
+            </div>
+            
+    </div>
+</div>
+</div>
+  <div ng-include="'views/footer.html'" class="container-fluid" style="padding-right:0px;padding-left:0px;" ng-cloak></div>
+<style>
+/*   @media (min-width: 992px) and (max-width: 1199px) {
+  .container-footer {
+     position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    bottom: 0;
+  }
+}*/
+/*  @media (min-width: 1200px) {
+  .container-footer {
+     position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    bottom: 0;
+  }
+}*/
+
+</style>

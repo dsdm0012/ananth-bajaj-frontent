@@ -1,0 +1,545 @@
+img::focus {
+    outline: none;
+}
+
+.outerMostInput
+{
+	display: block;margin: auto;text-align: left;margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.labelSection
+{
+	height: 50%;margin: auto;font-size: 16px;color: #777676;
+}
+
+.validation
+{
+	height: 50%;margin: auto;font-size: 16px;color: red;float: right;margin-bottom: -15px !important;
+}
+
+.inputArea
+{
+	height: 50%; display: flex;margin: auto;background-color: white;
+}
+
+.iconArea
+{
+	padding: 5px;text-align: center;background-color: white;
+}
+
+.iconArea > object
+{height: 20px;margin: auto;
+}
+
+.inputArea > .seperator
+{
+	font-size: 22px;text-align: center;
+}
+
+.inputText
+{
+	background-color: #FFFFFF;width: 100%;font-size: 17px;height: 40px;
+}
+/*-------------------------------------------Checkbox css ---------------------------------*/
+
+/*label input {
+  display: none;
+}*/
+label span {/* <-- style the artificial checkbox */
+  height: 20px;
+  width: 20px;
+  border: 1px solid grey;
+  display: inline-block;
+  position: relative;
+  float: right;  
+  top: 4px !important; 
+}
+[type=checkbox]:checked + span:before {/* <-- style its checked state..with a ticked icon */
+  content: '\2714';
+  position: absolute;
+  top: -2px;
+  left: 2px;
+  font-size: 18px;
+}
+/*-------------------------------------------Checkbox css ---------------------------------*/
+.links {
+    min-height: 20px;
+    padding: 10px;
+        min-height: 35px;
+    border-bottom: 1px solid #929292;
+}
+.links > a {
+    text-transform: uppercase;
+    font-size: 15px;
+    float: right;
+    text-decoration: none;
+}
+
+.carName
+{
+	margin: 5px 18px;
+    padding: 2px;
+    font-size: 16px;
+    text-align: left;
+    font-weight: 600;
+    color: #545454;
+    text-transform: uppercase;
+}
+
+.labelSection
+{
+	margin: auto;
+    font-size: 18px;
+    color: #2e5db3;
+    text-align: left;
+        font-weight: 600;
+}
+
+.topButtons
+{
+	display: flex;
+}
+
+.crossButton
+{
+	width: 10%;font-size: 15px;
+}
+
+.betweenTopButtons
+{
+	width: 80%;
+}
+
+.changeCarIcon
+{
+	width: 40px;
+}
+
+.inputContainer
+{
+	display: flex;margin-top: 35px !important;margin: 20px auto;
+}
+
+.checkboxInput
+{
+	height: 18px;width: 18px;
+}
+
+.checkboxLabel
+{
+    width: 20px;
+    height: 20px;
+    text-align: left;
+    font-size: 18px;
+    font-weight: normal;
+    color: #545454;
+}
+
+select
+{
+	width: 100%;margin: 5px auto;height: 40px;background: white;padding: 5px;font-size: 15px;
+}
+
+select::focus
+{
+	background: white;
+}
+
+h1
+{
+	margin: 5px auto;
+	font-size: 44px;
+	font-weight: 600;
+	text-align: left;
+    text-transform: uppercase;
+}
+
+.titleInput
+{
+	margin: 35px auto;
+}
+
+.mainCarCompareDiv
+{
+	width: 80%;
+	min-height: 10px;
+	margin: -20px auto 80px auto !important;
+    /*max-width: 1200px !important;*/
+    max-width: 100% !important;
+}
+
+.headSection
+{
+	margin: 30px auto !important;
+	display: flex;
+}
+
+.titleAndOptions
+{
+	width: 30%;
+	/*padding: 5px;*/
+}
+
+.titleAndOptions > h1
+{
+	text-align: left;
+}
+
+.blueSeperator
+{
+	height: 3px;
+    background-color: #071e39;
+    width: 70%;
+    text-align: left;
+    /*margin: 0 auto;*/
+}
+
+.carContainer
+{
+	min-height: 260px;
+    width: 35%	;
+    border: 1px solid #c5c5c5;
+    margin: 0px auto;
+	min-width: 250px;
+}
+
+
+.carContainerr
+{
+    width: 24%;
+    min-height: 260px;
+    border: 1px solid #c5c5c5;
+    margin: 0px auto;
+}
+
+.titleAndOptionss
+{
+	width: 25%;
+	padding: 5px;
+}
+
+
+.testDriveLast_buttonn
+  {
+    color: #ffffff;
+    background-color: #071e39;
+    font-size: 16px;
+    border: 1px solid #071e39;
+    min-width: 150px;
+    max-width: 320px;
+    width: 90%;
+    height: 50px;
+   /* margin-top: -15px !important;*/
+    margin-bottom: 10px !important;
+    text-transform: uppercase;
+
+  }
+
+  .eachRow
+{
+    min-height: 45px;
+    margin: 5px auto;
+    border-bottom: 1px solid #989898;
+    text-transform: capitalize;
+    text-align: left;
+    font-size: 14px;
+    padding: 5px;
+    padding-left: 1px;
+    color: #545454;
+    width: 97%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}  .eachRow1
+{
+    min-height: 60px;
+    margin: 5px auto;
+    border-bottom: 1px solid #989898;
+    text-transform: capitalize;
+    text-align: left;
+    font-size: 17px;
+    padding: 5px;
+    padding-left: 1px;
+    color: #545454;
+    width: 97%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+.overView
+{
+    display: flex;
+}
+
+.title
+{
+  font-size: 20px;
+  text-align: left;
+  border-bottom: 3px solid #071e39;
+  margin-bottom: 30px !important;
+  margin-top: 40px !important;
+  text-transform: uppercase;
+}
+
+.headerImage
+{
+ /*  max-height: 100px;min-height: 100px;min-width: 140px;*/max-width: 160px;
+}
+
+.categoryHeader
+{
+    width: 98%;text-align: left;font-size: 18px;margin-top: 40px !important;text-transform: uppercase;margin: auto;
+}
+
+.categoryHeaderExpand
+{
+    width: 2%;text-align: left;font-size: 24px;margin-top: 40px !important;text-transform: uppercase;margin: auto;
+}
+
+.inputContainerr
+{
+    display: block;margin-top: 60px !important;
+}
+
+@media (max-width: 400px) and (min-width: 320px)
+{
+    .eachRow {
+        font-size: 12px !important;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 1000px)
+{
+    .title {
+        font-size: 16px;
+    }
+
+    .categoryHeader,.categoryHeaderExpand
+    {
+        font-size: 16px;
+    }
+
+
+    select
+    {
+        width: 96%;
+    }
+
+    .carContainerrWidth
+    {
+        display: none !important;
+    }
+
+    .carContainerr, .titleAndOptionss
+    {
+        width: 30%;
+        margin: 0px auto;
+    }
+
+    .inputContainerr
+    {
+        display: block;margin-top: 0px !important;
+    }
+
+    .labelSection {
+        font-size: 14px;
+    }
+
+    .eachRow {
+           /* height: 120px; */
+    /* margin: 5px auto; */
+    border-bottom: 1px solid #989898;
+    text-transform: capitalize;
+    text-align: left;
+    font-size: 14px;
+    /* padding: 25px 0px; */
+    padding-left: 1px;
+    color: #545454;
+    width: 97%;
+    text-overflow: ellipsis;
+    white-space: normal;
+    overflow: hidden;
+    }
+
+    .eachRowColor
+    {
+        display: block !important;
+        padding: 0px;
+        text-align: center;
+    }
+
+    h1 {
+        margin: 5px auto;
+        font-size: 35px;
+        font-weight: 600;
+        text-align: left;
+    }
+
+    .checkboxLabel {
+        font-size: 12px;
+    }
+
+    input[type=checkbox]
+    {
+        margin: 0px !important;
+    }
+
+    .checkboxInput {
+        height: 14px;
+        width: 14px;
+    }
+
+    .headerImage {
+       /* margin: 25px auto;
+        max-height: 50px;
+        min-height: 50px;
+        min-width: 50px;
+        max-width: 60px;*/
+    }
+
+    .carName {
+       /* margin: 5px 5px;*/
+        padding: 0px;
+        font-size: 12px;
+        text-align: left;
+        font-weight: 600;
+        color: #545454;
+        text-transform: uppercase;
+    }
+
+    .testDriveLast_buttonn {
+        color: #ffffff;
+        background-color: #071e39;
+        font-size: 12px;
+        border: 1px solid #071e39;
+        width: 250px;
+        height: 40px;
+        text-overflow: ellipsis;
+        white-space: normal;
+        overflow: hidden;    
+        min-width: 140px;
+        max-width: 140px;
+    }
+
+    .carContainerr
+    {
+       /* height: 280px;*/
+    }
+
+    .titleInput {
+        margin: 0px auto;
+    }
+
+    .inputContainer {
+       /* margin-top: 20px !important;*/
+        margin: 25px auto;
+    }
+
+    .mainCarCompareDiv {
+        width: 80%;
+        min-height: 10px;
+        margin: 60px auto 30px auto !important;
+		min-width:768px;
+    }
+
+    select {
+        width: 100%;
+        margin: 5px auto;
+        height: 35px;
+        background: white;
+        padding: 1px;
+        font-size: 12px;
+    }
+
+}
+
+@media (min-width: 480px) and (max-width: 1000px)
+{
+ 
+
+    .categoryHeader
+    {
+        width: 97%;
+    }
+
+    .categoryHeaderExpand
+    {
+        width: 3%;
+    }
+
+    .crossButton {
+        width: 15%;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 600px)
+{
+    .testDriveLast_buttonn {
+        color: #ffffff;
+        background-color: #071e39;
+        font-size: 12px;
+        border: 1px solid #071e39;
+        width: 90%;
+        height: 40px;
+        text-overflow: ellipsis;
+        white-space: normal;
+        overflow: hidden;
+        min-width: 50px;
+        max-width: 75px;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 480px)
+{
+    .testDriveLast_buttonn {
+        color: #ffffff;
+        background-color: #071e39;
+        font-size: 12px;
+        border: 1px solid #071e39;
+        width: 90%;
+        height: 40px;
+        text-overflow: ellipsis;
+        white-space: normal;
+        overflow: hidden;
+        min-width: 50px;
+        max-width: 75px;
+    }  
+
+    .categoryHeader
+    {
+        width: 95%;
+    }
+
+    .categoryHeaderExpand
+    {
+        width: 5%;
+    }
+
+    .crossButton {
+        width: 30%;
+    }
+}
+
+@media (min-width: 992px)
+{
+    .links
+    {
+        margin-top: 40px !important;
+    }
+}
+
+select {
+    -moz-appearance: none !important;
+    -webkit-appearance: none !important;
+    -ms-appearance:none !important;
+     appearance:none !important;
+     background-image: url("/images/arrow.png") !important;
+     background-repeat: no-repeat !important;
+     background-position: center right !important;
+     background-size: 14px !important;
+     padding-right: 15px !important;
+     background-origin: content-box !important;
+}

@@ -1,0 +1,279 @@
+<div ng-controller="locateusdetailctrl" style="background:#ffffff;">
+       <div class="alert alert-danger alert-dismissable fade in" ng-show="Showerroralert" id="alertmessage">
+        <strong>{{errormessage}}</strong> 
+        </div>
+       <div class="container " style="height:100%;width:100%;"> 
+<div class="mapSectionn">
+        <div class="mapDiv">
+            <div id="googleMap" class="" style="height: 450px;"></div>
+        </div>
+    </div>
+           <div  class="row detailsSection fade-in" style="width: 98%;margin:0px auto;height:auto;">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 overViewSection" style="padding-right: 0px;padding-left: 0px;">
+            <div >               
+                <br>
+             <!--    <div class="row" ng-repeat="dealer in dealerDetails | customFilter:dealer"> -->  
+                <div class="row" ng-repeat="dealer in dealerdata">                  
+ <div style="display: flex;border-bottom: 2px solid #101010;margin-bottom: 10px !important;font-size:17px;font-weight: normal;width:70%;margin-left: 25px;">
+                <div class="categoryHeader">
+                    <!--<img src="images/formicons/dealerlocation.png" style="width:20px;"/>-->
+                    <font style="padding-left:10px;text-transform:uppercase;font-size: 21px;" >{{(dealer.dealer_type).join(', ')}}</font>
+                </div>               
+            </div>
+                    
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">	
+                          <!--  <div class="col-xs-12 align-left">
+            <h3 style="color:#101010;text-transform:uppercase;font-size: 22px;font-family: AvenirNextCondensed-Bold;"><img src="images/formicons/location.png" height="20px;" class="pull-left"> &nbsp;&nbsp;{{dealer.dealer_name}}</h3>
+          <h4 style="width:60%;">{{dealer.address}}</h4><br>
+      	</div>-->
+        <div style="padding:0px;">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">	
+                    <div class="locatebox">
+       <!--   <div class="pull-left"> <span class="locateus-icon icon-iconcall small"></span><span class="" style="    margin-left: 10px;font-size: 16px;"><b>Telephone</b></span>
+               <div style="display: flex;font-size:15px;margin-left:10px;">
+                                     <div>
+                                        <div  ng-repeat="contact in dealer.dealer_numbers" style="margin-left: 15px;">
+                                           <a href="tel:{{contact.dealer_number}}" target="_top"  style="text-transform: lowercase !important;color:#101010;">{{contact.dealer_number}}</a>
+                                        </div>
+                                    </div>
+                           
+                            </div>
+          </div>-->
+                        <h4 style="height:2px;"></h4>
+                        <h4 style="color:#101010;text-transform:uppercase;font-size: 20px;font-family: AvenirNextCondensed-Bold;">Address</h4>
+                          <h3 style="color:#101010;text-transform:uppercase;font-size: 18px;font-family: AvenirNextCondensed-Bold;margin-top: 0px;">{{dealer.dealer_name}}</h3>
+          <h4 style="width:100%;font-family: AvenirNextCondensed-Medium">{{dealer.address}}</h4>
+                       
+                        <br><br>
+            </div>
+
+				</div>
+                   
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                     <div class="locatebox"><!-- <span class="locateus-icon icon-iconhours small"></span>-->
+            <!--<span class="red" style="font-size:15px;margin-left:10px;">{{dealer.working_hours}}</span>-->
+                         <h4 style="height:2px;"></h4>
+                          <h4 style="color:#101010;text-transform:uppercase;font-size: 20px;font-family: AvenirNextCondensed-Bold;">Working Hours</h4>
+                     <h4 style="font-family: AvenirNextCondensed-Medium">
+                         <b>Sales:</b> <br>Monday - Saturday 9.15 am to 7.00 pm <br> Sunday - 10.00 am to 6.00 pm,<br><br> <b>Service:</b><br> Monday - Saturday 8.30 am to 6.30 pm  <br> Sunday - 9.15 am to 1.00 pm
+                         </h4><br><br>
+          </div>
+                    <!-- <img src="images/formicons/Email.png" height="20px;" class="pull-left">
+          <div class="pull-left">
+            <div style="display: flex;font-size:15px;margin-left:10px;">
+                                     <div>
+                                        <div  ng-repeat="emailId in dealer.email">
+                                           <a href="mailto:{{emailId}}" target="_top"  style="text-transform: lowercase !important;color:#101010;">{{emailId}}</a>
+                                        </div>
+                                    </div>
+                           
+                            </div>
+          </div>-->
+								
+				</div>		
+                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">					
+        <!--   <div class="pull-left"> <span class="locateus-icon icon-iconhours small"></span>
+            <span class="red" style="font-size:15px;margin-left:10px;">{{dealer.working_hours}}</span>
+          </div><br><br><br>-->
+                         <div class="locatebox">
+                             <h4 style="height:2px;"></h4>
+                         <h4 style="color:#101010;text-transform:uppercase;font-size: 20px;font-family: AvenirNextCondensed-Bold;">Contact Numbers</h4>
+               <div style="font-size:16px;">
+                        <div  ng-repeat="contact in dealer.dealer_numbers">
+                        <a href="tel:{{contact.dealer_number}}" target="_top"  style="text-transform: Capitalize !important;color:#101010;font-family: AvenirNextCondensed-Medium;font-size: 18px;">{{contact.name}} - {{contact.dealer_number}}</a>
+                        </div>
+                            </div><br>
+                              <div style="color: #101010;text-transform: capitalize;font-size: 15px;font-weight:bold;font-family: AvenirNextCondensed-Medium;">Email Address:</div>
+                               <div style="display: flex;font-size:17px;margin-left:0px;">
+                                     <div>
+                                        <div  ng-repeat="emailId in dealer.email">
+                                           <a href="mailto:{{emailId}}" target="_top"  style="text-transform: lowercase !important;color:#101010;font-family: AvenirNextCondensed-Medium">{{emailId}}</a>
+                                        </div>
+                                    </div>
+                           
+                            </div>
+       
+            </div><br><br>
+                   
+				</div>			
+			
+                            
+                            </div>
+                        </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="margin-top: 7px;">
+                          <div style="margin-top:0px;">
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 locateuscard" role="button" style="text-align: center;border-right:5px solid white;" ng-click="openMap(dealer.latitude,dealer.longitude)">
+                <p style=" margin: 25px 0 5px;" class="imgtop"><img src="images/formicons/Direction.png" style="height: 50px;"  alt="" title="" class="easy-icon" /></p>
+              <div class="iconname ">Driving Directions</div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 locateuscard" role="button" title="COMING SOON" style="text-align: center;" ng-click = "openModalUCImages(dealer.dealer_name);" data-toggle="modal" data-target="#myModala">
+                <p style=" margin: 25px 0 5px;" class="imgtop">
+                    <!--<img ng-if="dealer.image[0]" src="{{dealer.image[0]}}" style="height: 50px;"  alt="" title="" class="easy-icon" />-->
+                    <img src="images/formicons/Gallery.png" style="height: 50px;"  alt="" title="" class="easy-icon" />
+                </p>
+              <div class="iconname ">Showroom Images</div>
+            </div></div>
+                    
+                    </div>
+            </div>
+                <br>                              
+           </div>
+
+        </div>
+    </div> <br>
+    </div>
+    <div ng-include="'views/footer.html'" ng-cloak></div>  
+     <div class="modal fade" id="myModala" role="dialog">
+        <div class="modal-dialog">        
+          <!-- Modal content-->
+          <div class="modal-content" style="background:rgba(0, 0, 0, .6);">
+            <div class="modal-header" style="padding: 1px;">
+              <button type="button" class="close" style="font-size: 40px;" data-dismiss="modal">&times;</button>
+              <!--<h4 class="modal-title" style="text-align: center;">Showroom Images</h4>-->
+            </div>
+            <div class="modal-body" style="padding: 1px;">
+
+                <div id="banner_gallery" class="carousel slide" data-ride="carousel" ng-cloak>  
+                 <div class="carousel-inner" role="listbox">
+                        <div class="item" data-ng-repeat="img in gallerydata track by $index" data-ng-class="{active : $first}">
+                            <img data-ng-src="{{img}}" alt=" carousel {{$index}}" style="margin: 0 auto;"/>
+                        </div>
+                    </div>
+                    <a class="carousel-control left" href="#banner_gallery" data-slide="prev" target="_self">
+                        <span class="slider-icon icon-slideleft small"></span>
+                    </a>
+                    <a class="carousel-control right" href="#banner_gallery" data-slide="next" target="_self">
+                        <span class="slider-icon icon-slideright small"></span>
+                    </a>
+                </div>
+
+            </div>
+            <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div> -->
+          </div>
+          
+        </div>
+      </div>
+</div>	
+<style>
+/*.row [class*="col-"]{
+  margin-bottom: -99999px;
+  padding-bottom: 99999px;
+}
+
+.row{
+  overflow: hidden; 
+}*/
+    .locatebox{
+           display: block;
+        border-radius: 5px;
+        box-shadow: 0 3px 4px 0 rgba(0,0,0,0.3);
+        transition: 0.3s;
+        background: white;
+        border-radius: 0px;
+        position: relative;
+            padding-left: 15px;
+    padding-right: 15px;
+    }
+           .row {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+    .close {
+  float: right;
+  font-size: 21px;
+  font-weight: bold;
+  line-height: 1;
+  color: #ffffff;
+  text-shadow: 0 1px 0 #fff;
+  filter: alpha(opacity=20);
+  opacity: 1;
+}
+.close:hover,
+.close:focus {
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+  filter: alpha(opacity=50);
+  opacity: 1;
+}
+          @media (min-width: 0px) and (max-width:699px) {
+.locateuscard {
+    background: url(../images/home/Bacgroundpatch.jpg);
+    background-size: cover;
+     height: 130px; 
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    border-right: 0px solid white !important;
+    border-left: 3px solid white !important;
+    border-bottom: 3px solid white !important;
+}
+}
+      @media (min-width: 700px) and (max-width:900px) {
+  .locatebox{
+        height: 370px !important;
+    }
+}
+
+    @media (min-width: 901px) and (max-width:1099px) {
+  .locatebox{
+        height: 300px !important;
+    }
+        .locateuscard{
+            height: 300px !important;
+        }
+        .imgtop{
+           margin-top: 70px !important;
+        }
+}
+    @media (min-width: 1100px)  {
+ .locatebox{
+        height: 280px !important;
+    }
+            .locateuscard{
+            height: 280px !important;
+        }
+          .imgtop{
+           margin-top: 70px !important;
+        }
+}
+</style>
+<script>
+    jQuery(document).ready(function(){
+           setTimeout(function() {
+                $('#banner_gallery').carousel({
+                   interval: 2000
+                });
+            }, 1000);
+		
+		var selectIds = jQuery('.collapse');
+		selectIds.on('show.bs.collapse hidden.bs.collapse', function () {
+				jQuery(this).prev().find('.glyphicon').toggleClass('glyphicon-plus glyphicon-minus');
+			});
+        
+   function alignModal(){
+        var modalDialog = $(this).find(".modal-dialog");
+        /* Applying the top margin on modal dialog to align it vertically center */
+        modalDialog.css("margin-top", Math.max(0, ($(window).height() - modalDialog.height()) / 2));
+    }
+    // Align modal when it is displayed
+    $(".modal").on("shown.bs.modal", alignModal);
+    
+    // Align modal when user resize the window
+    $(window).on("resize", function(){
+        $(".modal:visible").each(alignModal);
+    });
+        
+	});
+      function expandSpecific(id) {
+      //console.log(id);
+          $('.collapse').removeClass('in');
+          for(i=0;i<id.length;i++){
+          var myGroup = $('#panel'+id[i]);
+          $('#panel'+id[i]).addClass('in');
+      }
+    }
+
+
+</script>

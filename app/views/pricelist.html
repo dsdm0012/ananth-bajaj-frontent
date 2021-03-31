@@ -1,0 +1,195 @@
+<!--<div ng-controller="headerCtrl"></div>-->
+<div ng-controller="pricelistctrl" style="min-height:600px;">
+    <div class="alert alert-success alert-dismissable fade in" ng-show="Showsuccessalert">
+        <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+        <strong>{{successmessage}}</strong>
+    </div>
+    <div class="alert alert-danger alert-dismissable fade in" ng-show="Showerroralert" id="alertmessage">
+        <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+        <strong>{{errormessage}}</strong>
+    </div>
+
+    <div class="alert alert-info alert-dismissable fade in" ng-show="Showinfoalert" id="infomessage">
+        <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+        <strong>{{infomessage}}</strong>
+    </div>
+    <div class="container " style="height:100%;background:white;width:100%;">
+        <div class="row">
+            <br>
+            <br>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right">
+                <div class="dropdown sharecss" role="button">
+                    <img class="" ng-click="downloadpdf(pdflink);" src="./images/download.png" alt="dropdown image" class="img-responsive" style="height: 30px;width: auto;margin-right: 10px;">
+                    <span ng-click="downloadpdf(pdflink);" style="margin-right:25px;font-weight: bold;">Download</span>
+                    <img class="dropdown-toggle" src="./images/share_icon.png" alt="dropdown image" data-toggle="dropdown" class="img-responsive" style="height: 30px;width: auto;margin-right: 10px;font-weight: bold;"><span data-toggle="dropdown">Share</span>
+                    <ul class="dropdown-menu dropdown-menu-right" style="margin-right: 15px;">
+                        <li role="button" style="padding: 5px;">
+                            <a id="price_mail">Share via Mail</a>
+                        </li>
+                        <li role="button" class="hidden-lg hidden-md hidden-sm visible-xs" style="padding: 5px;">
+                            <a href="https://api.whatsapp.com/send?text=Price List Details https://goo.gl/oKvcZs">Share via WhatsApp</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <br>
+            <br>
+        </div>
+        <div class="row rowwidth" style="padding: 5px;">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-center-block1">
+                <div class="row" style="background:#071e39;padding: 15px;padding-left: 0px;padding-right: 0px;">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 rowcss1 visible-lg visible-md visible-sm visible-xs"> Model / Variant </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 rowcss1 visible-lg visible-md visible-sm hidden-xs"> Ex-Showroom Price</div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 rowcss1 visible-lg visible-md visible-sm hidden-xs"> Insurance</div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 rowcss1 visible-lg visible-md visible-sm hidden-xs"> Registration Charges</div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6 rowcss1 visible-lg visible-md visible-sm visible-xs"> On Road Price with Insurance</div>
+                </div>
+                <div class="row" ng-repeat="data in pricedata.bikes" ng-if="data.Non_Bajaj!=true">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background: #6F8EB2;padding:5px;">
+                        <p style="font-size: 22px;font-family: AvenirNextCondensed-Medium;color: #ffffff;text-align: left;margin: 0px 0 0px;">&nbsp; {{data.model_name}}</p>
+                    </div>
+                    <div ng-repeat="price in data.price_data">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 rowcss visible-lg visible-md visible-sm visible-xs"> &nbsp;{{price.Variant_Name}}</div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 rowcss visible-lg visible-md visible-sm hidden-xs">&nbsp; &#x20B9; {{price.Ex_Showroom_Price | INR1}}</div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 rowcss visible-lg visible-md visible-sm hidden-xs">&nbsp; &#x20B9; {{price.Insurance | INR1}}</div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 rowcss visible-lg visible-md visible-sm hidden-xs">&nbsp; &#x20B9; {{price.Registration_Charges | INR1}}</div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6 rowcss visible-lg visible-md visible-sm visible-xs"><b>&nbsp; &#x20B9; {{price.On_Road_Price | INR1}}</b></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="send_email" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header text-center" style="background:rgba(7, 30, 57, 1);">
+                    <button type="button" class="close" style="color:#ffffff;" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="color:#ffffff;">Please Enter Your Details</h4>
+                </div>
+                <div class="modal-body" style="padding:5px 50px;">
+                    <div class="alert alert-info alert-dismissable fade in" ng-show="Showinfoalert1" id="alertmessage">
+                        <strong>{{infomessage}}</strong>
+                    </div>
+                    <br>
+                    <br>
+                    <form role="bikepricequote" class="pricelistemail1" name="priceemailform" novalidate>
+                        <div class="form-group input-group">
+                            <span class="has-float-label" ng-class="{ 'has-error' : priceemailform.submitted && priceemailform.profileemail.$invalid }">
+
+                                    <input type="email" ng-model="pricemail.email" name="profileemail" tabindex="2" placeholder="Email ID" class="form-control borderline1" id="profileemail" ng-disabled="nomail" required>
+                                     <label for="profileemail">Email ID</label>
+                                    </span>
+                            <p ng-show="priceemailform.submitted && priceemailform.profileemail.$error.required" class="text-danger">Email ID is Required</p>
+                            <p ng-show="priceemailform.submitted && priceemailform.profileemail.$error.email" class="text-danger">Email ID a valid email.</p>
+                        </div>
+
+                        <div class="cartitle text-center">
+                            <div class="btn btn-primary btn-md btn-custom-lg" style="width:150px;" ng-click="sendmail();">SUBMIT</div>
+                        </div>
+                    </form>
+                </div>
+               <!-- <div class="modal-footer">
+                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-include="'views/footer.html'" class="container-fluid" style="padding-right:0px;padding-left:0px;" ng-cloak></div>
+<style>
+    .rowcss {
+        font-size: 18px;
+        font-family: AvenirNextCondensed-Medium;
+        color: #071e39;
+        text-align: left;
+        padding: 5px;
+        margin-top: 4px;
+        margin-bottom: 4px;
+    }
+    
+    .rowcss1 {
+        font-size: 16px;
+        /*font-family: AvenirNextCondensed-Medium;*/
+        color: #ffffff;
+        text-align: left;
+        text-transform: uppercase;
+        padding-left: 10px;
+    }
+    
+    @media (min-width: 0px) and (max-width:765px) {
+        .rowcss1 {
+            font-size: 18px !important;
+            font-family: AvenirNextCondensed-Medium;
+            color: #ffffff;
+            text-align: left;
+        }
+        .rowcss {
+            font-size: 15px !important;
+            color: #071e39;
+        }
+        .rowwidth{
+            margin-left: 0px !important;
+            margin-right: 0px !important;
+        }
+        .sharecss{
+              margin-right: 15px;
+          }
+    }
+      @media (min-width: 766px) {
+             .rowwidth{
+            margin-left: 60px !important;
+            margin-right: 60px !important;
+        }
+          .sharecss{
+              margin-right: 66px;
+          }
+    }
+    
+   /* .row {
+        margin-right: 0px !important;
+        margin-left: 0px !important;
+    }*/
+    
+    .container {
+        padding-right: 0px;
+        padding-left: 0px;
+    }   
+    .pricelistemail1 .form-group {
+        position: relative;
+        margin-bottom: 1.5rem;
+        width: 95%;
+    }    
+    .pricelistemail1 .has-float-label label,
+    .pricelistemail1 .has-float-label>span {
+            color: #101010 !important;
+            font-weight: normal !important;
+    }
+    .pricelistemail1 input::placeholder {
+    color: #ffffff !important;
+    opacity: 0 !important; /* Firefox */
+}
+.pricelistemail1 input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   opacity: 0 !important;
+}
+.pricelistemail1 input::-ms-input-placeholder { /* Microsoft Edge */
+   opacity: 0 !important;
+}
+    .pricelistemail1 textarea::placeholder {
+    color: #ffffff !important;
+    opacity: 0 !important; /* Firefox */
+}
+.pricelistemail1 textarea:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   opacity: 0 !important;
+}
+.pricelistemail1 textarea::-ms-input-placeholder { /* Microsoft Edge */
+   opacity: 0 !important;
+}
+</style>
+
+<script>
+    $(document).ready(function() {
+        $("#price_mail").click(function() {
+            $("#send_email").modal();
+        });
+    });
+</script>

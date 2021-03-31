@@ -1,0 +1,471 @@
+<style>
+    option {
+        background-color: rgba(255, 255, 255, 1);
+    }
+    
+    select {
+        background-image: url(../images/arrow.png) !important;
+    }
+    
+    .row {
+        margin-right: 0px !important;
+        margin-left: 0px !important;
+    }
+    
+    .form-group {
+        position: relative;
+        margin-bottom: 1.5rem;
+        width: 95%;
+    }
+    
+    .has-float-label label,
+    .has-float-label>span {
+        color: #101010 !important;
+    }
+    
+    .paymentcss {
+        background: #071e39;
+        padding: 10px;
+        color: white;
+        text-align: center;
+    }
+    
+    .payment_text {
+        font-family: AvenirNextCondensed-Medium;
+        font-size: 20px;
+        margin-top: 20px;
+    }
+    
+    .payment_active {
+        color: #ffffff !important;
+        border-bottom: 2px solid white;
+    }
+    
+    .payment_color {
+        color: #ffffff !important;
+    }
+    
+    h4 small {
+        font-size: 100% !important;
+    }
+    
+    .paymentpage input::placeholder {
+        color: #ffffff !important;
+        opacity: 0 !important;
+        /* Firefox */
+    }
+    
+    .paymentpage input:-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        opacity: 0 !important;
+    }
+    
+    .paymentpage input::-ms-input-placeholder {
+        /* Microsoft Edge */
+        opacity: 0 !important;
+    }
+    
+    .paymentpage textarea::placeholder {
+        color: #ffffff !important;
+        opacity: 0 !important;
+        /* Firefox */
+    }
+    
+    .paymentpage textarea:-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        opacity: 0 !important;
+    }
+    
+    .paymentpage textarea::-ms-input-placeholder {
+        /* Microsoft Edge */
+        opacity: 0 !important;
+    }
+    
+    .paytitle {
+        font-size: 20px;
+        padding-top: 10px;
+        font-weight: normal;
+        margin-bottom: 15px;
+        color: #ffffff;
+        font-family: AvenirNextCondensed-Medium;
+    }
+    
+    .card {
+        background: white;
+        bottom: 0px !important;
+        margin-bottom: 0px !important;
+    }
+    
+    @media (min-width: 0px) and (max-width:766px) {
+        .paytitle {
+            font-size: 16px !important;
+        }
+        .paymenttext {
+            font-family: AvenirNextCondensed-Medium;
+            font-size: 18px !important;
+        }
+        .paymenttext1 {
+            font-family: AvenirNextCondensed-Medium;
+            font-size: 18px !important;
+        }
+        .payment_text {
+            font-size: 14px !important;
+            margin-top: 25px !important;
+        }
+        .paymentcss {
+            padding: 0px;
+        }
+        .mobilecolumn {
+            padding-right: 0px !important;
+            padding-left: 0px !important;
+        }
+        .breadcrumb {
+            margin-left: 0px !important;
+        }
+    }
+    
+    .form-control[disabled],
+    .form-control[readonly],
+    fieldset[disabled] .form-control {
+        background-color: transparent !important;
+        opacity: 1;
+    }
+</style>
+<div ng-controller="makepaymentctrl" class="paymentpage" style="background: white;">
+    <div class="alert alert-success alert-dismissable fade in" ng-show="Showsuccessalert">
+        <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+        <strong>{{successmessage}}</strong>
+    </div>
+    <div class="alert alert-danger alert-dismissable fade in" ng-show="Showerroralert" id="alertmessage">
+        <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+        <strong>{{errormessage}}</strong>
+    </div>
+    <div class="alert alert-info alert-dismissable fade in" ng-show="Showinfoalert" id="alertmessage">
+        <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+        <strong>{{infomessage}}</strong>
+    </div>
+    <ul class="breadcrumb" style="margin-left:65px;">
+        <!-- <li ><a style="color:#949495;" ng-click="gotohomepage();" role="button">Home</a></li>-->
+        <li><a style="color:#949495;font-size: 16px;" ng-href="#" href="#" role="button">HOME</a></li>
+        <li style="color:#101010;font-size: 16px;text-transform:uppercase;"><b>{{category}}</b></li>
+    </ul>
+    <div class="container-full" style="height:100%;">
+        <div class="row paymentcss" style="padding-bottom: 0px;">
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xs-4 mobilecolumn" ng-click="makepayment('Make Payment');">
+                <h4 class="payment_text"><small ng-class="'Make Payment' === classVar ? 'payment_active' : 'payment_color'" role="button">MAKE PAYMENT</small></h4>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xs-4 mobilecolumn" ng-click="paymentdue('Payment Due');">
+                <h4 class="payment_text"><small ng-class="'Payment Due' === classVar ? 'payment_active' : 'payment_color'" role="button">PAYMENT DUE</small><span class="badge custobg" ng-if="payduelength > 0 ">5</span></h4>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xs-4 mobilecolumn" ng-click="paymenthistory('Payment History');">
+                <h4 class="payment_text"><small ng-class="'Payment History' === classVar ? 'payment_active' : 'payment_color'" role="button">PAYMENT HISTORY</small></h4>
+            </div>
+        </div>
+
+        <!--Make payment start-->
+        <div class="row" style="margin-top: 20px;margin-bottom:50px;" ng-show="category=='Make Payment'">
+
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xs-12 col-center-block1" style="background:rgba(99, 99, 99, .2)">
+                <div class="row">
+                    <div>
+                        <div class="col-sm-10 col-md-10 col-lg-10 col-xs-12 col-center-block1" style="margin-top: 30px;">
+                            <form role="form" name="paymentform" novalidate>
+                                <div class="form-group input-group">
+                                    <span class="has-float-label" ng-class="{ 'has-error' : paymentform.submitted && paymentform.paymentname.$invalid }">                                       
+                                        <input type="text" placeholder="Name" name="paymentname" ng-model="payment.name" tabindex="1" class="form-control borderline1" id="paymentname" ng-disabled="paydue" required>
+                                        <label for="paymentname">Name</label>
+                                    </span>
+                                    <p ng-show="paymentform.submitted && paymentform.paymentname.$error.required" class="text-danger">Name is Required</p>
+                                </div>
+
+                                <div class="form-group input-group">
+                                    <span class="has-float-label" ng-class="{ 'has-error' : paymentform.submitted && paymentform.paymentmail.$invalid }">                                       
+                                        <input type="email" placeholder="Email" name="paymentmail" ng-model="payment.email" tabindex="2" class="form-control borderline1" id="paymentmail" ng-disabled="paydue" required>
+                                        <label for="paymentmail">Email</label>
+                                    </span>
+                                    <p ng-show="paymentform.submitted && paymentform.paymentmail.$error.required" class="text-danger">Email is Required</p>
+                                    <p ng-show="paymentform.submitted && paymentform.paymentmail.$error.email" class="text-danger">Enter a valid email.</p>
+                                </div>
+                                <div class="form-group input-group">
+                                    <span class="has-float-label" ng-class="{ 'has-error' : paymentform.submitted && paymentform.paymentmobile.$invalid }">                                 
+                                        <input type="number" ng-model="payment.phone" name="paymentmobile" tabindex="5" placeholder="Mobile Number" ng-minlength="10" ng-maxlength="10" class="form-control borderline1" id="paymentmobile" required>
+                                        <label for="paymentmobile">Mobile Number</label>
+                                    </span>
+                                    <p ng-show="paymentform.submitted && paymentform.paymentmobile.$error.required" class="text-danger">Mobile No is Required</p>
+                                    <p ng-show="paymentform.submitted && paymentform.paymentmobile.$error.minlength" class="text-danger">Mobile Number Should be 10 digits</p>
+                                    <p ng-show="paymentform.submitted && paymentform.paymentmobile.$error.maxlength" class="text-danger">Mobile Number Maximum digits</p>
+                                </div>
+                                <div class="form-group input-group">
+                                    <span class="has-float-label" ng-class="{ 'has-error' : paymentform.submitted && paymentform.paymentfor.$invalid }">                                    
+                                        <select class="form-control borderline1" ng-model="payment.entity_type" name="paymentfor" tabindex="3" id="feedback" ng-change="changemodel();row2=1;" ng-disabled="paydue" required>
+                                            <option value="" ng-selected="true" disabled>Payment for</option>
+                                            <option value="Booking down-payment">Booking down-payment</option>
+                             <option value="Service Bill">Service Bill</option>
+                             <option value="Insurance Renewal">Insurance Renewal</option>                            
+					  	     <option value="Accessories">Accessories</option>
+                             <option value="Counter Sale & Spares">Counter Sale & Spares</option>
+                             <!--<option value="Other">Other</option>-->
+                                        </select>
+                                         <label for="paymentfor" ng-if="row2==1">Payment for</label>
+                                    </span>
+                                    <p ng-show="paymentform.submitted && paymentform.paymentfor.$error.required" class="text-danger">Payment for is Required</p>
+                                </div>
+
+                                <div class="form-group input-group">
+                                    <span class="has-float-label">                                     
+                                        <select class="form-control borderline1" name="paymentmodel" ng-model="payment.bike_id" tabindex="4" id="model" ng-change="changecarmodel();row3=1;" ng-disabled="paydue" required>
+                                            <option value="" ng-selected="true" disabled>Model</option>
+                                            <option ng-if="custommodel && data.non_bajaj!=true" ng-repeat="data in cardetails" value="{{data.id}}">{{data.name}}</option>
+                                            <option ng-if="showmodel" ng-repeat="data in mycardetails" value="{{data.id}}">{{data.bike}} / {{data.registration_number}}</option>
+                                        </select>
+                                         <label for="paymentmodel" ng-if="row3==1">Model</label>
+                                    </span>
+                                    <p ng-show="paymentform.submitted && paymentform.paymentmodel.$error.required" class="text-danger">Model is Required</p>
+                                    <p class="text-left" style="color:#fff;font-size:18px;" ng-show="addmycarpage">
+                                        <img src="images/home/plus.png" style="color:#fff;'"><a ng-click="addmycarpayment();">Add Bike</a>
+                                    </p>
+                                </div>
+                                <div class="form-group input-group">
+                                    <span class="has-float-label" ng-class="{ 'has-error' : paymentform.submitted && paymentform.paymentlocation.$invalid }">                                   
+                                        <select class="form-control borderline1" ng-model="payment.dealer_id" name="paymentlocation" tabindex="6" id="paymentlocation" ng-disabled="paydue" required ng-change="row4=1;">
+                                            <option value="" ng-selected="true" disabled>Dealership Location</option>
+                                            <option ng-repeat="dealer in dealerdata" value="{{dealer.id}}">{{dealer.dealer_name}}</option>
+                                        </select>
+                                         <label for="paymentlocation" ng-if="row4==1">Dealership Location</label>
+                                    </span>
+                                    <p ng-show="paymentform.submitted && paymentform.paymentlocation.$error.required" class="text-danger">Location is Required</p>
+                                </div>
+                                <div class="form-group input-group">
+                                    <span class="has-float-label" ng-class="{ 'has-error' : paymentform.submitted && paymentform.paymentamount.$invalid }">                                       
+                                        <input type="number" name="paymentamount" ng-model="payment.amount" placeholder="Amount" tabindex="7" class="form-control borderline1" id="paymentamount" ng-disabled="paydue" required>
+                                         <label for="paymentamount">Amount</label>
+                                    </span>
+                                    <p ng-show="paymentform.submitted && paymentform.paymentamount.$error.required" class="text-danger">Amount is Required</p>
+
+                                </div>
+                                <!-- <div class="form-group">
+                                    <div class="input-group" ng-class="{ 'has-error' : paymentform.submitted && paymentform.paymentregno.$invalid }">
+                                        <div class="input-group-addon bordercss">
+                                            <span class="custom-icon icon-mycarregno large"></span>
+                                        </div>
+                                        <input type="text" placeholder="Registration Number" name="paymentregno" ng-model="payment.registration_number" tabindex="4" class="form-control2" id="regno" required>
+                                    </div>
+                                    <p ng-show="paymentform.submitted && paymentform.paymentregno.$error.required" class="text-danger">Registation No is Required</p>
+                                </div>-->
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="cartitle text-center" style="margin-top:40px;">
+                    <!--  <button class="btn btn-primary btn-md btn-custom-lg" tabindex="8" style="width:120px;" ng-click="makepaymentnow();" ng-disabled="paysubmit">PAY</button>-->
+                    <div class="btn btn-primary btn-md btn-custom-lg" tabindex="8" style="width: 160px;" ng-click="makepaymentnow();" ng-disabled="paysubmit"> PAY </div>
+                </div>
+                <div style="display: none;">
+
+                    <form action="https://secure.payu.in/_payment" method="post">
+                        <div ng-repeat="(key,val) in formData">
+                            <input type="hidden" name="{{key}}" value="{{val}}" />
+                        </div>
+                    </form>
+
+                    <form ng-form-commit action="https://secure.payu.in/_payment" name='payForm' method="post" target="_top">
+                        <div ng-repeat="(key,val) in formData">
+                            <input type="hidden" name="{{key}}" value="{{val}}" />
+                        </div>
+                        <button type='button' ng-click='save(payForm)' id="payNow">Pay</button>
+                    </form>
+
+                </div>
+                <br>
+            </div>
+
+        </div>
+        <!--Make payment end-->
+        <!--     payment due start-->
+        <div class="row" style="margin-top: 20px;" ng-show="category=='Payment Due'">
+            <div class="row" ng-if="paymentdata.length==0">
+                <div class="center-block text-center" style="min-height: 400px;">
+                    <h4>No Payment Available!</h4>
+                </div>
+            </div>
+            <div class="row" style="min-height: 500px;">
+                <div class="col-sm-6 col-md-6 col-lg-4 col-xs-12 col-center-block1 " ng-repeat="payment in paymentdata" style="border: 10px solid #f2f2f2;padding-right: 0px;padding-left: 0px;">
+                    <div class="card">
+                        <div class="row" style="background: #071e39;margin-right: 0px;margin-left: 0px;">
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xs-6">
+                                <div class="paytitle text-left" style="padding-top:10px;color: #ffffff;">{{payment.txn_id}}</div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xs-6">
+                                <div class="paytitle text-right" style="padding-top:10px;color: #ffffff;">{{payment.updated_at}}</div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-right: 0px;margin-left: 0px;border-bottom: 1px solid #ccc;">
+                            <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6">
+                                <br>
+                                <h4 class="paymenttext"> Vehicle</h4>
+                                <h4 class="paymenttext"> Reg No </h4>
+                                <h4 class="paymenttext"> Payment For </h4>
+                                <h5 class="paymenttext"> Dealership </h5>
+                                <h4 class="paymenttext"> Amount </h4>
+                                <br>
+                            </div>
+                            <div class="col-sm-8 col-md-8 col-lg-8 col-xs-6">
+                                <br>
+                                <h4 class="paymenttext1">{{payment.vehicle_name}}</h4>
+                                <h4 class="paymenttext1">{{payment.reg_no}} <span ng-if="!payment.reg_no">-</span></h4>
+                                <h4 class="paymenttext1">{{payment.entity_type}}</h4>
+                                <h5 class="paymenttext1">{{payment.dealer_name}}</h5>
+                                <h4 class="paymenttext1"> Rs. {{payment.amount}}</h4>
+                                <br>
+                                <div class="cartitle text-right">
+                                    <div class="btn btn-default btn-md btn-custom-lg" tabindex="12" style="width:140px !important;" ng-click="paynow(payment.id);">Make Payment</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row top-buffer"> </div>
+            <div class="row top-buffer"> </div>
+        </div>
+        <!--    payment due end -->
+        <!--  payment history start-->
+        <div class="row" style="margin-top: 20px;" ng-show="category=='Payment History'">
+            <div class="row" ng-if="paymentrecord.length==0">
+                <div class="center-block text-center" style="min-height: 400px;">
+                    <h4>No Payment History!</h4>
+                </div>
+            </div>
+            <div class="row" style="min-height: 500px;">
+                <div class="col-sm-6 col-md-6 col-lg-4 col-xs-12 col-center-block1 " ng-repeat="payment in paymentrecord" style="border: 10px solid #f2f2f2;padding-right: 0px;padding-left: 0px;">
+                    <div class="card">
+                        <div class="row" style="background: #071e39;margin-right: 0px;margin-left: 0px;">
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xs-6">
+                                <div class="paytitle text-left" style="padding-top:10px;color: #ffffff;">{{payment.txn_id}}</div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xs-6">
+                                <div class="paytitle text-right" style="padding-top:10px;color: #ffffff;">{{payment.updated_at}}</div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-right: 0px;margin-left: 0px;border-bottom: 1px solid #ccc;">
+                            <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6" style="padding-right: 10px;padding-left: 15px;">
+                                <br>
+                                <h4 class="paymenttext"> Vehicle </h4>
+                                <h4 class="paymenttext"> Reg No </h4>
+                                <h4 class="paymenttext"> Payment For </h4>
+                                <h5 class="paymenttext"> Dealership </h5>
+                                <h4 class="paymenttext"> Amount </h4>
+                                <br>
+                            </div>
+                            <div class="col-sm-8 col-md-8 col-lg-8 col-xs-6" style="padding-right: 10px;padding-left: 10px;">
+                                <br>
+                                <h4 class="paymenttext1">{{payment.vehicle_name}} 
+                <span style="float:right;">
+                    <img src="images/home/success.jpg" style="" height="20px;" width="20px;"  alt="" title="" class="easy-icon" ng-if="payment.status=='success'"/>
+                 <img src="images/home/Failed.png" style="" height="20px;" width="20px;"  alt="" title="" class="easy-icon" ng-if="payment.status=='failure'"/>
+                </span>
+            </h4>
+                                <h4 class="paymenttext1">{{payment.reg_no}} <span ng-if="!payment.reg_no">-</span></h4>
+                                <h4 class="paymenttext1">{{payment.entity_type}}</h4>
+                                <h5 class="paymenttext1">{{payment.dealer_name}}</h5>
+                                <h4 class="paymenttext1"> Rs. {{payment.amount}}</h4>
+                                <br>
+                                <div class="cartitle text-right">
+                                    <div class="btn btn-default btn-md btn-custom-lg" tabindex="12" style="width:auto !important;" ng-click="paymentdetails(payment.payment_id);">View Details</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row top-buffer"> </div>
+            <div class="row top-buffer"> </div>
+        </div>
+        <!--      payment history end-->
+    </div>
+    <div class="modal fade" id="add_mycar" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="modal-header" style="padding:35px 40px;">
+                    <h4 class="modal-title" style="text-align: center;">Add Bike</h4>
+
+                </div>
+                <div class="modal-body" style="padding:5px 50px;">
+                    <div class="alert alert-danger alert-dismissable fade in" ng-show="Showerroralert2">
+                        <strong>{{errormessage}}</strong>
+                    </div>
+                    <div class="alert alert-info alert-dismissable fade in" ng-show="Showinfoalert">
+                        <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+                        <strong>{{infomessage}}</strong>
+                    </div>
+                    <form role="form" name="mycarspayment" novalidate>
+                        <div class="form-group input-group">
+                            <span class="has-float-label" ng-class="{ 'has-error' : mycarspayment.submitted && mycarspayment.mycarmodel.$invalid }">                       
+                                <select class="form-control borderline1" name="mycarmodel" ng-change="testFuels();row6=1" ng-model="mycars.bike" tabindex="1" id="mycarmodel" required>
+                                    <option value="" ng-selected="true" disabled>Model</option>
+                                    <option ng-repeat="data in mycarcardetails" ng-if="data.non_bajaj!=true" value="{{data.name}}">{{data.name}}</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                 <label for="mycarmodel" ng-if="row6==1">Model</label>
+                            </span>
+                            <p ng-show="mycarspayment.submitted && mycarspayment.mycarmodel.$error.required" class="text-danger">Model is Required</p>
+                        </div>
+                        <div class="form-group input-group" ng-if="othercarselected">
+                            <div class="has-float-label">                        
+                                <input type="text" name="othermodel" ng-model="mycars.other_model" placeholder="Add Custom Bike Model Here" tabindex="6" class="form-control borderline1" id="othercar">
+                                <label for="othercar">Add Custom Bike Model Here</label>
+                            </div>
+                            <p class="text-danger" ng-if="modelinvalid">Model is Required</p>
+                        </div>
+                    <!--    <div class="form-group">
+                            <div class="input-group" ng-class="{ 'has-error' : mycarspayment.submitted && mycarspayment.mycarsfueltype.$invalid }">
+                                <div class="input-group-addon bordercss">
+                                    <span class="custom-icon icon-mycarfuel large"></span>
+                                </div>
+                                <select class="form-control2" ng-model="mycars.fuel_type" name="mycarsfueltype" tabindex="2" id="FuelType" required>
+                                    <option value="" ng-selected="true" disabled>Fuel Type*</option>
+                                    <option ng-repeat="fuel in testDriveFuelTypes" value="{{fuel}}" ng-selected="">{{fuel}}</option>
+                                </select>
+                            </div>
+                            <p ng-show="mycarspayment.submitted && mycarspayment.mycarsfueltype.$error.required" class="text-danger">Fuel type is Required</p>
+                        </div>-->
+                        <div class="form-group input-group">
+                            <span class="has-float-label" ng-class="{ 'has-error' : mycarspayment.submitted && mycarspayment.mycarsregno.$invalid }">                           
+                                <input type="text" name="mycarsregno" ng-model="mycars.registration_number" placeholder="Registration Number" tabindex="3" class="form-control borderline1" id="mycarsregno" required>
+                                <label for="mycarsregno">Registration Number</label>
+                            </span>
+                            <p ng-show="mycarspayment.submitted && mycarspayment.mycarsregno.$error.required" class="text-danger">Registration No is Required</p>
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="has-float-label" ng-class="{ 'has-error' : mycarspayment.submitted && mycarspayment.mycarspurchase.$invalid }">               
+                                <input type="text" placeholder="Date of Vehicle Purchase" ng-model="mycars.date_of_purchase" name="mycarspurchase" tabindex="4" class="form-control borderline1" id="datepicker1" required>
+                                 <label for="datepicker1">Date of Vehicle Purchase</label>
+                            </span>
+                            <p ng-show="mycarspayment.submitted && mycarspayment.mycarspurchase.$error.required" class="text-danger">Purchase Date is Required</p>
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="has-float-label" ng-class="{ 'has-error' : mycarspayment.submitted && mycarspayment.mycarexpiry.$invalid }">                          
+                                <input type="text" name="mycarexpiry" ng-model="mycars.insurance_expiry" placeholder="Insurance Expiry Date" tabindex="11" class="form-control borderline1" id="datepicker3" required>
+                                 <label for="datepicker3">Insurance Expiry Date</label>
+                            </span>
+                            <p ng-show="mycarspayment.submitted && mycarspayment.mycarexpiry.$error.required" class="text-danger">Expiry Date is Required</p>
+                            <p class="text-danger" ng-if="expiryDate">Expiry Date is invalid</p>
+                        </div>
+
+                        <div class="cartitle text-center">
+                            <div class="btn btn-primary btn-md btn-custom-lg" style="width:120px;" ng-click="addcarpayment();">ADD</div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div ng-include="'views/footer.html'" ng-cloak></div>

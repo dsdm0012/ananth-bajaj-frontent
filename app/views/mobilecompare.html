@@ -1,0 +1,292 @@
+<div ng-controller="mobilecomparectrl" style="background: white;height:100%;">
+       <div class="alert alert-danger alert-dismissable fade in" ng-show="Showerroralert" id="alertmessage">
+        <strong>{{errormessage}}</strong> 
+        </div>
+     <ul class="breadcrumb" style="margin-left: 0px;">
+         <li ><a style="color:#949495;" ng-click="gotohomepage();" role="button">BIKE DETAILS </a></li>
+        <!--<li><a style="color:#949495;" ng-click="" role="button">MY ACCOUNT</a></li>-->
+        <li style="color:#101010;"><b>COMPARE</b></li>
+    </ul>
+<link rel="stylesheet" href="styles/carcompare.css?v=00018">
+        <style type="text/css">
+          .checkbox_empty {
+                height: 20px;
+                position: relative;
+                top: -2px;
+          }
+        </style>
+<style type="text/css">
+    .row {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+    button.close {
+    -webkit-appearance: none;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none !important;
+}
+		.highLight
+		{
+			background-color: #e3e9f1;
+			/*background-color: red;*/
+		}
+
+		.nohighLight
+		{
+			background-color: none;
+		}
+	
+	.popup-close {
+				top: 10px;
+				right: 10px;
+			}
+	.ng-modal-dialog{
+		width:60%;
+		max-width:400px;
+		height: auto;
+	}
+     option {
+        background-color: rgba(255, 255, 255, 1);
+    }
+       .nav_active{
+        color:#071e39 !important;
+        background: #e3e9f1 !important;
+    }
+     .nav_color{
+        color:#071e39 !important;
+    }
+	
+	</style>
+      <div class="modal fade" id="car_onroadprice" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header text-center" style="background:rgba(7, 30, 57, 1);">
+                    <button type="button" class="close" style="color:#ffffff;" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="color:#ffffff;">Request Price Quote</h4>
+                </div>
+                <div class="modal-body" style="padding:5px 50px;">
+                    <div class="alert alert-info alert-dismissable fade in" ng-show="Showinfoalert1" id="alertmessage">
+                        <strong>{{infomessage}}</strong>
+                    </div>
+                      <div class="alert alert-success alert-dismissable fade in" ng-show="Showsuccessalert">
+        <strong>{{successmessage}}</strong>
+    </div>
+    <div class="alert alert-danger alert-dismissable fade in" ng-show="Showerroralert" id="alertmessage">
+        <strong>{{errormessage}}</strong>
+    </div>
+                    <br>
+                    <br>
+                    <form role="bikecomparequote" name="bikecomparequote" novalidate>
+                        <div class="form-group formborder" ng-class="{ 'has-error' : bikecomparequote.submitted && bikecomparequote.signupname.$invalid }">
+                            <input type="text" ng-model="compareprice.name" class="form-control" name="signupname" id="name" placeholder="Name" required>
+                            <p ng-show="bikecomparequote.submitted && bikecomparequote.signupname.$error.required" class="help-block">Name is Required</p>
+                        </div>
+                        <div class="form-group formborder" ng-class="{ 'has-error' : bikecomparequote.submitted && bikecomparequote.signupmobile.$invalid }">
+                            <input type="number" ng-model="compareprice.mobile" ng-minlength="10" class="form-control" name="signupmobile" id="Mobile" placeholder="Mobile Number" required>
+                            <p ng-show="bikecomparequote.submitted && bikecomparequote.signupmobile.$error.required" class="help-block">Mobile No is Required</p>
+                            <p ng-show="bikecomparequote.submitted && bikecomparequote.signupmobile.$error.minlength" class="help-block">Mobile Number Should be 10 digits</p>
+                        </div>
+                        <div class="form-group formborder" ng-class="{ 'has-error' : bikecomparequote.submitted && bikecomparequote.signupmail.$invalid }">
+                            <input type="email" ng-model="compareprice.email" class="form-control" name="signupmail" id="email1" placeholder="Email ID" required>
+                            <p ng-show="bikecomparequote.submitted && bikecomparequote.signupmail.$error.required" class="help-block">Email is Required</p>
+                            <p ng-show="bikecomparequote.submitted && bikecomparequote.signupmail.$error.email" class="help-block">Enter a valid email.</p>
+                        </div>
+                        <div class="form-group formborder" ng-class="{ 'has-error' : bikecomparequote.submitted && bikecomparequote.pricevariant.$invalid }">
+                            <select class="form-control" id="variant" ng-model="compareprice.id" name="pricevariant" tabindex="2" required>
+                                <option value="" ng-selected="true">Select Variant</option>
+                                <option ng-repeat="data in bikevariant" value="{{data.varient.id}}">{{data.varient.varient_name}}</option>
+                            </select>
+                            <p ng-show="bikecomparequote.submitted && bikecomparequote.pricevariant.$error.required" class="help-block">Variant is Required</p>
+                        </div>
+                        <div class="cartitle text-center">
+                            <div class="btn btn-primary btn-lg btn-custom-lg" style="width:210px;" ng-click="sendpricedetail();">EMAIL PRICE QUOTE</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+
+        </div>
+    </div>
+       <div class="modal fade" id="add_newcar" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header text-center" style="background:rgba(7, 30, 57, 1);">
+                    <button type="button" class="close" style="color:#ffffff;" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="color:#ffffff;">{{modalTitle}}</h4>
+                </div>
+                <div class="modal-body" style="padding:5px 50px;">
+                    <div class="alert alert-info alert-dismissable fade in" ng-show="Showsuccessalert" id="alertmessage">
+                        <strong>{{successmessage}}</strong>
+                    </div>
+                    <br><br>
+                    <form role="form" name="pricequoteform1" novalidate>              
+         <div class="form-group">  
+             <div class="input-group">
+             <div class="input-group-addon">
+             <span class="custom-icon icon-iconshowroom large"></span> 
+             </div> 
+             <select class="form-control" ng-model="model"  ng-change="modelChange();" id="changeModel" name="pricequotemodel" tabindex="4">
+                   <option value="" ng-selected="true">Select Bike</option>
+				  <option ng-repeat="bike in bikeList" value="{{bike.id}}">{{bike.name}}</option>
+                  </select>
+             </div>              
+                </div>
+                 <!--<div class="form-group"> 
+                     <div class="input-group">
+             <div class="input-group-addon">
+             <span class="custom-icon icon-iconvariant large"></span> 
+             </div> 
+             <select class="form-control" ng-model="variant" ng-change="variantChange();" id="changeVariant" name="pricequotevariant" tabindex="5">
+                 <option value="" ng-selected="true">Select Variant</option>
+                  <option disabled class="yellowcss1"> **Yellow highlight is for taxi</option>
+				  <option ng-repeat="data in variantsToShow" value="{{data.variant.id}}" ng-selected="" ng-class="{whitecss: data.variant.board, yellowcss:data.variant.board === 'yellow'}">{{data.variant.variant_name}}</option>	
+                  </select>
+                     </div>
+              
+                </div>-->
+               
+          </form>
+              
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+<div ng-if="!dataLoaded" style="margin: 0 auto;text-align:center; font-size: 22px;margin-top: 10px;">   
+<img src="./images/loader-64x/Preloader_2.gif" style="width: 48px;">
+</div>
+<div class="mainCarCompareDiv"  id="myDIV" style="display: none;width:80%!important;min-width: 100%;margin: 0px auto 0px auto !important;padding: 10px;">
+       <div class="row">                           
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xs-6" ng-repeat="car in data" style="padding-right: 5px;padding-left: 5px;">
+            <div style="border: 1px solid #c5c5c5;">			
+			<!--<div class="imageDiv" style="text-align: center;margin-top: 10px;">
+				<img src="{{car.default_image}}" class="headerImage" style="height:100px;"   onmousedown="return false"/>
+			</div>--><br>
+                   <div style="padding-right: 0px;padding-left: 0px;">
+      <img src="{{car.default_image}}" alt="loading" class="img-responsive" />
+    </div>
+                <div class="carcomparetitle" style="margin-top: 38px;color: #071e39;font-size: 20px;height: 60px;" title="{{car.car}}" ng-if="$index==0">
+				{{car.bike_name}}
+			</div>
+				
+			<div class="dropDownDiv" style="margin-top: -10px;" ng-if="$index!=0">
+				<div class="inputContainer">	
+					<select class="inputText" id="{{'variantID'+$index}}" ng-change="changeVariant($index);" ng-model="selectedVariantDisplay" ng-init="selectedVariantDisplay=car.bike_values[0].id"  name="test" style="width: 90%; margin: 5px auto;" ng-disabled="$first">
+					  <option selected disabled value="">Change Model</option>
+					<!--  <option ng-repeat="bike in bikemodel" value="{{bike.id}}" ng-value="{{bike.id}}">{{bike.name}}</option>	--> 
+                         <option ng-repeat="bike in comparemodel" ng-if="bike.non_bajaj==true" value="{{bike.id}}" ng-value="{{bike.id}}">{{bike.name}}</option>	 
+					</select>  
+				</div>	
+			</div>
+			<div class="carcomparetitle" title="{{car.car_data[2].start_price}}" style="margin-bottom:20px;font-size:18px;"> &#8377; {{car.bike_values[11].bike_price | INR1}}* </div>		
+			<div style="margin: 0 auto;text-align: center;" >
+                 <div class="cartitle text-center">                 
+                    <div class="btn btn-primary btn-md btn-custom-lg" ng-click="getPriceQuote($event, car.bike_name,car.bike_values[19].non_bajaj);" style="" tabindex="10" ng-disabled="car.bike_values[19].non_bajaj==true"> Get On Road Price </div>
+                </div>
+			</div>
+        </div>
+                </div>                              
+                
+                </div>
+    	<div class=""> 
+				<div class="inputContainer">			
+	              <span class="checkbox-text" style="font-family: AvenirNextCondensed-Medium;font-size: 18px;"> 
+                    <img src="images/radio1.png" ng-show="!common" class="checkbox_empty" ng-click="common = !common;differences=false;commonfeature(true);" onmousedown="return false" id="common" for="common" value="1"/> 
+                    <img src="images/radio2.png" ng-show="common" class="checkbox_empty" ng-click="common = !common;differences=false;uncommonfeature(true)"  value="1" onmousedown="return false" id="common" for="common"/> &nbsp;&nbsp;Highlight Common Specifications
+	              </span>
+				</div>
+				<div class="inputContainer">			
+	              <span class="checkbox-text" style="font-family: AvenirNextCondensed-Medium;font-size: 18px;"> 
+                    <img src="images/radio1.png" ng-show="!differences" class="checkbox_empty" ng-click="differences = !differences;common=false;commonfeature(false);" value="1" onmousedown="return false" id="differences" for="differences"/> 
+                    <img src="images/radio2.png" ng-show="differences" class="checkbox_empty" ng-click="differences = !differences;common=false;uncommonfeature(false)" value="1"  onmousedown="return false" id="differences" for="differences"/> &nbsp;&nbsp;Highlight Differences
+	              </span>		
+				</div>				
+			</div>
+	<div>
+        <div class="row" style="padding: 10px;background: #ffffff;background: #071e39;color: white;text-align: center;font-size: 20px;font-weight: normal;font-family: AvenirNextCondensed-Medium;">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12" style="padding-right: 0px;padding-left: 0px;">
+            <div class="">SPECIFICATIONS</div>
+            </div>
+        </div>
+		<div class="container" id="panel7">
+			<div class="row">
+				<div ng-repeat="spec1 in data[0].specifications">
+                    <!--spec1 from array1  = {{spec1}}
+                    spec1 from array2 = {{data[1].specifications[$index]}}-->
+                    <h4 style="text-align: center;font-size: 22px;font-family: AvenirNextCondensed-Medium;color: #071e39;padding: 10px;">{{spec1.specifications_type}} / {{spec1.specifi_name}}</h4>
+                       <div class="row" style="border-bottom: 2px solid #949495;">                           
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xs-6" style="padding-right: 0px;padding-left: 0px;">
+                <h4 style="text-align: center;font-size:  16px;;color: #071e39;padding: 2px;padding-right:10px; border-right: 3px solid #ccc;" ng-class="spec1.matched === changecolor ? 'nav_active' : 'nav_color'">{{spec1.value}}</h4>
+                           </div>
+                              <div class="col-sm-6 col-md-6 col-lg-6 col-xs-6" style="padding-right: 0px;padding-left: 0px;">
+                                   <h4 style="text-align: center;font-size:  16px;color: #071e39;padding: 2px;padding-left: 10px;" ng-class="spec1.matched === changecolor ? 'nav_active' : 'nav_color'">{{data[1].specifications[$index].value}}</h4>                                  
+                           </div>                
+                </div>
+			</div>		
+		</div>
+	</div>
+
+<script type="text/javascript">
+	
+	function pageDataLoaded()
+{
+	
+    setTimeout(function() {
+        $('#myDIV').fadeIn(1000);
+        /*var myDIV = document.getElementById('myDIV');
+        if (myDIV.style.display === 'none') {
+            myDIV.style.display = 'block';
+        }*/
+       // viewReady();
+    }, 500);
+}
+	$(".slide-buttonn").on('click', function()
+	{
+	    var panelId = $(this).attr('data-content');
+	    $('#'+panelId).toggle(400);
+
+	    $(this).find('.panel-icon').text(function(_, txt) {
+	        return txt === "+" ? "-" : "+";
+	    });
+	});	
+
+	function expandSpecific(id)
+	{
+		var panelId = "panel" + id;
+		setTimeout(function() {
+			$('#'+panelId).toggle(400);
+			var div = $('#'+panelId).find('.panel-icon');
+		    var t = '.panelicon'+id;
+		    $('div').find(t).text(function(_, txt) {
+		        return txt === "+" ? "-" : "+";
+		    });
+		}, 300);	    
+
+	}
+</script>
+</div>
+
+<style type="text/css">
+    /*.fade-in {
+      opacity: 0;
+      animation: fadeIn .5s ease-in 1 forwards;
+    }*/
+	
+	.popup-close {
+				top: 20px;
+				right: 20px;
+			}
+</style>
+	
+</div>
+<div ng-include="'views/footer.html'" ng-cloak></div>
